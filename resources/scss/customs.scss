@@ -1,0 +1,403 @@
+.btn-outline-pink {
+    color: $pink_bertha;
+    border-color: $pink_bertha;
+}
+
+.btn-outline-pink{
+    &:hover {
+        color: #fff;
+        background-color: $pink_bertha;
+        border-color: $pink_bertha;
+    }
+}
+
+.btn-outline-pink:focus,
+.btn-outline-pink.focus {
+    box-shadow: 0 0 0 0.2rem $pink_bertha;
+}
+
+.btn-outline-pink.disabled,
+.btn-outline-pink:disabled {
+    color: $pink_bertha;
+    background-color: transparent;
+}
+
+.btn-outline-pink:not(:disabled):not(.disabled):active,
+.btn-outline-pink:not(:disabled):not(.disabled).active,
+.show > .btn-outline-pink.dropdown-toggle {
+    color: #fff;
+    background-color: $pink_bertha;
+    border-color: $pink_bertha;
+}
+
+.btn-outline-pink:not(:disabled):not(.disabled):active:focus,
+.btn-outline-pink:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-pink.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem $pink_bertha;
+}
+
+.btn-outline-purple {
+    color: $purple_bertha;
+    border-color: $purple_bertha;
+}
+
+.btn-outline-purple:hover {
+    color: #fff;
+    background-color: $purple_bertha;
+    border-color: $purple_bertha;
+}
+
+.btn-outline-purple:focus,
+.btn-outline-purple.focus {
+    box-shadow: 0 0 0 0.2rem $purple_bertha;
+}
+
+.btn-outline-purple.disabled,
+.btn-outline-purple:disabled {
+    color: $purple_bertha;
+    background-color: transparent;
+}
+
+.btn-outline-purple:not(:disabled):not(.disabled):active,
+.btn-outline-purple:not(:disabled):not(.disabled).active,
+.show > .btn-outline-purple.dropdown-toggle {
+    color: #fff;
+    background-color: $purple_bertha;
+    border-color: $purple_bertha;
+}
+
+.btn-outline-purple:not(:disabled):not(.disabled):active:focus,
+.btn-outline-purple:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-purple.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem $purple_bertha;
+}
+
+.btn-outline-exito {
+    color: $green_bertha;
+    border-color: $green_bertha;
+}
+
+.btn-outline-exito:hover {
+    color: #fff;
+    background-color: $green_bertha;
+    border-color: $green_bertha;
+}
+
+.btn-outline-exito:focus,
+.btn-outline-exito.focus {
+    box-shadow: 0 0 0 0.2rem $green_bertha;
+}
+
+.btn-outline-exito.disabled,
+.btn-outline-exito:disabled {
+    color: $green_bertha;
+    background-color: transparent;
+}
+
+.btn-outline-exito:not(:disabled):not(.disabled):active,
+.btn-outline-exito:not(:disabled):not(.disabled).active,
+.show > .btn-outline-exito.dropdown-toggle {
+    color: #fff;
+    background-color: $green_bertha;
+    border-color: $green_bertha;
+}
+
+.btn-outline-exito:not(:disabled):not(.disabled):active:focus,
+.btn-outline-exito:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-exito.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem $green_bertha;
+}
+
+.cc-react-cc{
+
+    $const: 33px;
+
+    width: $const !important;
+    margin: 0;
+
+    .flag-dropdown{
+        width: $const !important;
+        .flag-dropdown{
+            width: 35px;
+        }
+    }
+
+    .arrow{
+        display: none!important;
+    }
+
+    .flag-dropdown{
+        background-color: unset !important;
+        border: none !important;
+        border-radius: unset !important;
+    }
+}
+
+.icon-documento-identidad{
+    width: 150px;
+    height: auto;
+    filter: blur(2px);
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
+
+.twi {
+    color: #fff !important;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.opacity-inputs {
+    &::placeholder,
+    &:-ms-input-placeholder,
+    &::-ms-input-placeholder,
+    &::-webkit-input-placeholder,
+    &::-moz-placeholder {
+        color: #6c757d;
+        opacity: 0.5;
+    }
+
+    // Para selects inválidos
+    select:invalid {
+        color: #6c757d;
+        opacity: 0.5;
+    }
+}
+
+.bordered{
+    &, &:hover, &:active, &:focus{
+        border-radius: 4px;
+    }
+}
+
+.no-bordered{
+    &, &:hover, &:active, &:focus{
+        border-radius: 0 !important;
+    }
+}
+
+.select-form-req{
+    &, &:hover, &:active, &:focus{
+        border: 0 !important;
+        border-bottom: solid 1px #495057 !important;
+        box-shadow: unset !important;
+    }
+}
+
+.req-form-select.is-arrow{
+    padding-right: calc(1.5em + .75rem);
+    background-image: url(../../public/img/icons/chevron-down-solid.svg);
+    background-repeat: no-repeat;
+    background-position: 97% 50%;
+    background-size: calc(0.75em + 0.25rem) calc(0.75em + 0.25rem);
+}
+
+.input-normal-font{
+    font-size: 1rem !important;
+}
+
+.speech-formalizer p{
+    height: 130px !important;
+}
+
+.circled-frame{
+    border: 1px solid #ced4da;
+    padding: 1rem 0;
+    border-radius: 0.625rem;
+    margin: unset;
+}
+
+.boton-height-50{
+    min-height: 50px !important;
+    max-height: fit-content !important;
+}
+
+.distrito-placeholder-select, .requerimiento-placeholder-select{
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+}
+
+.distrito-placeholder-select{
+    color: #495057 !important;
+}
+
+.requerimiento-placeholder-select{
+    color: #b6babe !important;
+}
+
+.distrito-select-menu{
+    font-size: 1rem !important;
+    text-align: left !important;
+    font-weight: normal !important;
+}
+
+.distrito-select{
+    &, &:hover, &:active, &:focus{
+        border: 1px solid #ced4da !important;
+        box-shadow: unset !important;
+    }
+}
+
+.font-select-component{
+    font-size: 1rem;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &::-ms-expand{
+        background-color: transparent;
+        border: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+
+    &:focus{
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: unset !important;
+    }
+
+    &::-moz-placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+
+    &::placeholder {
+        color: #6c757d;
+        opacity: 1;
+    }
+
+    &:disabled, &[readonly]{
+        background-color: #e9ecef;
+        opacity: 1;
+    }
+}
+
+input[type=date].form-control,
+input[type=time].form-control,
+input[type=datetime-local].form-control,
+input[type=month].form-control {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+select.form-control{
+    &:-moz-focusring {
+        color: transparent;
+        text-shadow: 0 0 0 #495057;
+    }
+
+    &:focus::-ms-value {
+        color: #495057;
+        background-color: #fff;
+    }
+
+    &[size], &[multiple]{
+        height: auto;
+    }
+}
+
+.form-control-file,
+.form-control-range {
+    display: block;
+    width: 100%;
+}
+
+.form-control-plaintext {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0;
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #212529;
+    background-color: transparent;
+    border: solid transparent;
+    border-width: 1px 0;
+}
+
+.form-control-plaintext.form-control-sm,
+.form-control-plaintext.form-control-lg {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.form-control-sm {
+    height: calc(1.5em + 0.5rem + 2px);
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.2rem;
+}
+
+.form-control-lg {
+    height: calc(1.5em + 1rem + 2px);
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: 0.3rem;
+}
+
+textarea.form-control {
+    height: auto;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before{
+    background-color: $pink_bertha;
+    border-color: $pink_bertha;
+}
+
+.espacio{
+    margin-top: 2rem;
+}
+
+/* Styles for the input */
+div.ReactTags__tagInput {
+    width: 200px;
+    border-radius: 2px;
+    display: inline-block;
+    margin: 0px 10px 5px 0px;
+    font-size: 1rem;
+}
+div.ReactTags__tagInput input.ReactTags__tagInputField{
+    margin: 0;
+    font-size: 1rem;
+    width: 100%;
+    border: 2px solid $purple_bertha;
+    border-radius: 0.25rem;
+    padding: 5px;
+}
+
+div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
+    border-bottom: 2px solid purple;
+
+}
+

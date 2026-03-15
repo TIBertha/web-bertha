@@ -1,0 +1,262 @@
+.form-template{
+    background-color: #eeeeee;
+    color: #212529;
+
+    .form-div{
+        height: 100vh !important;
+    }
+}
+
+
+.contador{
+    text-align: center;
+    padding: 2rem 0;
+
+    span{
+        margin: 0 0.25rem;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        padding: 10px 17.5px;
+        text-align: center;
+        font-weight: bold;
+        border: 2.5px solid;
+
+        &.active{
+            border-color: $purple_bertha;
+            color: $purple_bertha;
+        }
+
+        &.disable{
+            border-color: #c9bce1;
+            color: #c9bce1;
+        }
+    }
+}
+
+.button-registro{
+    font-size: 1.25rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+}
+
+.btn-anterior{
+    &, &:hover, &:active, &:focus{
+        background-color: #757575;
+    }
+}
+
+.btn-siguiente{
+    &, &:hover, &:active, &:focus{
+        background-color: $pink_bertha;
+    }
+}
+
+.btn-registro{
+    &, &:hover, &:active, &:focus{
+        background-color: $green_bertha;
+    }
+}
+
+.btn-anterior, .btn-siguiente, .btn-registro{
+    &, &:hover, &:active, &:focus{
+        color: white;
+        box-shadow: none;
+        font-weight: unset;
+    }
+}
+
+.imgEnterButton{
+    height: 25px;
+    width: auto;
+}
+
+.gray-sig{
+    color: #6c757d!important;
+    font-size: 12.5px !important;
+}
+
+.gray-sig-2{
+    color: #6c757d!important;
+    font-size: 11px !important;
+}
+
+div.ReactTags__selected span.ReactTags__tag {
+    border: 2px solid #ced4da;
+    border-radius: 0.25rem;
+    background:none;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 10px 5px 0;
+    cursor: move;
+    text-transform: lowercase;
+}
+
+div.ReactTags__selected a.ReactTags__remove {
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.ReactTags__remove{
+    border-radius: 0.25rem;
+    background-color: white;
+    margin-left: 0.5rem;
+    border-color: $purple_bertha;
+    line-height: 1.25;
+    font-weight: bold;
+
+    svg{
+        fill: #212529
+    }
+}
+
+.edad-requerimiento{
+    div.ReactTags__tagInput input.ReactTags__tagInputField{
+        font-size: 12.5px !important;
+    }
+    div.ReactTags__selected span.ReactTags__tag{
+        font-size: 12.5px !important;
+    }
+}
+
+.texto-formulario , .input-formulario , .bt-registro{
+    font-size: 1.5rem;
+}
+
+.input-formulario{
+    border: none;
+    border-radius: 0;
+
+    &, &:hover, &:active, &:focus{
+        box-shadow: none;
+        border-bottom: solid 1px #495057;
+    }
+
+    option{
+        font-size: 1rem;
+    }
+}
+
+.secRl{
+    font-size: 15px;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.texto-formulario{
+    i{
+        color: $purple_bertha;
+    }
+
+    .texto-pasos{
+        font-size: 19.2px !important;
+    }
+
+    .texto-casillas{
+        font-size: 17.6px !important;
+    }
+
+    .texto-sub-casillas{
+        font-size: 15px !important;
+    }
+
+    .texto-input{
+        font-size: 16px !important;
+        height: 51px !important;
+    }
+
+    .textarea{
+        font-size: 16px !important;
+    }
+
+    .logo-registro-requerimiento{
+        width: 325px !important;
+        height: auto !important;
+    }
+
+    .texto-pregunta {
+        font-size: 22.4px !important;
+    }
+
+    .texto-bienvenida{
+        font-size: 35px !important;
+        @include media-breakpoint-down(md){ /*--Less than 768px---*/
+            font-size: 25px !important;
+        }
+    }
+}
+
+.sueldo-minimo-input{
+    &, &:hover, &:active, &:focus{
+        color: #f95851 !important;
+        border-bottom: solid 1px #f95851 !important;
+    }
+}
+
+.confirmar-requerimiento-form-content {
+    max-width: 530px;
+    border: 2px solid $pink_bertha;
+    padding: 0 1.5rem;
+    margin: 4rem auto 2.5rem;
+
+    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+        padding: 0 2rem;
+    }
+
+    .btn-facebook{
+        color: white !important;
+        padding: 0.4rem;
+        font-weight: 500;
+    }
+}
+
+.progress-bar {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-top: 2.5px;
+    background-color: $pink_bertha;
+}
+
+.progress-bar-div{
+    padding: 1rem;
+    min-width: 195%;
+}
+
+.form-progress-bar{
+    .progress{
+        height: 1.8rem;
+    }
+}
+
+.alert-purple {
+    color: white;
+    background-color: $purple_bertha;
+    border-color: $purple_bertha;
+    border-radius: 0.625rem;
+    font-size: 1rem;
+    text-align: center;
+    padding: .25rem 1rem !important;
+    width: fit-content;
+
+    i{
+        color: white !important;
+    }
+
+    a{
+        &, &:hover, &:active, &:focus{
+            color: white;
+            font-weight: bold;
+            text-decoration: unset;
+        }
+    }
+}
+
+.phone-input-formulario-registro{
+    box-shadow: none;
+    border-bottom: solid 1px #495057;
+
+    input{
+        border: none !important;
+    }
+}

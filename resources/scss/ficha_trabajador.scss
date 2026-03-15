@@ -1,0 +1,194 @@
+@include media-breakpoint-down(md){ /*--Less than 768px---*/
+
+}
+.perfil-trabajador{
+
+    color: #212529 !important;
+
+    .pink-label{
+        position: fixed;
+        z-index: +1;
+        width: 100%;
+        background-color: $pink_bertha;
+        color: white;
+        font-weight: bold;
+
+        .retrato{
+            width: 40px;
+            height: 40px;
+            padding: 1px;
+            border-radius: 2rem;
+            background-color: white;
+            border: 1px solid rgba(0,0,0,.2);
+        }
+
+        .white-button,.white-button:hover, .white-button:focus, .white-button:active{
+            font-size: 17.6px;
+            color: white;
+            font-weight: bold;
+            box-shadow: unset !important;
+            text-decoration: none;
+        }
+
+    }
+
+    .curriculum-area{
+        padding-top : 5rem !important;
+
+        .map{
+            border: solid 1px rgba(0,0,0,.2);
+            border-radius: 0.625rem;
+            .check{
+                color:$green_bertha;
+                margin-left: 0.5rem;
+            }
+            .icono, .iconos-contacto span{
+                color: #6c757d;
+                font-size: 1.5rem;
+            }
+
+            .icono-shield{
+                color: deepskyblue;
+                font-size: 1.18rem;
+            }
+            .icono:hover, .icono:focus, .icono:active{
+                cursor: pointer;
+            }
+            .icono-deplegable{
+            }
+            hr{
+                margin: 0;
+                border-width: 1px;
+                border-color: rgba(0,0,0,.2);
+            }
+            .retrato{
+                width: 175px;
+                height: 175px;
+                border-radius: 20rem;
+                border: solid 1px rgba(0,0,0,.2);
+                padding: 0.25rem;
+                background-color: #f8fafc;
+            }
+            .button, .button:hover, .button:focus, .button:active{
+                font-size: 16px;
+                color: white;
+                background-color: $pink_bertha;
+                box-shadow: unset !important;
+                text-decoration: none;
+            }
+            .nombre-trabajador{
+                font-size: 1.18rem;
+                font-weight: bold;
+            }
+            .titulo-seccions{
+                font-size: 1.1rem;
+                text-decoration: underline $pink_bertha;
+            }
+            .detalles{
+                p{
+                    font-size:1rem;
+                    margin-bottom: 0.5rem !important;
+                    line-height: 1.25rem;
+                }
+                p:last-child{
+                    margin: 0;
+                }
+                .actividad-modalidad-idioma{
+                    span{
+                        margin-right: 1rem;
+                        padding: 0 0.25rem;
+                        border-radius: 0.25rem;
+                        font-size: 15px;
+                        color: white;
+                        background-color: $pink_bertha;
+                        display: inline-block;
+                        font-weight: bold;
+                    }
+                }
+                .iconos-contacto{
+                    span{
+                        margin-right: 1.5rem;
+                    }
+                }
+                .estudio-border{
+                    padding-top: 1.25rem;
+                    padding-bottom: 1.25rem;
+                    border-top: solid 1px $gray_bertha2;
+
+                }
+                .experiencia-estudio{
+                    padding-top: 1.25rem;
+                    padding-bottom: 1.25rem;
+                    border-bottom: solid 1px $gray_bertha2;
+                }
+                .experiencia-estudio:first-child{
+                    padding-top: 0;
+                }
+                .experiencia-estudio:last-child{
+                    padding-bottom: 0;
+                    border-bottom: unset;
+                }
+                .flecha, .flecha:hover, .flecha:focus, .flecha:active{
+                    cursor: pointer;
+                }
+                .evaluacion-psicologica{
+                    .constructos{
+                        margin-bottom: 1.5rem;
+                    }
+                    .constructos:last-child{
+                        margin-bottom: 0;
+                    }
+                    .progress{
+                        height: 9px !important;
+                    }
+                    .progress-bar:hover{
+                        background-color: #96004B;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.modal-compartir{
+    .img-verificacion{
+        max-width: 100%;
+        height: auto;
+        align-self: flex-start;
+    }
+    .tittle-area{
+        font-size: 17.6px;
+    }
+    p{
+        font-size: 16px;
+    }
+
+    .copy-section{
+        margin-bottom: 1.5rem;
+    }
+    .copy-section:last-child{
+        margin-bottom: 0;
+    }
+    .copy-bar{
+        font-size: 16px;
+        border: solid 1px rgba(0,0,0,.2);
+        border-radius: 0.625rem;
+        padding: 0.5rem 1rem;
+        .side-hatch{
+            border-left: solid 1px rgba(0,0,0,.2);
+        }
+        @include media-breakpoint-down(md){
+            .side-hatch{
+                border-left: unset;
+            }
+
+        }
+    }
+    .social-icons{
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}

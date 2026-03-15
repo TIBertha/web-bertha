@@ -1,0 +1,6 @@
+export default {
+    PURPLEBERTHA: '#513675',
+    PAGOANTECEDENTES: 20,
+    REGION: 'pe',
+    FACEBOOKAPPID: 365759320789492
+};

@@ -1,0 +1,70 @@
+.whatsapp-plugin{
+    position:fixed;
+    width:3.125rem;
+    height:3.125rem;
+    bottom:0.95rem;
+    right:0.95rem;
+    background-color: #4AD504;
+    border-radius:50px;
+    text-align:center;
+    font-size:30px;
+    box-shadow: 2px 2px 3px #999;
+    z-index:100;
+
+    p{
+        margin: 0 ;
+        padding: 0.25rem 0.5rem;
+    }
+
+    &, &:hover, &:link,
+    &:visited ,&:focus,
+    &:before, &:after,
+    &:checked, &:active{
+        color:#FFF;
+        text-decoration: none;
+        font-weight: normal;
+        text-shadow: unset;
+    }
+
+    .whatsapp-icon{
+        margin-top: unset;
+    }
+}
+
+.views-plugin{
+    width: fit-content;
+    height: unset;
+    border-radius: 10px 10px 0 0 ;
+    position: fixed;
+    bottom: 0 ;
+    left: 0.95rem;
+    background-color: $purple_bertha;
+    text-align: center;
+    box-shadow: unset;
+    z-index: 100;
+    font-size: 19.2px !important;
+
+    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+        font-size: 16px !important;
+    }
+
+    p{
+        margin: 0 ;
+        padding: 0.25rem 0.5rem;
+    }
+
+    &, &:hover, &:link,
+    &:visited ,&:focus,
+    &:before, &:after,
+    &:checked, &:active{
+        color:#FFF;
+        text-decoration: none;
+        font-weight: normal;
+        text-shadow: unset;
+    }
+}
+
+.infront{
+    position: relative;
+    z-index: +1;
+}

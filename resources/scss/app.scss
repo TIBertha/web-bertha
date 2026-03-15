@@ -1,1 +1,42 @@
 @import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "bootstrap/scss/bootstrap";
+@import "bertha_styles.scss";
+@import "navbar.scss";
+@import "slider.scss";
+@import "spinners.scss";
+@import "plugins.scss";
+@import "reclamos.scss";
+@import "seleccion.scss";
+@import "ficha_trabajador.scss";
+@import "customs.scss";
+@import "registro_requerimiento.scss";
+@import "registro_postulante.scss";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Google+Sans:300,400,500,600|Material+Icons|Google+Sans+Display:400,500');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css");
+
+@font-face {
+    font-family: 'Jasmina';
+    src: url("fonts/JasminaFYRegular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Calibri';
+    src: url("fonts/calibri.ttf") format("truetype");
+}
+
+body{
+    font-family:"Roboto", sans-serif !important;
+    color: $grey_bertha;
+    min-height: 100vh !important;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10+ and Edge */
+    user-select: none; /* Standard syntax */
+}
+
+p{
+    margin-bottom: 0 !important;
+}
+
+.react-datepicker-wrapper {
+    display: grid !important;
+}

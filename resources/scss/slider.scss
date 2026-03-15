@@ -1,0 +1,202 @@
+$slick-font-family: "Font Awesome 5 Free" !default;
+$slick-prev-character: "\f053" !default;
+$slick-next-character: "\f054" !default;
+$slick-opacity-default: 0.75 !default;
+$slick-opacity-on-hover: 1 !default;
+$slick-opacity-not-active: 0.25 !default;
+$animation-speed: .5s;
+$animation-function: ease-out;
+$backdrop-color: rgba(0, 0, 0, .75);
+
+.slide-testimonial{
+    padding-top: 16px;
+    padding-bottom: 60px;
+
+    .slick-slide{
+        margin: 0px;
+
+        img{
+            border: none;
+            border-top-right-radius: 0.8rem;
+            border-top-left-radius: 0.8rem;
+            -moz-border-radius-topleft: 0.8rem;
+            -moz-border-radius-topright: 0.8rem;
+            -webkit-border-top-left-radius: 0.8rem;
+            -webkit-border-top-right-radius: 0.8rem;
+        }
+
+        .img-testimonial-trabajador{
+            height: 550px;
+        }
+    }
+
+    .slot{
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .slot:focus, .slot:active , .slot:hover {
+        outline: none;
+    }
+
+}
+
+.card-testimonial{
+
+    border-radius: 0.8rem;
+    -moz-border-radius: 0.8rem;
+    -webkit-border-radius: 0.8rem;
+
+    .card-body{
+        display: table;
+        font-size: 0;
+        padding: 7px 12px;
+        height: 125px;
+    }
+
+    .numeroTestimonio{
+        color: $pink_bertha;
+        font-size: 16px;
+        text-align: right;
+        padding: 7px 12px;
+        font-weight: bold;
+    }
+
+    .icon-play-container{
+        display: table-cell;
+        vertical-align: middle;
+
+        i{
+            font-size: 3rem;
+            color: $purple_bertha;
+        }
+    }
+
+    .info-container{
+        padding-left: 12px;
+        text-align: left;
+        display: table-cell;
+        vertical-align: middle;
+
+        .cliente{
+            display: inline-block;
+            font-size: 1.4rem;
+            margin-bottom: 0;
+            color: $pink_bertha;
+        }
+
+        .testimonio{
+            font-size: 0.96rem;
+            margin-bottom: 0;
+
+            i{
+                margin-right: 1rem;
+                color: gold;
+            }
+        }
+    }
+
+}
+
+.slide-testimonial{
+    padding-top: 16px;
+    padding-bottom: 60px;
+
+    .slick-slide{
+        margin: 0px;
+
+        img{
+            border: none;
+            border-top-right-radius: 0.8rem;
+            border-top-left-radius: 0.8rem;
+            -moz-border-radius-topleft: 0.8rem;
+            -moz-border-radius-topright: 0.8rem;
+            -webkit-border-top-left-radius: 0.8rem;
+            -webkit-border-top-right-radius: 0.8rem;
+        }
+
+        .img-testimonial-trabajador{
+            height: 550px;
+        }
+    }
+
+    .slot{
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .slot:focus, .slot:active , .slot:hover {
+        outline: none;
+    }
+
+}
+
+.slick-prev,
+.slick-next {
+    position: absolute;
+    display: block;
+    height: 20px;
+    width: 20px;
+    font-weight: 900;
+    line-height: 0;
+    font-size: 0;
+    cursor: pointer;
+    background: transparent;
+    color: transparent;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    padding: 0;
+    border: none;
+    outline: none;
+    &:hover, &:focus {
+        outline: none;
+        background: transparent;
+        color: transparent;
+        &:before {
+            opacity: $slick-opacity-on-hover;
+        }
+    }
+    &.slick-disabled:before {
+        opacity: $slick-opacity-not-active;
+    }
+    &:before {
+        font-family: $slick-font-family !important;
+        font-weight: 900;
+        font-size: 20px;
+        line-height: 1;
+        color: $pink_bertha !important;
+        opacity: $slick-opacity-default !important;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+.slick-prev {
+    left: -25px;
+    [dir="rtl"] & {
+        left: auto;
+        right: -25px;
+    }
+    &:before {
+        content: $slick-prev-character !important;
+        [dir="rtl"] & {
+            content: $slick-next-character !important;
+        }
+    }
+}
+
+.slick-next {
+    right: -25px;
+    [dir="rtl"] & {
+        left: -25px;
+        right: auto;
+    }
+    &:before {
+        content: $slick-next-character !important;
+        [dir="rtl"] & {
+            content: $slick-prev-character !important;
+        }
+    }
+}

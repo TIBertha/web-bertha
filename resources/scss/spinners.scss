@@ -1,0 +1,68 @@
+
+.spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 999;
+    display: inline;
+}
+
+.pink .spinner__content {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    background: $pink_bertha;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.purple .spinner__content {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    background: $purple_bertha;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.spinner__content .label {
+    margin: 1rem 0 0 0;
+}
+
+.spin-pedido{
+    margin: 20% 50% 50% 50%;
+}
+
+.block-ui-overlay {
+    background-color: black !important;
+    opacity: 0.5 !important;
+}
+
+/* Loading spinner - React */
+.spinner-react{
+    margin: 0 auto;
+    width: 50px;
+}
+
+.spin-seleccion{
+    margin: 8rem auto 8rem auto;
+}
