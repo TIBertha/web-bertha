@@ -11,6 +11,7 @@
 @import "customs.scss";
 @import "registro_requerimiento.scss";
 @import "registro_postulante.scss";
+@import "modal_video.scss";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Google+Sans:300,400,500,600|Material+Icons|Google+Sans+Display:400,500');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css");
 
@@ -25,7 +26,8 @@
 }
 
 body{
-    font-family:"Roboto", sans-serif !important;
+    font-weight: 500;
+    font-family: Google Sans, sans-serif !important;
     color: $grey_bertha;
     min-height: 100vh !important;
     -webkit-user-select: none; /* Safari */

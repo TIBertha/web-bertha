@@ -109,7 +109,7 @@ export default function ModalIniciarSesion({url, showModal, setShowModal, countr
                         setIsLoading(false);
 
                     }else{
-                        setCodeOperacion('300');
+                        setCodeOperacion('200');
                         save(nombres, apellidos, celular, politica, tipousuario, codeOperacion);
 
                     }

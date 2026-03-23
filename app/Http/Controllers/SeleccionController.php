@@ -115,7 +115,7 @@ class SeleccionController extends Controller
                 'apellidos'     => formatText($request->input('apellidos')),
                 'telefono'      => formatText($request->input('celular')),
                 'tipousuario'   => $request->input('tipousuario'),
-                'codeoperacion' => $request->input('codeOperacion'),
+                'codeoperacion' => intval($request->input('codeOperacion')),
             ];
 
             $token = generateTokenEmpleador(
@@ -127,7 +127,8 @@ class SeleccionController extends Controller
             // 1. Obtener o crear usuario según operación
             // -----------------------------------------
 
-            if ($data['codeoperacion'] == 200) {
+            if ($data['codeoperacion'] === 200) {
+
                 // Usuario existente
                 $usu = Usuario::where('telefono', $data['telefono'])->firstOrFail();
 
@@ -181,6 +182,8 @@ class SeleccionController extends Controller
         } catch (\Exception $e) {
 
             DB::rollback();
+
+            dd($e);
 
             return response()->json([
                 'code' => 500,

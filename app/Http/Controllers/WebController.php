@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Configuracion;
 use App\Models\Contrato;
 use App\Models\RedesSociales;
+use App\Models\TestimonialEmpleador;
+use App\Models\TestimonialTrabajador;
 use App\Models\Views\PrensaView;
 use App\Models\Views\TestimonialEmpleadorView;
 use App\Models\Views\TestimonialTrabajadorView;
@@ -167,16 +169,13 @@ class WebController extends Controller
     public function ajaxGetTestimonialesEmpleador(){
         $this->cleanPass();
 
-        $testimoniales = TestimonialEmpleadorView::orderBy('fecha_original','desc')->orderBy('actualizado','desc')->get();
+        $testimoniales = TestimonialEmpleador::whereNotNull('imagen_testimonial')->orderBy('fecha','desc')->get();
 
         $data = [];
 
         foreach ($testimoniales as $t){
             $data[] = [
-                'empleador'                         => $t->empleador ? (mb_convert_case($t->empleador, MB_CASE_TITLE, "UTF-8") . ".") : $t->nombre_cliente,
-                'imagen'                             => $t->imagen_testimonial ?: $t->poster,
-                'video_youtube'                     => $t->video_youtube,
-                'isVideo'                           => !empty($t->video_youtube),
+                'imagen'                             => $t->imagen_testimonial,
             ];
         }
 
@@ -191,11 +190,19 @@ class WebController extends Controller
 
         $this->cleanPass();
 
-        $testimoniales = TestimonialTrabajadorView::orderBy('id', 'desc')->get();
+        $testimoniales = TestimonialTrabajador::whereNotNull('imagen')->orderBy('id', 'desc')->get();
+
+        $data = [];
+
+        foreach ($testimoniales as $t){
+            $data[] = [
+                'imagen'                             => $t->imagen,
+            ];
+        }
 
         return response()->json([
             'code' => 200,
-            'testimoniales' => $testimoniales
+            'testimoniales' => $data
         ]);
 
     }

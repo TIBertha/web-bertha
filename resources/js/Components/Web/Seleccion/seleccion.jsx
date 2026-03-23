@@ -1,23 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import ReactDOM from "react-dom";
 import queryString from 'query-string';
 import Swal from "sweetalert2";
 import Drawer from 'rc-drawer';
 import { useMediaQuery } from 'react-responsive';
-
 import {ajaxFinalizarSeleccion, ajaxProcesarSeleccion, ajaxSaveCartSeleccion} from "../../Functions/Seleccion.jsx";
 import {ajaxVerifyDisableModalSeleccion} from "../../Functions/Home.jsx";
 import {getCountryData} from "../../Functions/General.jsx";
-
 import {isEmptyObject} from "../../Helpers/helpers.jsx";
 import {showAlert} from "../../Helpers/alerts.jsx";
-
 import Filtros from "./filtros.jsx";
 import Totales from "./totales.jsx";
 import Cart from "./cart.jsx";
 import Trabajadores from "./trabajadores.jsx";
 import ModalMenu from "./modalMenu.jsx";
-
 import FichaRestringidaTrabajadorIndex from "../FichaTrabajador/FichaRestringida/fichaRestringidaTrabajadorIndex.jsx";
 import ModalIniciarSesion from "./Modal/modalIniciarSesion.jsx";
 import ModalComoFunciona from "./Modal/modalComoFunciona.jsx";

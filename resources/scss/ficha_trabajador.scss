@@ -126,7 +126,7 @@
                 }
                 .experiencia-estudio:last-child{
                     padding-bottom: 0;
-                    border-bottom: unset;
+                    border-bottom: unset !important;
                 }
                 .flecha, .flecha:hover, .flecha:focus, .flecha:active{
                     cursor: pointer;

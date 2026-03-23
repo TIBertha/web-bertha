@@ -3,7 +3,6 @@ import CSSTransition from 'react-transition-group/CSSTransition';
 import YouTube from 'react-youtube';
 import { MdClear } from 'react-icons/md';
 
-
 export default function ModalVideo({ channel = 'youtube', isOpen, url, onClose }) {
 
     const modalRef = useRef(null);
@@ -52,24 +51,37 @@ export default function ModalVideo({ channel = 'youtube', isOpen, url, onClose }
 
     const videoId = getYoutubeID(url);
 
+    function getPadding(ratio) {
+        const arr = ratio.split(':');
+        const width = Number(arr[0]);
+        const height = Number(arr[1]);
+        const padding = (height * 100) / width;
+        return padding + '%';
+    }
+
+    const paddingStyle = {
+        paddingBottom: getPadding('16:9')
+    }
+
     return (
         <CSSTransition
             in={isOpen}
             timeout={300}
             classNames="modal-video-effect"
             unmountOnExit
+            nodeRef={modalRef}   // ← REQUIRED FIX
         >
             <div
                 className="modal-video"
                 tabIndex="-1"
                 role="dialog"
                 onClick={closeModal}
-                ref={modalRef}
+                ref={modalRef}     // ← MUST MATCH nodeRef
                 onKeyDown={handleFocusTrap}
             >
                 <div className="modal-video-body">
                     <div className="modal-video-inner">
-                        <div className="modal-video-movie-wrap">
+                        <div className="modal-video-movie-wrap"  style={paddingStyle}>
                             <button
                                 className="modal-video-close-btn"
                                 aria-label="Close"

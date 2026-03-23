@@ -24,14 +24,7 @@ export default function Header({url, path}) {
         {
             label: "Seleccionar",
             href: "/es-pe/seleccionar",
-            includedPath: "seleccionar",
-            drowpdown: false,
-            sublist: [],
-        },
-        {
-            label: "Busco Trabajo",
-            href: "/es-pe/busco-trabajo",
-            includedPath: "busco-trabajo",
+            includedPath: "es-pe/seleccionar",
             drowpdown: false,
             sublist: [],
         }
@@ -64,7 +57,7 @@ export default function Header({url, path}) {
                                 {menuList.map((m, index) => {
                                         return (
                                             <li>
-                                                <a href={m.href} className={ verticalNavbar.button + (path.includes( m.includedPath) ? " selected" : "")}>
+                                                <a href={m.href} className={ verticalNavbar.button + (path === m.includedPath ? " selected" : "")}>
                                                     <span className={verticalNavbar.label} > {m.label} </span>
                                                 </a>
                                             </li>
@@ -88,7 +81,7 @@ export default function Header({url, path}) {
                             {menuList.map((m, index) => {
                                 return (
                                     <li>
-                                        <a href={m.href} className={ verticalNavbar.button + (path.includes( m.includedPath) ? " selected" : "")}>
+                                        <a href={m.href} className={ verticalNavbar.button + (path === m.includedPath ? " selected" : "")}>
                                             <span className={verticalNavbar.label} > {m.label} </span>
                                         </a>
                                     </li>
