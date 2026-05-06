@@ -108,14 +108,8 @@ class WebController extends Controller
 
     public function viewPrivacidad()
     {
-
         countViewWeb('/privacidad');
-        $this->cleanPass();
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com/es-pe');
-        }else{
-            return view('Web.privacidad');
-        }
+        return view('Web.privacidad');
     }
 
     public function ajaxGetRedesSociales(){
