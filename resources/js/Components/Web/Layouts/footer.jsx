@@ -26,6 +26,7 @@ export default function Footer({ url, country = "pe" }) {
     const [loading, setLoading] = useState(true);
     const [redesSociales, setRedesSociales] = useState(null);
 
+    console.log(url);
     const list1 = [
         { url: url + "/condiciones", title: "Términos y condiciones" },
         { url: url + "/privacidad", title: "Política de privacidad" },

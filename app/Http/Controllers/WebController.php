@@ -17,8 +17,6 @@ class WebController extends Controller
 {
     public function index()
     {
-
-        dd(url('/'));
         return redirect('/es-pe');
     }
 
