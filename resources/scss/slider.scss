@@ -99,6 +99,11 @@ $backdrop-color: rgba(0, 0, 0, .75);
 }
 
 .slide-testimonial{
+
+    @media (min-width: 1200px) {
+        max-width: 1140px !important;
+    }
+
     padding-top: 16px;
     padding-bottom: 60px;
 
