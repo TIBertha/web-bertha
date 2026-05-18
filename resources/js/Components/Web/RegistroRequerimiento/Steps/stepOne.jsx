@@ -62,7 +62,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                     />
 
                     {(requerimiento.sueldo && (requerimiento.sueldo < (requerimiento.sueldoActividad ? requerimiento.sueldoActividad : 0)) ) &&
-                        <div className="espacio">
+                        <div>
                             <p className="sueldo-minimo-span mb-0">{'El sueldo es desde ' + requerimiento.divisa + requerimiento.sueldoActividad}</p>
                         </div>
                     }
