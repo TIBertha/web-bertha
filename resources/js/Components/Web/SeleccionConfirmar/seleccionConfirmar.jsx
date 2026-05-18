@@ -35,14 +35,11 @@ export default function SeleccionConfirmar({url}) {
 
         ajaxContinuarCartSeleccion(country).then(result => {
             setIsLoading(false);
-
-            console.log(url + '/requerimiento/' + result.token);
-
-            /*if(result.code === 200){
+            if(result.code === 200){
                 window.location.href = url + '/requerimiento/' + result.token;
             }else if(result.code === 500){
                 showAlert('error', result.msj);
-            }*/
+            }
         });
 
     }
