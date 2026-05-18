@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Actividad;
 use App\Models\DiaSemana;
+use App\Models\Distrito;
 use App\Models\Empleador;
 use App\Models\FrecuenciaServicio;
 use App\Models\Modalidad;
@@ -248,7 +249,7 @@ class RegistroRequerimientoController extends Controller
             $distrito = $provincia = $departamento = null;
 
             if ($data['ubicacion_id'] && $data['ubicacion_id']['value']) {
-                $ubicacion = DistritoView::find($data['ubicacion_id']['value']);
+                $ubicacion = Distrito::find($data['ubicacion_id']['value']);
                 $distrito = $ubicacion?->id;
                 $provincia = $ubicacion?->provincia_id;
                 $departamento = $ubicacion?->departamento_id;
