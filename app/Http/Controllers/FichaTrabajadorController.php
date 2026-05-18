@@ -12,10 +12,7 @@ use Illuminate\Http\Request;
 class FichaTrabajadorController extends Controller
 {
     public function viewFichaRestringidaTrabajador($token = null){
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com');
-        }else{
-            if(!$token){
+        if(!$token){
                 return redirect('/');
             }else{
 
@@ -56,17 +53,11 @@ class FichaTrabajadorController extends Controller
                 }
             }
 
-            //return view('Web.FichaTrabajador.Restringida.ficha-restringida-trabajador', $data);
-        }
-
     }
 
     public function viewFichaCRMTrabajador($token = null){
 
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com');
-        }else{
-            if(!$token){
+        if(!$token){
                 return redirect('/');
             }else{
 
@@ -108,7 +99,6 @@ class FichaTrabajadorController extends Controller
                 }
             }
             return view('Web.FichaTrabajador.Restringida.ficha-crm-trabajador', $data);
-        }
     }
 
     public function getListAudioVerificaciones($verificaciones, $privada = null, $access = null){

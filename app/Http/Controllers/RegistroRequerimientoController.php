@@ -23,10 +23,7 @@ use Illuminate\Support\Facades\DB;
 class RegistroRequerimientoController extends Controller
 {
     public function viewRegistroRequerimiento($token = null){
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com');
-        }else{
-            if(!$token){
+        if(!$token){
                 return redirect('/');
             }
 
@@ -39,7 +36,6 @@ class RegistroRequerimientoController extends Controller
             $data['token'] = $token;
 
             return view('Web.formulario-requerimiento', $data);
-        }
     }
 
     public function ajaxLoadDataRegistroRequerimiento(Request $request){

@@ -16,11 +16,7 @@ class ReclamoController extends Controller
     {
         countViewWeb('/reclamos');
         cleanPass();
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com');
-        }else{
-            return view('Web.libro-reclamaciones');
-        }
+        return view('Web.libro-reclamaciones');
 
     }
 

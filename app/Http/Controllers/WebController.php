@@ -204,11 +204,7 @@ class WebController extends Controller
     public  function cuentaBancariaView()
     {
         $this->cleanPass();
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com/es-pe');
-        }else{
-            return view('Web.cuenta-bancaria');
-        }
+        return view('Web.cuenta-bancaria');
     }
 
 }

@@ -21,11 +21,7 @@ class SeleccionController extends Controller
 {
     public function index()
     {
-        if ($_SERVER['HTTP_HOST'] == 'bertha.pe'){
-            return redirect()->to('https://holabertha.com');
-        }else{
-            return redirect('/es-pe/seleccionar');
-        }
+        return redirect('/es-pe/seleccionar');
     }
 
     public function viewIndex($country){
