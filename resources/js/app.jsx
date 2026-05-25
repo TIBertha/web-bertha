@@ -167,3 +167,19 @@ if (registroPostulanteJSX) {
         />,
     );
 }
+
+/*---fichaRestringidaTrabajadorIndex.jsx---*/
+import FichaRestringidaTrabajadorIndexJSX from "./Components/Web/FichaTrabajador/FichaRestringida/fichaRestringidaTrabajadorIndex.jsx";
+const fichaRestringidaTrabajadorIndexJSX = document.getElementById("ficha-restringida-trabajador-index");
+if (fichaRestringidaTrabajadorIndexJSX) {
+    const { url, token, usuario, typeform, version } = fichaRestringidaTrabajadorIndexJSX.dataset;
+    ReactDOM.createRoot(fichaRestringidaTrabajadorIndexJSX).render(
+        <FichaRestringidaTrabajadorIndexJSX
+            url={url}
+            token={token}
+            usuario={usuario}
+            typeform={typeform}
+            version={version}
+        />,
+    );
+}
