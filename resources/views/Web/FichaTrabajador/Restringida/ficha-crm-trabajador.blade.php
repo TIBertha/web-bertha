@@ -28,19 +28,3 @@
     </div>
 
 @endsection
-
-@section('cintillo')
-
-    @component('Components.cintillo')
-        @slot('background')
-            pink
-        @endslot
-        @slot('telefono')
-            tiempocompleto2
-        @endslot
-        @slot('texto')
-            Solicita también a tu trabajadora del hogar vía WhatsApp, escribiendo al
-        @endslot
-    @endcomponent
-
-@endsection
