@@ -5,6 +5,9 @@ import Tooltips from "../../Components/tooltips.jsx";
 import VerAdjunto from "./verAdjunto.jsx";
 
 export default function VerEstudio({ url, privado, estudio, iconFile }) {
+
+
+    let [show, setShow] = useState(false);
     return (
         <>
             {estudio.tipo && estudio.centro && estudio.titulo && (
