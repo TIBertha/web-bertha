@@ -11,6 +11,7 @@ use App\Http\Controllers\RegistroPostulanteController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\ReclamoController;
+use App\Http\Controllers\MisContratosController;
 
 //ruta subir archivos
 Route::post('/ajax-upload-file', [MasterController::class, 'ajaxUploadFile']);
@@ -99,3 +100,9 @@ Route::get('/pdf/ver-comprobante/{link}', [ShortURLController::class, 'ajaxOpenE
 Route::get('/pdf/ver-comprobante-adelanto/{link}', [ShortURLController::class, 'ajaxOpenEncodePDFComprobanteAdelanto']);
 Route::get('/pdf/ver-adelanto/{link}', [ShortURLController::class, 'ajaxOpenEncodePDFVerAdelanto']);
 Route::get('/docs/foto-referencial', [ShortURLController::class, 'ajaxOpenFotoReferencial']);
+
+
+
+Route::get('/mis-contratos/{link}', [ShortURLController::class, 'ajaxOpenEncodeContratoAdjuntos']);
+Route::get('/mis-contratos/antecedentes-trabajador/{link}', [MisContratosController::class, 'ajaxOpenEncodeAntecedentesTrabajador']);
+

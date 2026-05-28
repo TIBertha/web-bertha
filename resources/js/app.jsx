@@ -183,3 +183,15 @@ if (fichaRestringidaTrabajadorIndexJSX) {
         />,
     );
 }
+
+/*---verAntecedente.jsx---*/
+import VerAntecedenteJSX from "./Components/Web/MisContratos/AntecedentesPDF/verAntecedente.jsx";
+const verAntecedenteJSX = document.getElementById("ver-antecedente");
+if (verAntecedenteJSX) {
+    const { pdflink } = verAntecedenteJSX.dataset;
+    ReactDOM.createRoot(verAntecedenteJSX).render(
+        <VerAntecedenteJSX
+            pdflink={pdflink}
+        />,
+    );
+}

@@ -159,4 +159,12 @@ class ShortURLController extends Controller
         die();
 
     }
+
+    public function ajaxOpenEncodeContratoAdjuntos($id){
+        $decodeID = base64_decode($id);
+
+        $data['id'] = $decodeID;
+
+        return view('Web.MisContratos.mis-contratos', $data);
+    }
 }
