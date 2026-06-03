@@ -4,31 +4,26 @@ import {showAlert} from "../../../Helpers/alerts.jsx";
 import Slider from "react-slick";
 import LoadingScreen from "../loadingScreen.jsx";
 import {str_limit} from "../../../Helpers/strings.jsx";
+import {mobileDesktop } from "../../../Functions/General.jsx";
 
 export default function SliderPrensa({url}) {
 
     const [arPrensa, setArPrensa] = useState([]);
     const [isLoading, setLoading] = useState(false);
 
+    let display = mobileDesktop();
+    const numberSlides = (display === "desktop" ? 4 : 1);
+
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 4,
+        slidesToShow: numberSlides,
         swipeToSlide: true,
         autoplay: true,
         autoplaySpeed: 2000,
         cssEase: "linear",
         speed: 500,
         slidesToScroll: 1,
-        responsive: [
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                }
-            }
-        ]
     };
 
     useEffect(() => {

@@ -3,49 +3,23 @@ import {ajaxGetTestimonialesEmpleador} from "../../../Functions/Home.jsx";
 import {showAlert} from "../../../Helpers/alerts.jsx";
 import Slider from "react-slick";
 import LoadingScreen from "../loadingScreen.jsx";
+import {mobileDesktop } from "../../../Functions/General.jsx";
 
 export default function SliderTestimonialesEmpleador({url, trabajadora}) {
 
     const [testimoniales, setTestimoniales] = useState([]);
     const [isLoading, setLoading] = useState(false);
 
+    let display = mobileDesktop();
+    const numberSlides = (display === "desktop" ? 3 : 1);
+
     const settings = {
         dots: false,
         infinite: true,
         speed: 1000,
-        slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToShow: numberSlides,
+        slidesToScroll: numberSlides,
         adaptiveHeight: true,
-        responsive: [
-            {
-                breakpoint: 1200,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3
-                }
-            },
-            {
-                breakpoint: 970,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2
-                }
-            },
-            {
-                breakpoint: 770,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
     };
 
     useEffect(() => {
