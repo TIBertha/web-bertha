@@ -86,7 +86,7 @@ export default function SeleccionConfirmar({url}) {
 
                         <hr className="divider-pink" />
 
-                        <div className="row">
+                        <div className="row mb-4">
                             <div className="col-12 col-md-4">
                                 <button className="btn btn-outline-pink full-size mb-3" type="button" onClick={ () => deleteCart() } disabled={isLoading ? true : false}>
                                     Descartar

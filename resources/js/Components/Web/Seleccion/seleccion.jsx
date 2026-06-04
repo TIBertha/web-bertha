@@ -155,7 +155,10 @@ export default function Seleccion({url,session, country}) {
                 showAlert('error', 'Solo puedes agregar hasta un máximo de 2 trabajadores')
             }else{
 
-                if(isValidoTrabajadorForAddCart(cart, tra)){
+                setCart(newItem);
+                ajaxSaveCartSeleccion(newItem);
+
+                /*if(isValidoTrabajadorForAddCart(cart, tra)){
                     setCart(newItem);
                     ajaxSaveCartSeleccion(newItem);
                 }else{
@@ -176,7 +179,7 @@ export default function Seleccion({url,session, country}) {
 
                     });
 
-                }
+                }*/
 
             }
 

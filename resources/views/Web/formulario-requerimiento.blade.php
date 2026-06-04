@@ -9,7 +9,7 @@
 
 @section('content')
     <div class="row mx-0 form-div justify-content-center">
-        <div class="col-11 col-md-8 col-lg-6 ret-a px-0 mx-auto mb-auto m-md-auto">
+        <div class="col-11 col-lg-8 ret-a px-0 mx-auto mb-auto m-md-auto">
             <div id="registro-requerimiento" data-url="{{ url('/') }}" data-token="{{ $token }}" ></div>
         </div>
     </div>
