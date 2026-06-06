@@ -38,7 +38,7 @@ export default function UseFormRequerimiento(initialState= {}) {
 
             forceInputUppercase(valor);
 
-        }else if (tipo == 'evento'){
+        }else if (tipo === 'evento'){
 
             if (["actividad_id", "modalidad_id"].includes(nombrecampo)){
 
@@ -147,7 +147,7 @@ export default function UseFormRequerimiento(initialState= {}) {
 
     const handleDelete = (valor, nombrecampo) => {
 
-        if (nombrecampo === 'edadBebes'){
+        /*if (nombrecampo === 'edadBebes'){
             setValue({...value,
                 [ nombrecampo ]: value.edadBebes.filter((tag, index) => index !== valor)
             })
@@ -159,18 +159,58 @@ export default function UseFormRequerimiento(initialState= {}) {
             setValue({...value,
                 [ nombrecampo ]: value.edadAdultos.filter((tag, index) => index !== valor)
             })
+        }*/
+
+        if (nombrecampo === 'edadNinos'){
+            setValue({...value,
+                [ nombrecampo ]: value.edadNinos.filter((tag, index) => index !== valor)
+            })
         }
 
     };
 
-    const handleAddition = (valor, nombrecampo) => {
+    const handleDeleteAge = (valor, nombrecampo) => {
 
-        if (nombrecampo === 'edadBebes'){
+        if (nombrecampo === 'edadNinos'){
+            setValue({...value,
+                [ nombrecampo ]: value.edadNinos.filter((tag, index) => index !== valor)
+            })
+        }
+
+    };
+
+    /*if (nombrecampo === 'edadBebes'){
             setValue(state => ({ ...value,edadBebes: [...value.edadBebes,valor] }))
         }else if (nombrecampo === 'edadNinos'){
             setValue(state => ({ ...value,edadNinos: [...value.edadNinos,valor] }))
         }else if (nombrecampo === 'edadAdultos'){
             setValue(state => ({ ...value,edadAdultos: [...value.edadAdultos,valor] }))
+        }*/
+
+    const handleAddition = (valor, nombrecampo, va) => {
+
+        const item = {
+            id: va,
+            text: va,
+        };
+
+        if (nombrecampo === 'edadNinos'){
+            setValue(state => ({ ...value,edadNinos: [...value.edadNinos,item] }))
+        }
+
+    };
+
+    const handleAddAge = (valor, nombrecampo, va) => {
+
+        console.log(nombrecampo)
+
+        const item = {
+            id: va,
+            text: va,
+        };
+
+        if (nombrecampo === 'edadNinos'){
+            setValue(state => ({ ...value,edadNinos: [...value.edadNinos,item] }))
         }
 
     };
@@ -221,5 +261,5 @@ export default function UseFormRequerimiento(initialState= {}) {
         });
     };
 
-    return [ value, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios,setFields, reset ];
+    return [ value, handleChange,handleAddAge, handleDeleteAge, handleDelete, handleAddition, handleDrag, handleChangeHorarios,setFields, reset ];
 }

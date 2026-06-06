@@ -265,3 +265,48 @@ div.ReactTags__selected a.ReactTags__remove {
     color: #f95851;
     font-size: 14px;
 }
+
+.edadninosAdvice{
+    color: $purple_bertha;
+    font-size: 1rem;
+}
+
+.optionsEdadesNinos{
+    padding-top: 1rem;
+
+    .option{
+        padding: 0.5rem;
+        border: solid 2px $purple_bertha;
+        border-radius: 0.625rem;
+        font-size: 1.1rem;
+        color: $purple_bertha;
+        margin: 0.25rem;
+        min-height: 47px;
+        cursor: pointer;
+
+        &:hover, &:active, &:focus{
+            background-color: $selected_pink_bertha;
+            border-color: $selected_pink_bertha;
+        }
+    }
+}
+
+.edadesSeleccionadas{
+    .seleccionados{
+        padding: 0.5rem;
+        border: solid 2px $selected_purple_bertha;
+        border-radius: 0.625rem;
+        font-size: 1rem;
+        color: $purple_bertha;
+        background-color: $selected_purple_bertha;
+        margin: 0.25rem;
+        min-height: 47px;
+        align-content: center;
+        font-weight: bold;
+
+        .deleteSeleccionado{
+            cursor: pointer;
+            color: $purple_bertha;
+        }
+    }
+}

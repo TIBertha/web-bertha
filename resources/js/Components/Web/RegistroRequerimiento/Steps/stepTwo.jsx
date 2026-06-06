@@ -6,6 +6,8 @@ import Tooltips from "../../Components/tooltips.jsx";
 import SelectFormExterno from "../../Components/selectFormExterno.jsx";
 
 import TagEdades from "../Components/tagEdades.jsx";
+import imgEnterButton from "../../../../../../public/img/enter-button.jpg";
+import imgCommaButton from "../../../../../../public/img/comma-button.png";
 
 const makeNumberOptions = (max) =>
     Array.from({ length: max + 1 }, (_, i) => ({
@@ -33,7 +35,30 @@ const optionsPisosDepa = () =>
         ['3', 'Triplex (3 pisos)']
     ].map(([value, label]) => ({ value, label }));
 
-export default function StepTwo({handleChange, handleDelete, handleAddition, handleDrag, requerimiento, tiposViviendas}) {
+
+const edadNinos = [
+    "Menor a 1 año",
+    "1 año",
+    "2 años",
+    "3 años",
+    "4 años",
+    "5 años",
+    "6 años",
+    "7 años",
+    "8 años",
+    "9 años",
+    "10 años",
+    "11 años",
+    "12 años",
+    "13 años"
+];
+
+const optionsEdadNinos = edadNinos.map((edad) => ({
+    id: edad,
+    text: edad,
+}));
+
+export default function StepTwo({handleChange, handleDelete, handleAddition, handleDrag, requerimiento, tiposViviendas, handleAddAge, handleDeleteAge}) {
     let estilo = {TipoVivienda: '', NumeroPisos: '', NumeroNinos: '', EdadNinos: '', NumeroAdultos: '', EdadAdultos: '', NumeroMascotas: ''};
 
 
@@ -67,9 +92,6 @@ export default function StepTwo({handleChange, handleDelete, handleAddition, han
             estilo.NumeroMascotas = 'col-12 col-lg-12 order-5';
         }
     }
-
-
-    console.log(requerimiento.actividad_id.value, estilo);
 
     let label = {EdadNino: ''};
 
@@ -108,14 +130,56 @@ export default function StepTwo({handleChange, handleDelete, handleAddition, han
                     }
 
                     {[1,2,4,5,6,7,9].includes(requerimiento.actividad_id.value) &&
-                        <div className={estilo.EdadNinos}>
+                        <div className={estilo.EdadNinos + ' pt-4'}>
+
+                            <div className="mt-4 texto-casillas">Edad de tu(s) hijo(s)</div>
+                            <div className="mt-0 edadninosAdvice"><i className="fa-solid fa-circle-info me-2"></i> Si tiene <strong>13 años o más</strong>, inclúyelo  en el número de adultos.</div>
+
+                            <div className={'optionsEdadesNinos'}>
+                                <div className={'row mx-0'}>
+                                    {optionsEdadNinos.map((d) =>  {
+                                        return(
+                                            <div className={'col-auto px-0'}>
+                                                <div className={'option'} onClick={(e) => handleAddition(e, 'edadNinos', d.id)}>
+                                                    {d.text}
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+
+                            {(requerimiento.edadNinos.length !== 0) &&
+                                <>
+                                    <div className="mt-4 texto-casillas">Edades seleccionadas</div>
+
+                                    <div className={'edadesSeleccionadas'}>
+                                        <div className={'row mx-0'}>
+                                            {requerimiento.edadNinos.map((en, index) =>  {
+                                                return(
+                                                    <div className={'col-auto px-0'}>
+                                                        <div className={'seleccionados'}>
+                                                            {en.text} <i className="fa-solid fa-xmark ms-3 deleteSeleccionado" onClick={(e) => handleDelete(index, 'edadNinos')}></i>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
+                                </>
+
+                            }
+
+                            {/*
                             <TagEdades custom={[1,2,4,5,9].includes(requerimiento.actividad_id.value)} campo={requerimiento.edadNinos} nombrecampo="edadNinos" handleChange={handleChange} handleDelete={handleDelete} handleAddition={handleAddition} handleDrag={handleDrag} labelEdad={label.EdadNino}/>
+                            */}
+
                         </div>
                     }
 
                     {[1,2,5,8,9].includes(requerimiento.actividad_id.value) &&
                         <div className={estilo.NumeroAdultos}>
-                            <div className="mt-4 texto-casillas">{'N° de ' + (requerimiento.actividad_id.value === 3 ? 'pacientes' : 'adultos')}</div>
+                            <div className="mt-4 texto-casillas">{'N° de ' + (requerimiento.actividad_id.value === 3 ? 'pacientes' : 'adultos (o adolescentes desde los 13 años)')}</div>
                             <SelectFormExterno value={requerimiento.numeroAdultos} placeholder="Ingresa tu n° de adultos" nombrecampo="numeroAdultos" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} />
                         </div>
                     }
