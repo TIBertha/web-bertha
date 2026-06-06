@@ -28,12 +28,11 @@ const makeRangeOptions = (min, max) =>
 const options3 = makeRangeOptions(1, 3);
 const optionsPisos = makeRangeOptions(1, 5);
 
-const optionsPisosDepa = () =>
-    [
-        ['1', 'Flat (1 piso)'],
-        ['2', 'Dúplex (2 pisos)'],
-        ['3', 'Triplex (3 pisos)']
-    ].map(([value, label]) => ({ value, label }));
+const optionsPisosDepa = [
+    { value: '1', label: 'Flat (1 piso)' },
+    { value: '2', label: 'Dúplex (2 pisos)' },
+    { value: '3', label: 'Triplex (3 pisos)' },
+];
 
 
 const edadNinos = [
@@ -49,8 +48,7 @@ const edadNinos = [
     "9 años",
     "10 años",
     "11 años",
-    "12 años",
-    "13 años"
+    "12 años"
 ];
 
 const optionsEdadNinos = edadNinos.map((edad) => ({

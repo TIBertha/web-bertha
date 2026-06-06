@@ -143,7 +143,7 @@ export default function UseFormRequerimiento(initialState= {}) {
 
     const handleDelete = (valor, nombrecampo) => {
 
-        /*if (nombrecampo === 'edadBebes'){
+        if (nombrecampo === 'edadBebes'){
             setValue({...value,
                 [ nombrecampo ]: value.edadBebes.filter((tag, index) => index !== valor)
             })
@@ -154,12 +154,6 @@ export default function UseFormRequerimiento(initialState= {}) {
         }else if (nombrecampo === 'edadAdultos'){
             setValue({...value,
                 [ nombrecampo ]: value.edadAdultos.filter((tag, index) => index !== valor)
-            })
-        }*/
-
-        if (nombrecampo === 'edadNinos'){
-            setValue({...value,
-                [ nombrecampo ]: value.edadNinos.filter((tag, index) => index !== valor)
             })
         }
 
@@ -182,6 +176,8 @@ export default function UseFormRequerimiento(initialState= {}) {
 
         if (nombrecampo === 'edadNinos'){
             setValue(state => ({ ...value,edadNinos: [...value.edadNinos,item] }))
+        }else if (nombrecampo === 'edadAdultos'){
+            setValue(state => ({ ...value,edadAdultos: [...value.edadAdultos,valor] }))
         }
 
     };
