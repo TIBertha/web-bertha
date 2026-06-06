@@ -90,7 +90,7 @@ export default function RegistroRequerimiento({url, token}) {
     const [msjExito, setMsjExito] = useState(false);
     const [step, setStep] = useState(initialStep);
     const [percentageProgressBar, setPercentageProgressBar] = useState(0);
-    const [requerimiento, handleAddAge, handleDeleteAge, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios, setFields] = UseFormRequerimiento(initialStateRequerimiento);
+    const [requerimiento, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios, setFields] = UseFormRequerimiento(initialStateRequerimiento);
     const [edades, setEdades] = useState([]);
     const [actividades, setActividades] = useState([]);
     const [modalidades, setModalidades] = useState([]);
@@ -112,18 +112,6 @@ export default function RegistroRequerimiento({url, token}) {
     const onChange = (e, nombreCampo, tipoCampo) => {
         handleChange(e, nombreCampo, tipoCampo);
     };
-
-
-
-    const onDeleteAge = (e, nombreCampo, value) => {
-        handleDeleteAge(e, nombreCampo);
-    };
-
-    const onAddAge = (e, nombreCampo, value) => {
-        handleAddAge(e, nombreCampo, value);
-    };
-
-
 
     const onDelete = (e, nombreCampo) => {
         handleDelete(e, nombreCampo);
@@ -294,8 +282,6 @@ export default function RegistroRequerimiento({url, token}) {
                                     handleDelete={onDelete}
                                     handleAddition={onAdittion}
                                     handleDrag={onDrag}
-                                    handleAddAge={onAddAge}
-                                    handleDeleteAge={onDeleteAge}
                                     requerimiento={requerimiento}
                                     tiposViviendas={tiposViviendas}
                                 />

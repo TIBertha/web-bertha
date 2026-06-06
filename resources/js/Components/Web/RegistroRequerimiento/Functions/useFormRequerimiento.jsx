@@ -127,11 +127,7 @@ export default function UseFormRequerimiento(initialState= {}) {
 
         return result;
 
-    };
-
-    /*const setFields = (target) => {
-        setValue({...value, ...target});
-    };*/
+    }
 
     const setFields = (target) => {
         const normalized = {
@@ -169,16 +165,6 @@ export default function UseFormRequerimiento(initialState= {}) {
 
     };
 
-    const handleDeleteAge = (valor, nombrecampo) => {
-
-        if (nombrecampo === 'edadNinos'){
-            setValue({...value,
-                [ nombrecampo ]: value.edadNinos.filter((tag, index) => index !== valor)
-            })
-        }
-
-    };
-
     /*if (nombrecampo === 'edadBebes'){
             setValue(state => ({ ...value,edadBebes: [...value.edadBebes,valor] }))
         }else if (nombrecampo === 'edadNinos'){
@@ -188,21 +174,6 @@ export default function UseFormRequerimiento(initialState= {}) {
         }*/
 
     const handleAddition = (valor, nombrecampo, va) => {
-
-        const item = {
-            id: va,
-            text: va,
-        };
-
-        if (nombrecampo === 'edadNinos'){
-            setValue(state => ({ ...value,edadNinos: [...value.edadNinos,item] }))
-        }
-
-    };
-
-    const handleAddAge = (valor, nombrecampo, va) => {
-
-        console.log(nombrecampo)
 
         const item = {
             id: va,
@@ -261,5 +232,5 @@ export default function UseFormRequerimiento(initialState= {}) {
         });
     };
 
-    return [ value, handleChange,handleAddAge, handleDeleteAge, handleDelete, handleAddition, handleDrag, handleChangeHorarios,setFields, reset ];
+    return [ value, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios,setFields, reset ];
 }

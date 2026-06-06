@@ -58,7 +58,7 @@ const optionsEdadNinos = edadNinos.map((edad) => ({
     text: edad,
 }));
 
-export default function StepTwo({handleChange, handleDelete, handleAddition, handleDrag, requerimiento, tiposViviendas, handleAddAge, handleDeleteAge}) {
+export default function StepTwo({handleChange, handleDelete, handleAddition, handleDrag, requerimiento, tiposViviendas}) {
     let estilo = {TipoVivienda: '', NumeroPisos: '', NumeroNinos: '', EdadNinos: '', NumeroAdultos: '', EdadAdultos: '', NumeroMascotas: ''};
 
 
