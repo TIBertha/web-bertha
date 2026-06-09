@@ -31,7 +31,7 @@ Route::post('/ajax-get-redes-sociales', [WebController::class, 'ajaxGetRedesSoci
 
 //ruta de condiciones
 Route::get('/condiciones', [WebController::class, 'condiciones'])->name('condiciones');
-Route::get('es-pe/condiciones', [WebController::class, 'condiciones'])->name('condiciones');
+Route::get('es-pe/condiciones', [WebController::class, 'condiciones'])->name('condiciones-pe');
 
 //ruta de privacidad
 Route::get('/privacidad', [WebController::class, 'viewPrivacidad'])->name('privacidad');
