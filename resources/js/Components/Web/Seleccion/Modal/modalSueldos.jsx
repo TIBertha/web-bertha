@@ -18,51 +18,62 @@ export default function ModalSueldos({ country }) {
             label: "Cama adentro sale sale viernes 7pm, retorna lunes 7am",
             cost: "1700",
         },
-        { label: "Cama afuera de lunes a viernes de 8am a 7pm", cost: "1700" },
         {
-            label: "Cama afuera de lunes a viernes de 8am a 6pm, sábados de 8am a 1pm",
+            label: "Cama afuera de lunes a viernes de 8am a 7pm + sábados 8am a 1pm",
+            cost: "1700"
+        },
+        {
+            label: "Cama afuera de lunes a viernes de 8am a 7pm",
+            cost: "1600"
+        },
+        {
+            label: "Cama afuera de lunes a viernes de 8am a 6pm + sábados 8am a 1pm",
             cost: "1550",
         },
         {
-            label: "Cama afuera de lunes a viernes de 8am a 5pm, sábados de 8am a 1pm",
+            label: "Cama afuera de lunes a viernes de 8am a 5pm + sábados 8am a 1pm",
             cost: "1450",
         },
         { label: "Cama afuera de lunes a viernes de 8am a 6pm", cost: "1450" },
         {
-            label: "Cama afuera de lunes a viernes de 8am a 4pm, sábados de 8am a 1pm",
+            label: "Cama afuera de lunes a viernes 8am a 3:30pm + sábados 8am a 1pm",
             cost: "1400",
         },
-        { label: "Cama afuera de lunes a viernes de 8am a 5pm", cost: "1400" },
+        { label: "Cama afuera de lunes a viernes 8am a 5pm", cost: "1400" },
     ];
 
     let arrayMTPe = [
         {
-            label: "Cama afuera medio turno, lunes a sábado de 8am a 1pm",
+            label: "Cama afuera lunes a sábado de 8am a 1pm",
             cost: "1350",
         },
         {
-            label: "(Más solicitado) Cama afuera medio turno, lunes a viernes de 8am a 3pm",
+            label: "Cama afuera de lunes a viernes 8am a 3pm o 9am a 4pm",
             cost: "1350",
         },
         {
-            label: "(Más solicitado) Cama afuera medio turno, lunes a viernes de 8am a 2pm o de 12pm a 6pm",
+            label: "Cama afuera de lunes a viernes 8am a 2pm o 12am a 6pm",
             cost: "1250",
         },
         {
-            label: "4 veces por semana de 8am a 5pm",
-            cost: "80 el día o 1280 el mes",
+            label: "Cama afuera de lunes a viernes 8am a 1pm",
+            cost: "1150",
         },
         {
-            label: "3 veces por semana lun/mie/vie o mar/jue/sab de 8am a 5pm",
-            cost: "80 el día o 960 el mes",
+            label: "4 veces: (Entre lunes y viernes) 8am a 5pm",
+            cost: "80 por día o 1280 al mes",
         },
         {
-            label: "2 veces por semana martes y jueves de 8am a 5pm",
-            cost: "80 el día o 640 el mes",
+            label: "3 veces: (lunes-miércoles-viernes o martes-jueves-sábado) 8am a 5pm",
+            cost: "80 por día o 960 al mes",
         },
         {
-            label: "1 vez por semana martes o jueves de 8am a 5pm",
-            cost: "80 el día o 320 el mes",
+            label: "2 veces: (martes-jueves) 8am a 5pm",
+            cost: "80 por día o 640 al mes",
+        },
+        {
+            label: "1 vez: (martes o jueves) 8am a 5pm",
+            cost: "80 por día o 320 al mes",
         },
     ];
 
