@@ -132,7 +132,7 @@ export default function ModalSueldos({ country }) {
                                 " desde):"}
                         </p>
 
-                        <div className={"ps-2 pb-2"}>
+                        <div className={"ps-2 py-2"}>
                             {sueldoLista.lista1.map((d) => {
                                 return (
                                     <p className={"pb-2 fw-100"}>
@@ -148,7 +148,7 @@ export default function ModalSueldos({ country }) {
                                 " desde):"}
                         </p>
 
-                        <div className={"ps-2"}>
+                        <div className={"ps-2 py-2"}>
                             {sueldoLista.lista2.map((d) => {
                                 return (
                                     <p className={"pb-2 fw-100"}>
