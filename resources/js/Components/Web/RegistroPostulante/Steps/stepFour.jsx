@@ -171,7 +171,7 @@ export default function StepFour({trabajador, show, stepCurrent, setFields, acti
         <div className="form-group mb-0 no-select-text pt-3 pt-lg-0">
             <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
 
-                <h4 className="mb-0 texto-pasos">{stepCurrent}. EXPERIENCIA LABORAL</h4>
+                <h4 className="mb-0 texto-pasos">{stepCurrent -1}. EXPERIENCIA LABORAL</h4>
                 <div className="subtitulo-pasos">Tu recomendación es el motivo por el cual la mayoría de empleadores te contratan, si tienes el celular de al menos un ex empleador, agrega tu experiencia aquí:</div>
 
                 <section className="row">

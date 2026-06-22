@@ -56,6 +56,7 @@ export default function StepThree({labelError, paisPostulando, trabajador, show,
 
             </div>
 
+            {/*
             <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
 
                 <h4 className="mb-3 texto-pasos">{stepCurrent}. COVID</h4>
@@ -76,6 +77,7 @@ export default function StepThree({labelError, paisPostulando, trabajador, show,
                 </section>
 
             </div>
+            */}
 
         </div>
     )

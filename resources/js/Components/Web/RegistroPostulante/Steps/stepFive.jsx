@@ -133,7 +133,7 @@ export default function StepFive({labelError, trabajador, show, stepCurrent, set
 
             <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
 
-                <h4 className="mb-0 texto-pasos">{stepCurrent}. ESTUDIOS</h4>
+                <h4 className="mb-0 texto-pasos">{stepCurrent - 1}. ESTUDIOS</h4>
                 <div className="subtitulo-pasos">¿Cuál es tu nivel de educación?</div>
 
                 <section className="row">

@@ -2,7 +2,7 @@ import React from "react";
 import CircledHr from "../Components/circledHr.jsx";
 import imgHuella from "../../../../../public/img/icons/huella.png";
 import imgTable from "../../../../../public/img/icons/table.png";
-import imgCarnetCovid from "../../../../../public/img/icons/carnet-covid.png"
+import imgPeriodoPrueba from "../../../../../public/img/icons/periodo-prueba.png"
 import imgReemplazos from "../../../../../public/img/icons/reemplazos.png";
 import imgGirl from "../../../../../public/img/new_version/bertha_girl_img.png";
 
@@ -64,12 +64,12 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                             <div className="col-12 description-activity-item row">
 
                                 <div className="col-4 p-0">
-                                    <img className="description-activity-icon" src={imgCarnetCovid} alt="Con vacunación COVID"/>
+                                    <img className="description-activity-icon" src={imgPeriodoPrueba} alt="Periodo de prueba"/>
                                 </div>
 
                                 <div className="col-8 px-lg-0">
-                                    <h5 className="responsive-description-size">Con vacunación COVID</h5>
-                                    <p className="responsive-content-size">Solicitamos que las trabajadoras informen sobre su vacunación COVID.</p>
+                                    <h5 className="responsive-description-size">Con periodo de prueba</h5>
+                                    <p className="responsive-content-size">Durante este tiempo evalúa a tu trabajadora del hogar.</p>
                                 </div>
 
                             </div>

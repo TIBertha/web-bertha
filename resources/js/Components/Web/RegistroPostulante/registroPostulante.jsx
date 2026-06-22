@@ -138,7 +138,6 @@ export default function RegistroPostulante({url, token, usuario, typeform, show,
                     data.numero_documento &&
                     data.numero_documento.length >= 8 &&
                     data.fechanacimiento &&
-                    data.estadocivil_id &&
                     data.departamentonacimiento_id &&
                     data.idioma_id
                 )) {
@@ -172,7 +171,7 @@ export default function RegistroPostulante({url, token, usuario, typeform, show,
         }
 
         else if (paso === 3) {
-            if (!(data.distrito_id && data.direccion && data.tiene_vacuna)) {
+            if (!(data.distrito_id && data.direccion)) {
                 pass = false;
                 setErroresList(detectErroresByStep(data, paso, erroresList));
                 setShowAlertDiv(true);

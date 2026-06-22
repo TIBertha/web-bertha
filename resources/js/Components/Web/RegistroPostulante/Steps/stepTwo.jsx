@@ -164,16 +164,6 @@ export default function StepTwo({labelError, trabajador, enabledCountries,show, 
                         )}
                     </div>
 
-                    <div className="col-12 col-lg-6">
-                        <div className="mt-3 texto-casillas">Estado Civil:</div>
-                        <SelectFormExterno value={trabajador.estadocivil_id} placeholder="Ingresa tu estado civil" nombrecampo="estadocivil_id" tipocampo="event" opciones={estadosciviles} handleChange={handleChange} isDisabled={!!show} />
-                        {labelError && !trabajador?.estadocivil_id && (
-                            <div className="msj-error-registro-postulante">
-                                Falta llenar este campo.
-                            </div>
-                        )}
-                    </div>
-
                     {typeform === 'new' &&
                         <div className="col-12 col-lg-6">
 

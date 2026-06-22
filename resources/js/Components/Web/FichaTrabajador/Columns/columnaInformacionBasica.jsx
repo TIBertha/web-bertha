@@ -191,7 +191,6 @@ export default function ColumnaInformacionBasica({
                             {informacionBasica.fechaNacimiento}
                         </p>
                         <p>Edad: {informacionBasica.edad}</p>
-                        <p>Estado Civil: {informacionBasica.estadoCivil}</p>
                     </div>
                 </div>
             </div>

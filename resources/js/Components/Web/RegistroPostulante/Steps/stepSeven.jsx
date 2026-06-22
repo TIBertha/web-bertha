@@ -13,7 +13,7 @@ export default function StepSeven({labelError, trabajador, show, stepCurrent, ha
 
                 <ModalVideo channel='youtube' isOpen={isOpenVideoYoutube} url={video} onClose={ () => setIsOpenVideoYoutube(false) } />
 
-                <h4 className="mb-0 texto-pasos">{stepCurrent}.  VIDEO DE PRESENTACIÓN</h4>
+                <h4 className="mb-0 texto-pasos">{stepCurrent - 1}.  VIDEO DE PRESENTACIÓN</h4>
                 <div className="subtitulo-pasos">
                     <p>Finalmente, envía tu video de presentación para que los empleadores se convenzan de contratarte.</p>
                     <p className="mb-1">A) Di solo tus nombre <b>(No digas tus apellidos)</b>.</p>

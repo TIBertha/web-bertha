@@ -24,22 +24,22 @@ export default function (initialState = {}, version , paisPostulando) {
 
             forceInputUppercase(valor);
 
-        }else if(tipo == 'firma'){
+        }else if(tipo === 'firma'){
 
             setValue({...value, firma: valor });
 
-        }else if(tipo == 'videoyoutube'){
+        }else if(tipo === 'videoyoutube'){
 
             setValue({...value, video_introduccion: valor });
 
-        }else if(tipo == 'event'){
+        }else if(tipo === 'event'){
 
-            if (nombrecampo == 'genero_id'){
+            if (nombrecampo === 'genero_id'){
                 setValue({...value,
                     [ nombrecampo ]: valor,
                     actividad_id: '',
                 });
-            }if (nombrecampo == 'departamentonacimiento_id'){
+            }if (nombrecampo === 'departamentonacimiento_id'){
                 setValue({...value,
                     [ nombrecampo ]: valor,
                     lugar_nacimiento: valor.label,
@@ -48,16 +48,16 @@ export default function (initialState = {}, version , paisPostulando) {
                 setValue({...value, [ nombrecampo ]: valor});
             }
 
-        }else if(tipo == 'pais'){
+        }else if(tipo === 'pais'){
             let v = {nacionalidad: 2, tipoDocumento: ''};
 
-            if (paisPostulando == 54){
-                if (valor.value == 54){
+            if (paisPostulando === 54){
+                if (valor.value === 54){
                     v.nacionalidad = 1;
                     v.tipoDocumento = {value:'1', label: 'DOCUMENTO NACIONAL DE IDENTIDAD (DNI)'};
                 }
-            }else if (paisPostulando == 11){
-                if (valor.value == 11){
+            }else if (paisPostulando === 11){
+                if (valor.value === 11){
                     v.nacionalidad = 1;
                     v.tipoDocumento = {value:'10', label: 'ROL UNICO NACIONAL (RUN)'};
                 }
@@ -72,12 +72,12 @@ export default function (initialState = {}, version , paisPostulando) {
                 numero_documento: ''
             })
 
-        }else if(tipo == 'imagen' || tipo == 'imagenpdf') {
+        }else if(tipo === 'imagen' || tipo === 'imagenpdf') {
 
             let file = valor.target.files[0];
             let tipoFile = file.type;
 
-            if(tipo == 'imagen'){
+            if(tipo === 'imagen'){
 
                 let options = {
                     maxSizeMB: 4,
@@ -91,13 +91,13 @@ export default function (initialState = {}, version , paisPostulando) {
 
                     reader.readAsDataURL(compressedFile);
 
-                    reader.onload = (e) => {
+                    reader.onload = () => {
                         actionUploadFile(reader.result, nombrecampo, null, null);
                     };
 
                 });
 
-            }else if(tipo == 'imagenpdf'){
+            }else if(tipo === 'imagenpdf'){
 
                 let tiposFilePermitidos = ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'];
 
@@ -105,7 +105,7 @@ export default function (initialState = {}, version , paisPostulando) {
 
                     let reader = new FileReader();
                     reader.readAsDataURL(file);
-                    reader.onloadend = (e) => {
+                    reader.onloadend = () => {
                         actionUploadFile(reader.result, campo, tipoFile);
                     }
 
@@ -126,13 +126,13 @@ export default function (initialState = {}, version , paisPostulando) {
     const actionUploadFile = (file, campo, tipoarchivo = null, llave = null) => {
 
         ajaxUploadFile(file, campo, tipoarchivo).then(r => {
-            if(campo == 'certificadoantecedente'){
+            if(campo === 'certificadoantecedente'){
                 this.setState({
                     [key]: false,
                     certificadoantecedente: r.result.image,
                     certificadoantecedentepdf: r.result.pdf
                 });
-            }else if(campo == 'recibos'){
+            }else if(campo === 'recibos'){
                 const data = this.state.fotorecibo.map((recibo, sidx) => {
                     if (llave !== sidx){
                         return recibo;

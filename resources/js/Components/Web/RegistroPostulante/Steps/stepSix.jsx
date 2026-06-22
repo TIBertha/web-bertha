@@ -66,7 +66,7 @@ export default function StepSix({labelError, trabajador, show, setFields, stepCu
         <div className="form-group mb-0 no-select-text pt-3 pt-lg-0">
             <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
 
-                <h4 className="mb-3 texto-pasos">{stepCurrent}. DOCUMENTO DE IDENTIDAD</h4>
+                <h4 className="mb-3 texto-pasos">{stepCurrent - 1}. DOCUMENTO DE IDENTIDAD</h4>
                 <div className="subtitulo-pasos">{'Genial, ahora adjunta las fotos (echadas) de tu último documento de identidad' + (isChofer ? ' y licencia de condicir.' : '.')}</div>
 
 

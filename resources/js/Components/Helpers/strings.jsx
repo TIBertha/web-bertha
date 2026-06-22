@@ -51,19 +51,17 @@ export function detectErroresByStep(data, paso, errores = []) {
                 errores.push("Falta la edad de tu(s) hijos(s).");
             }
 
-            if (data.nacionalidad_id == 2) {
+            if (data.nacionalidad_id === 2) {
                 if (isEmpty(data.lugar_nacimiento)) errores.push("Falta tu lugar de nacimiento.");
             } else {
                 if (isEmpty(data.departamentonacimiento_id)) errores.push("Falta tu departamento de nacimiento.");
             }
 
-            if (isEmpty(data.estadocivil_id)) errores.push("Falta tu estado civil.");
             break;
 
         case 3:
             if (isEmpty(data.distrito_id)) errores.push("Falta el distrito donde vives.");
             if (isEmpty(data.direccion)) errores.push("Falta la dirección donde vives.");
-            if (isEmpty(data.tiene_vacuna)) errores.push("Falta la cantidad de vacunas.");
             break;
 
         case 5:
