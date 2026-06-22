@@ -82,7 +82,7 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
 
                                 <div className="col-8 px-lg-0">
                                     <h5 className="responsive-description-size">Con reemplazos</h5>
-                                    <p className="responsive-content-size">Durante este tiempo evalúa a tu trabajadora del hogar. Si no estás conforme, solicita los reemplazos que necesites.</p>
+                                    <p className="responsive-content-size">Si no estás conforme, solicita los reemplazos que necesites.</p>
                                 </div>
 
                             </div>
