@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import queryString from 'query-string';
-import Swal from "sweetalert2";
 import Drawer from 'rc-drawer';
 import { useMediaQuery } from 'react-responsive';
 import {ajaxFinalizarSeleccion, ajaxProcesarSeleccion, ajaxSaveCartSeleccion} from "../../Functions/Seleccion.jsx";
@@ -26,17 +25,7 @@ const setParametrosURL = (parametros) => {
 
 };
 
-const isValidoTrabajadorForAddCart = (cart, newData) => {
-
-    const valido = cart.map(tra => {
-        if (!tra.modalidad_id.some(m => newData.modalidad_id.includes(m))) return false;
-        if (!tra.actividad_id.some(a => newData.actividad_id.includes(a))) return false;
-    });
-
-    return valido.every(v => v === true);
-};
-
-export default function Seleccion({url,session, country}) {
+export default function Seleccion({url, country}) {
     const [filtrosSelected, setFiltrosSelected] = useState([]);
     const [trabajadores, setTrabajadores] = useState([]);
     const [cart, setCart] = useState([]);

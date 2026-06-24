@@ -21,7 +21,6 @@ export default function ColumnaInformacionBasica({
     modalidad,
     informacionBasica,
     identificacion,
-    idioma,
     iconDocumentoIdentidad,
     openModalVideo,
     dataseleccion,
@@ -280,28 +279,7 @@ export default function ColumnaInformacionBasica({
                 </div>
             </div>
 
-            {idioma.length > 0 && (
-                <>
-                    <hr />
 
-                    <div className="py-3">
-                        <p className="titulo-seccions m-0">Idiomas</p>
-                        <div className="row mx-0 justify-content-end detalles mt-2">
-                            <div className="col-12 col-xl-10">
-                                <div className="mb-2 actividad-modalidad-idioma">
-                                    {idioma.map((data, index) => {
-                                        return (
-                                            <span key={index}>
-                                                {data.nombre}
-                                            </span>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </>
-            )}
         </section>
     );
 }

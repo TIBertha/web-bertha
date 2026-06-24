@@ -1,35 +1,52 @@
 import React from "react";
 import parse from "html-react-parser";
-
 import DeclaracionDomicilio from "../../../../../../public/img/ficha/declaracion-domicilio.jpg";
-
 import { getTieneDosisVacuna } from "../../../Functions/FichaTrabajador.jsx";
-
 import InputTelefono from "../Components/inputTelefono.jsx";
 import Tooltips from "../../Components/tooltips.jsx";
 import SwitchTooltip from "../../Components/switchTooltip.jsx";
-
 import DeclaracionJuradaSalud from "../../../../../../public/img/ficha/declaracion-salud.jpg";
 import ReciboServicio from "../../../../../../public/img/ficha/recibo-servicio.png";
 import Antecedentes from "../../../../../../public/img/ficha/reporte-antecedentes.jpg";
 import AntecedentesCl from "../../../../../../public/img/ficha/reporte-antecedentes-cl.jpg";
 
 export default function ColumnaDomicilioLegalSalud({
-    url,
     country = 54,
     domicilio,
     salud,
     legal,
     redesContacto,
     iconFile,
-    dataseleccion,
-    privado,
-    contactosEmergencia,
+    idioma,
 }) {
-    let tieneVacuna = getTieneDosisVacuna(parseInt(salud.tieneVacuna));
+    //let tieneVacuna = getTieneDosisVacuna(parseInt(salud.tieneVacuna));
 
     return (
         <section className="map p-3">
+
+            {idioma.length > 0 && (
+                <>
+                    <div className="py-3">
+                        <p className="titulo-seccions m-0">Idiomas</p>
+                        <div className="row mx-0 justify-content-end detalles mt-2">
+                            <div className="col-12 col-xl-10">
+                                <div className="mb-2 actividad-modalidad-idioma">
+                                    {idioma.map((data, index) => {
+                                        return (
+                                            <span key={index}>
+                                                {data.nombre}
+                                            </span>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                </>
+            )}
+
             <div className="py-3">
                 <p className="titulo-seccions m-0">Contacto</p>
                 <div className="row mx-0 justify-content-end detalles mt-2">
@@ -272,6 +289,7 @@ export default function ColumnaDomicilioLegalSalud({
 
             <hr />
 
+            {/*
             <div className="py-3">
                 <p className="titulo-seccions m-0">Vacuna COVID</p>
                 <div className="row mx-0 justify-content-end detalles mt-2">
@@ -315,6 +333,7 @@ export default function ColumnaDomicilioLegalSalud({
             </div>
 
             <hr />
+            */}
 
             <div className="py-3">
                 <p className="titulo-seccions m-0">Salud</p>

@@ -176,7 +176,6 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                         modalidad={modalidad}
                         informacionBasica={informacionBasica}
                         identificacion={identificacion}
-                        idioma={idioma}
                         defaultMessageTelefono={defaultMessage}
                         defaultMessageWhatsapp={defaultMessage}
                         iconTelefono={iconTelefono}
@@ -204,6 +203,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                         salud={salud}
                         legal={legal}
                         iconFile={iconFile}
+                        idioma={idioma}
                     />
                 </div>
 
