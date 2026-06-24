@@ -406,6 +406,24 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
     width: 100%;
     height: 100vh; // o el tamaño que quieras
     overflow: hidden;
+    background-color: $purple_bertha;
+
+    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+        width: 100%;
+        height: max-content;
+
+        .video-element {
+            position: relative !important;
+            width: 100% !important;
+            top: unset !important;
+            left: unset !important;
+            height: auto !important;
+            min-height: unset !important;
+            min-width: unset !important;
+            transform: unset !important;
+            object-fit: contain !important; // evita recortes
+        }
+    }
 
     .video-element {
         position: absolute;
