@@ -30,7 +30,7 @@ export default function Index({url, num, country}){
                         }
                     }}
                 >
-                    <source src={'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-index-video.mov'} type={'video/mp4'}/>
+                    <source src={'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-home-video.MOV'} type={'video/mp4'}/>
                 </video>
             </section>
 
