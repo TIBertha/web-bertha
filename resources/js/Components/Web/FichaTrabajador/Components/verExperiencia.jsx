@@ -121,7 +121,7 @@ export default function VerExperiencia({
                                 )}
                             </div>
                             <div className="col-2 mb-auto">
-                                {experiencia.adjunto && (
+                                {/*experiencia.adjunto && (
                                     <>
                                         <Tooltips
                                             text={parse(
@@ -134,7 +134,7 @@ export default function VerExperiencia({
                                             placement={"bottom"}
                                         />
                                     </>
-                                )}
+                                )*/}
                             </div>
                         </div>
                     </section>
