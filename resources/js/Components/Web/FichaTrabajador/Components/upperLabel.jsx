@@ -25,11 +25,7 @@ export default function UpperLabel({
                 onClose={() => closeModalVideo()}
             />
 
-            <div
-                className={
-                    "row px-3 px-md-5 my-md-3 my-lg-0 py-2 justify-content-between mx-0 pink-label fix-pink-label"
-                }
-            >
+            <div className={"row px-3 px-md-5 my-0 py-2 justify-content-between mx-0 pink-label fix-pink-label"}>
                 <div className="col-auto px-0">
                     {retrato && <img className="retrato align-middle" src={retrato} />}
                     <span className="d-none px-1 align-middle">|</span>

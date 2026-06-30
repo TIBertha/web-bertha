@@ -159,9 +159,9 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                 isSeleccion={isSeleccion}
             />
 
-            <div className="row px-3 px-md-5 my-md-3 my-lg-0 pb-lg-4 justify-content-center mx-0 curriculum-area pb-5">
+            <div className="row px-3 px-md-5 my-0 justify-content-center mx-0 curriculum-area pb-5">
 
-                <div className="col-12 col-md-8 col-lg-4 ret-a my-0 px-0 px-md-3">
+                <div className="col-12 col-lg-4 ret-a my-0 px-0 px-md-3">
                     <ColumnaInformacionBasica
                         country={country}
                         dataseleccion={dataseleccion}
@@ -191,7 +191,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                     />
                 </div>
 
-                <div className="col-12 col-md-8 col-lg-4 ret-a my-0 pt-4 pt-lg-0 px-0 px-md-3">
+                <div className="col-12 col-lg-4 ret-a my-0 pt-4 pt-lg-0 px-0 px-md-3">
                     <ColumnaDomicilioLegalSalud
                         country={country}
                         dataseleccion={dataseleccion}
@@ -207,7 +207,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                     />
                 </div>
 
-                <div className="col-12 col-md-8 col-lg-4 ret-a my-0 pt-4 pt-lg-0 px-0 px-md-3">
+                <div className="col-12 col-lg-4 ret-a my-0 pt-4 pt-lg-0 px-0 px-md-3">
 
                     {numExperiencia > 0 && (
                         <ColumnaExperienciaEstudios
