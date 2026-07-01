@@ -409,12 +409,12 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
     background-color: $purple_bertha;
 
     @include media-breakpoint-down(md){ /*--Less than 768px---*/
-        width: 100%;
-        height: max-content;
+        /*width: 100%;
+        height: max-content;*/
 
-        .video-element {
+        /*.video-element {
             position: relative !important;
-            width: 100% !important;
+            width: fit-content !important;
             top: unset !important;
             left: unset !important;
             height: auto !important;
@@ -422,7 +422,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
             min-width: unset !important;
             transform: unset !important;
             object-fit: contain !important; // evita recortes
-        }
+        }*/
     }
 
     .video-element {

@@ -8,8 +8,11 @@ import FrameTuTrabajadoraDelHogar from "./frameTuTrabajadoraDelHogar.jsx";
 import SliderTestimonialesEmpleador from "../Components/HomeSliders/sliderTestimonialesEmpleador.jsx";
 import SliderTestimonialesTrabajador from "../Components/HomeSliders/sliderTestimonialesTrabajador.jsx";
 import SliderPrensa from "../Components/HomeSliders/sliderPrensa.jsx";
+import {mobileDesktop} from "../../Functions/General.jsx";
 
 export default function Index({url, num, country}){
+    let display = mobileDesktop();
+    let movie = display === 'desktop' ? 'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-home-video.mp4' : 'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-home-video-mobile.mp4';
     return(
         <>
             <FramePrincipal url={url} country={country} />
@@ -30,7 +33,7 @@ export default function Index({url, num, country}){
                         }
                     }}
                 >
-                    <source src={'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-home-video.MOV'} type={'video/mp4'}/>
+                    <source src={movie} type={'video/mp4'}/>
                 </video>
             </section>
 
