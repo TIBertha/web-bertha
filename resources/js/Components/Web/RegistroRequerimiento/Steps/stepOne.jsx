@@ -66,7 +66,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
         <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
 
-            <h4 className="mb-0 texto-pasos">{'1. ¡Hola ' + nombreEmpleador + '! Llena todo tu requerimiento para que consigamos a tu trabajadora ideal. Son solo 3 pasos:' }</h4>
+            <h4 className="mb-0 texto-pasos">{'1. ¡Hola ' + nombreEmpleador + '! Llena todo tu requerimiento para que consigamos a tu trabajadora ideal. Son solo 2 pasos:' }</h4>
 
             <section className="row">
 
@@ -94,8 +94,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                 {[1,2,4,5,6,7,9].includes(requerimiento.actividad_id.value) &&
                     <div className={'col-12 pt-4'}>
 
-                        <div className="mt-4 texto-casillas">Edad de tu(s) hijo(s)</div>
-                        <div className="mt-0 edadninosAdvice"><i className="fa-solid fa-circle-info me-2"></i> Si tiene <strong>13 años o más</strong>, inclúyelo  en el número de adultos.</div>
+                        <div className="mt-4 texto-casillas">Selecciona la edad de cada hijo(a)</div>
 
                         <div className={'optionsEdadesNinos'}>
                             <div className={'row mx-0'}>
@@ -110,6 +109,8 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                                 })}
                             </div>
                         </div>
+
+                        <div className="my-2 edadninosAdvice"><i className="fa-solid fa-circle-info me-2"></i> Si tiene <strong>13 años o más</strong>, inclúyelo  en el número de adultos.</div>
 
                         {(requerimiento.edadNinos.length !== 0) &&
                             <>
