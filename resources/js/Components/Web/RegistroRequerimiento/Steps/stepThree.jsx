@@ -44,7 +44,7 @@ export default function StepThree({handleChange, handleChangeHorarios, requerimi
 
                             <div className="form-group row">
 
-                                <div className={'col-12' + (requerimiento.modalidad_id.value == 2 ? ' px-0' : '')}>
+                                <div className={'col-12' + (requerimiento.modalidad_id.value === 2 ? ' px-0' : '')}>
 
                                     <div className={'row'}>
 

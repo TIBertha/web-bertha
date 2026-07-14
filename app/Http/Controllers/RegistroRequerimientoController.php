@@ -8,10 +8,12 @@ use App\Models\Distrito;
 use App\Models\Empleador;
 use App\Models\FrecuenciaServicio;
 use App\Models\Modalidad;
+use App\Models\ModalidadesHorarios;
 use App\Models\Nacionalidad;
 use App\Models\RangoEdad;
 use App\Models\Requerimiento;
 use App\Models\RequerimientoLink;
+use App\Models\SemiModalidades;
 use App\Models\TipoBeneficio;
 use App\Models\TipoVivienda;
 use App\Models\Usuario;
@@ -115,9 +117,13 @@ class RegistroRequerimientoController extends Controller
 
         $tiposBeneficio = TipoBeneficio::get();
         $tiposBeneficioSM = TipoBeneficio::WhereIn('id',$tb)->get();
+        $semiModalidades = SemiModalidades::get();
+        $modalidadesHorarios = ModalidadesHorarios::get();
 
         return response()->json([
             'code'              =>      200,
+            'semiModalidades'   =>     $semiModalidades,
+            'modalidadesHorarios' =>     $modalidadesHorarios,
             'requerimiento'     =>      $r->requerimiento_id ? formatDataRegistroRequerimiento($requerimiento, $placeholder, $sueldoActividad) : null,
             'nacionalidades'    =>      convertFormatSimpleSelect($nacionalidades),
             'edades'            =>      convertFormatSimpleSelect($edades, false),
@@ -174,6 +180,7 @@ class RegistroRequerimientoController extends Controller
         // PASO 1 — Encapsular todo en un solo arreglo limpio
         $data = [
             'id'                    => $request->input('data.id'),
+            'modalidadhorario_id'   => $request->input('data.modalidadhorario_id'),
             'input_domicilio'       => $request->input('data.input_domicilio'),
             'tipoBeneficio_id'      => $request->input('data.tipoBeneficio_id'),
             'fechaInicioLabores'    => $request->input('data.fechaInicioLabores'),
@@ -272,6 +279,7 @@ class RegistroRequerimientoController extends Controller
                 'estatusrequerimiento_id' => 4,
                 'actividad_id'            => $data['actividad_id']['value'] ?? null,
                 'modalidad_id'            => $data['modalidad_id']['value'] ?? null,
+                'modalidadhorario_id'     => $data['modalidadhorario_id'],
                 'rangoedad_id'            => $rangoEdad,
                 'input_domicilio'         => $data['input_domicilio'],
                 'distrito_id'             => $distrito,

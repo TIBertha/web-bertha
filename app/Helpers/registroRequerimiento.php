@@ -17,6 +17,7 @@ function formatDataRegistroRequerimiento($data, $placeholder, $sueldoActividad){
 
         $result = [
             'id'                      => $data->id,
+            'modalidadhorario_id'     => $data->modalidadhorario_id,
             'input_domicilio'         => $data->input_domicilio,
             'actividad_id'            => $data->actividad_id ? convertToFormatSelectRegistroRequerimiento($data->actividad_id, 'actividad', $paispedido) : '',
             'modalidad_id'            => $data->modalidad_id ? convertToFormatSelectRegistroRequerimiento($data->modalidad_id, 'modalidad', $paispedido) : '',

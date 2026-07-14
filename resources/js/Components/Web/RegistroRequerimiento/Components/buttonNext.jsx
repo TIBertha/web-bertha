@@ -6,19 +6,10 @@ export default function ButtonNext({ step, next, requerimiento }) {
 
     // ⭐ STEP 1
     if (step.current === 1) {
-        disable = !(
-            requerimiento.actividad_id &&
-            requerimiento.sueldo >= requerimiento.sueldoActividad &&
-            requerimiento.ubicacion_id
-        );
-    }
-
-    // ⭐ STEP 2
-    if (step.current === 2) {
 
         const act = requerimiento.actividad_id?.value;
 
-        const reglas = {
+        const reglasActividad = {
             1: requerimiento.tipoVivienda_id && requerimiento.numeroPisos && requerimiento.numeroAdultos && requerimiento.numeroMascotas,
             2: requerimiento.numeroAdultos && requerimiento.edadNinos.length > 0,
             3: requerimiento.edadAdultos.length > 0,
@@ -31,8 +22,23 @@ export default function ButtonNext({ step, next, requerimiento }) {
             10: requerimiento.edadAdultos.length > 0,
         };
 
-        disable = !reglas[act];
+        /*const reglasStep1Base =
+            requerimiento.actividad_id &&
+            requerimiento.sueldo >= requerimiento.sueldoActividad &&
+            requerimiento.ubicacion_id;*/
+
+        const reglasStep1Actividad = reglasActividad[act];
+
+        disable = !(/*reglasStep1Base &&*/ reglasStep1Actividad);
     }
+
+    // ⭐ STEP 2
+    /*if (step.current === 2) {
+        disable = !(
+            requerimiento.actividad_id &&
+            requerimiento.sueldo >= requerimiento.sueldoActividad
+        );
+    }*/
 
     if (step.current < step.last) {
         return (

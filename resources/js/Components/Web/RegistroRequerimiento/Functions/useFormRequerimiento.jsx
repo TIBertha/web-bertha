@@ -20,7 +20,13 @@ export default function UseFormRequerimiento(initialState= {}) {
 
     const handleChange = (valor, nombrecampo, tipo = 'text') => {
 
-        if (tipo === 'tags'){
+        if(tipo === 'modalidadHorario'){
+
+            console.log(valor);
+            setValue({...value,
+                modalidadhorario_id: valor,
+            });
+        }else if (tipo === 'tags'){
 
             if (nombrecampo === 'edadNinos'){
                 setValue({...value,

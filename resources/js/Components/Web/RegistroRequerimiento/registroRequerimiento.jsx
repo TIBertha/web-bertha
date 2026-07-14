@@ -77,6 +77,7 @@ export default function RegistroRequerimiento({url, token}) {
         fechaEntrevista: '',
         horaEntrevista: '',
         diassemana: [],
+        modalidadhorario_id: null,
         horarios: armarhorarioCFPD(),
         placeHolderSueldo: 'Ingresa Monto',
         setSueldoActividad: 0,
@@ -84,7 +85,7 @@ export default function RegistroRequerimiento({url, token}) {
         fechaInicioLabores: '',
     };
 
-    const initialStep = {first: 1, last: 3, current: 1};
+    const initialStep = {first: 1, last: 2, current: 1};
 
     const [loading, setLoading] = useState(false);
     const [msjExito, setMsjExito] = useState(false);
@@ -94,6 +95,8 @@ export default function RegistroRequerimiento({url, token}) {
     const [edades, setEdades] = useState([]);
     const [actividades, setActividades] = useState([]);
     const [modalidades, setModalidades] = useState([]);
+    const [semiModalidades, setSemiModalidades] = useState([]);
+    const [modalidadesHorarios, setModalidadesHorarios] = useState([]);
     const [nacionalidades, setNacionalidades] = useState([]);
     const [ubicaciones, setUbicaciones] = useState([]);
     const [tiposViviendas, setTiposViviendas] = useState([]);
@@ -108,6 +111,8 @@ export default function RegistroRequerimiento({url, token}) {
     const [horasLabor, setHorasLabor] = useState([]);
     const [tiposBeneficios, setTiposBeneficios] = useState([]);
     const [tiposBeneficiosSM, setTiposBeneficiosSM] = useState([]);
+
+    const [isLoadingData, setIsLoadingData] = useState(true);
 
     const onChange = (e, nombreCampo, tipoCampo) => {
         handleChange(e, nombreCampo, tipoCampo);
@@ -149,6 +154,14 @@ export default function RegistroRequerimiento({url, token}) {
 
     const calcularProgressBar = (paso) => { setPercentageProgressBar(( paso * 100) / step.last ) };
 
+
+
+
+    function parseHora(hora){
+        return hora?.label ? moment(hora.label, "hh:mm A").format() : hora;
+    }
+
+
     useEffect(() => {
 
         ajaxLoadDataRegistroRequerimiento(token).then(result => {
@@ -161,6 +174,8 @@ export default function RegistroRequerimiento({url, token}) {
             setApellidos(result.apellidos);
             setActividades(result.actividades);
             setModalidades(result.modalidades);
+            setSemiModalidades(result.semiModalidades);
+            setModalidadesHorarios(result.modalidadesHorarios);
             setNacionalidades(result.nacionalidades);
             setEdades(result.edades);
             setUbicaciones(result.ubicaciones);
@@ -177,12 +192,9 @@ export default function RegistroRequerimiento({url, token}) {
 
     }, []);
 
-
-    function parseHora(hora){
-        return hora?.label ? moment(hora.label, "hh:mm A").format() : hora;
-    }
-
     useEffect(() => {
+
+
         if (requerimiento.id){
 
             const he = parseHora(requerimiento.horaEntrevista);
@@ -200,32 +212,7 @@ export default function RegistroRequerimiento({url, token}) {
                 }
             });
         }
-    }, [requerimiento]);
-
-    const save = (e) => {
-        e.preventDefault();
-
-        setLoading(true);
-
-        const he = parseHora(requerimiento.horaEntrevista);
-        const hi = parseHora(requerimiento.horaIngreso);
-        const hs = parseHora(requerimiento.horaSalida);
-
-        ajaxSaveRegistroRequerimiento(requerimiento, token, he, hi, hs).then(r => {
-            setLoading(false);
-            if(r.code === 200){
-                setMsjExito(true);
-            }else if(r.code === 500){
-                showAlert('error', r.msj);
-            }
-        }).catch(function (error){
-            if (error.response.status === 422){
-                setLoading(false);
-                showAlert('error', error.response.data);
-            }
-        });
-
-    };
+    }, [requerimiento, isLoadingData]);
 
     const sendMailReq = (e) => {
         e.preventDefault();
@@ -255,7 +242,7 @@ export default function RegistroRequerimiento({url, token}) {
                         <form method="POST" onSubmit={sendMailReq} encType="multipart/form-data" >
                             {/* Contador */}
                             <div className="contador">
-                                {[1, 2, 3].map((num) => (
+                                {[1, 2].map((num) => (
                                     <span key={num} className={step.current >= num ? "active" : "disable"}>
                                     {num}
                                 </span>
@@ -273,29 +260,20 @@ export default function RegistroRequerimiento({url, token}) {
                                     actividades={actividades}
                                     modalidades={modalidades}
                                     nacionalidades={nacionalidades}
+
+                                    tiposViviendas={tiposViviendas}
+                                    handleDelete={onDelete}
+                                    handleAddition={onAdittion}
+                                    handleDrag={onDrag}
                                 />
                             )}
 
                             {step.current === 2 && (
                                 <StepTwo
                                     handleChange={onChange}
-                                    handleDelete={onDelete}
-                                    handleAddition={onAdittion}
-                                    handleDrag={onDrag}
+                                    modalidadesHorarios={modalidadesHorarios}
+                                    semiModalidades={semiModalidades}
                                     requerimiento={requerimiento}
-                                    tiposViviendas={tiposViviendas}
-                                />
-                            )}
-
-                            {step.current === 3 && (
-                                <StepThree
-                                    handleChange={onChange}
-                                    handleChangeHorarios={onChangeHorarios}
-                                    requerimiento={requerimiento}
-                                    diasI={diasI}
-                                    diasS={diasS}
-                                    frecuencias={frecuencias}
-                                    horasLabor={horasLabor}
                                 />
                             )}
 

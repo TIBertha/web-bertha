@@ -2197,3 +2197,20 @@ $grayTitleGoogle: #3c4043;
 .fw-100{
     font-weight: 100;
 }
+
+.horariosMod-group{
+    border-radius: 0.625rem;
+    border: solid 2px $gray_bertha2;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+
+    .semi_mod{
+        color: $purple_bertha;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .hor_mod{
+        font-size: 1rem;
+        color: black;
+    }
+}
