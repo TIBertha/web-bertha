@@ -25,6 +25,7 @@ Route::post('/ajax-verify-disable-modal-seleccion', [WebController::class, 'ajax
 Route::post('/ajax-get-data-prensa', [WebController::class, 'ajaxGetDataPrensa']);
 Route::post('/ajax-get-testimoniales-empleador', [WebController::class, 'ajaxGetTestimonialesEmpleador']);
 Route::post('/ajax-get-testimoniales-trabajador', [WebController::class, 'ajaxGetTestimonialesTrabajador']);
+Route::post('/ajax-get-postulantes-slider', [WebController::class, 'ajaxGetPostulantesSlider']);
 Route::post('/ajax-get-country-code', [WebController::class, 'ajaxGetCountryCode']);
 Route::post('/ajax-get-views', [WebController::class, 'ajaxGetViews']);
 Route::post('/ajax-get-redes-sociales', [WebController::class, 'ajaxGetRedesSociales']);

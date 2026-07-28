@@ -9,6 +9,8 @@ import SliderTestimonialesEmpleador from "../Components/HomeSliders/sliderTestim
 import SliderTestimonialesTrabajador from "../Components/HomeSliders/sliderTestimonialesTrabajador.jsx";
 import SliderPrensa from "../Components/HomeSliders/sliderPrensa.jsx";
 import {mobileDesktop} from "../../Functions/General.jsx";
+import FrameVideoBackground from "./frameVideoBackground.jsx";
+import FramePostulantesEnVivo from "./framePostulantesEnVivo.jsx";
 
 export default function Index({url, num, country}){
     let display = mobileDesktop();
@@ -17,25 +19,13 @@ export default function Index({url, num, country}){
         <>
             <FramePrincipal url={url} country={country} />
 
-            <section className={'video-background'}>
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className={'video-element'}
-                    onDoubleClick={(e) => {
-                        if (document.fullscreenElement) {
-                            document.exitFullscreen()
-                        } else {
-                            e.target.requestFullscreen()
-                        }
-                    }}
-                >
-                    <source src={movie} type={'video/mp4'}/>
-                </video>
+            <section>
+                <div className="alterative-bg-gray border-0">
+                    <FramePostulantesEnVivo url={url} country={country} />
+                </div>
             </section>
+
+            <FrameVideoBackground />
 
             <FrameSoyBertha url={url} country={country} />
 

@@ -511,6 +511,12 @@ $pink_add:#E663C3;
     }
 }
 
+.btn-full-width{
+    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+        width: 100% !important;
+    }
+}
+
 .bertha-purplepink-button {
     color: $purple_bertha;
     background-color: $white;
@@ -2213,4 +2219,8 @@ $grayTitleGoogle: #3c4043;
         font-size: 1rem;
         color: black;
     }
+}
+
+.centerSlider{
+    text-align: -webkit-center;
 }

@@ -98,7 +98,85 @@ $backdrop-color: rgba(0, 0, 0, .75);
 
 }
 
+.slide-postulanteenvivo{
+    margin: 0 !important;
+    padding: 0 !important;
+
+    max-width: 100% !important;
+
+    .slot{
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .slot:focus, .slot:active , .slot:hover {
+        outline: none;
+    }
+
+    .card-postulanteenvivo{
+
+
+        -webkit-box-align: center;
+        display: -webkit-box;
+
+        border-radius: 0.8rem;
+        -moz-border-radius: 0.8rem;
+        -webkit-border-radius: 0.8rem;
+
+        img{
+            border: none;
+            border-top-right-radius: 0.8rem;
+            border-top-left-radius: 0.8rem;
+            -moz-border-radius-topleft: 0.8rem;
+            -moz-border-radius-topright: 0.8rem;
+            -webkit-border-top-left-radius: 0.8rem;
+            -webkit-border-top-right-radius: 0.8rem;
+        }
+
+        .img-testimonial-trabajador{
+            width: 70px !important;
+            height: 70px !important;
+            border-radius: 50% !important;
+            padding: .25rem;
+            background-color: var(--bs-body-bg);
+            border: var(--bs-border-width) solid var(--bs-border-color);
+            max-width: 100%;
+        }
+    }
+}
+
 .slide-testimonial{
+
+    .card-postulanteenvivo{
+
+
+        -webkit-box-align: center;
+        display: -webkit-box;
+
+        border-radius: 0.8rem;
+        -moz-border-radius: 0.8rem;
+        -webkit-border-radius: 0.8rem;
+
+        img{
+            border: none;
+            border-top-right-radius: 0.8rem;
+            border-top-left-radius: 0.8rem;
+            -moz-border-radius-topleft: 0.8rem;
+            -moz-border-radius-topright: 0.8rem;
+            -webkit-border-top-left-radius: 0.8rem;
+            -webkit-border-top-right-radius: 0.8rem;
+        }
+
+        .img-testimonial-trabajador{
+            width: 70px !important;
+            height: 70px !important;
+            border-radius: 50% !important;
+            padding: .25rem;
+            background-color: var(--bs-body-bg);
+            border: var(--bs-border-width) solid var(--bs-border-color);
+            max-width: 100%;
+        }
+    }
 
     @media (min-width: 1200px) {
         max-width: 1140px !important;

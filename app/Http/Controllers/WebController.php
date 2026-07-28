@@ -7,9 +7,11 @@ use App\Models\Contrato;
 use App\Models\RedesSociales;
 use App\Models\TestimonialEmpleador;
 use App\Models\TestimonialTrabajador;
+use App\Models\Trabajador;
 use App\Models\Views\PrensaView;
 use App\Models\Views\TestimonialEmpleadorView;
 use App\Models\Views\TestimonialTrabajadorView;
+use App\Models\Views\TrabajadorView;
 use App\Models\VistasWeb;
 use Illuminate\Http\Request;
 
@@ -199,6 +201,33 @@ class WebController extends Controller
             'testimoniales' => $data
         ]);
 
+    }
+
+    public function ajaxGetPostulantesSlider(){
+        $this->cleanPass();
+
+        $data = [];
+
+        $postulantes = TrabajadorView::where('estadoid', 1)
+            ->whereNotNull('foto')
+            ->whereNotNull('nacionalidad_id')
+            ->whereNotNull('nombres')
+            ->whereNotNull('apellidos')
+            ->inRandomOrder()
+            ->limit(96)
+            ->get();
+
+        foreach ($postulantes as $p){
+            $data[] = [
+                'foto'                  => $p->foto,
+                'nombres'               => explode(' ', trim($p->nombres))[0] . ' ' . strtoupper(substr(explode(' ', trim($p->apellidos))[0], 0, 1)) . '.',
+            ];
+        }
+
+        return response()->json([
+            'code' => 200,
+            'data' => $data
+        ]);
     }
 
     public  function cuentaBancariaView()

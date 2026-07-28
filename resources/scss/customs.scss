@@ -439,3 +439,17 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
     }
 }
 
+.green-dot {
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    background-color: #3fa73c; /* rojo */
+    border-radius: 50%;
+    animation: blink 1s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}

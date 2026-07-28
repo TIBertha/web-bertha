@@ -13,8 +13,9 @@ class Trabajador extends Model
 
     protected $guarded = [];
 
-    public function usuario(){
-        return $this->belongsTo('App\Models\Usuario');
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'usuario_id', 'id');
     }
 
     public function scopeBorrado($query, $flag) {
