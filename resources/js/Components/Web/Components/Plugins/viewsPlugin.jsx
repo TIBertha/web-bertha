@@ -14,7 +14,7 @@ export default function ViewsPlugin({url}) {
 
     return(
         <a className="views-plugin">
-            <p><i className="whatsapp-icon fas fa-eye me-2"></i>{views + ' vieron esta web'}</p>
+            <p><i className="whatsapp-icon fa-solid fa-heart me-2"></i>{views + ' vieron esta web'}</p>
         </a>
     )
 }

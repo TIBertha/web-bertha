@@ -21,9 +21,9 @@ export default function Index({url, num, country}){
 
             <section>
                 {display === "mobile" && (
-                    <div className="wg-15-gray inverted border-0"></div>
+                    <div className="wg-15-gray inverted border-0 mt-5"></div>
                 )}
-                <div className="alterative-bg-gray border-0">
+                <div className={'alterative-bg-gray border-0 pb-5 pb-md-0'}>
                     <FramePostulantesEnVivo url={url} country={country} />
                 </div>
             </section>
