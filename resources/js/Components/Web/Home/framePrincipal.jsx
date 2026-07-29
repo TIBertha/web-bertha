@@ -11,14 +11,15 @@ export default function FramePrincipal({ url, country }) {
         second: "Selecciona a trabajadoras del hogar sin antecedentes y con recomendaciones.",
     };
 
+
+    //<a className="bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow" href={url + '/es-' + country + '/seleccionar'}>Solicitar</a>
     function button() {
         return (
             <a
-                className={
-                    "bertha-yellow-button2 my-3 btn btn-lg " +
-                    (display === "desktop"
-                        ? "yellow-fixed-button my-2 btn-size"
-                        : "btn-block")
+                className={ display === 'desktop' ?
+                    "bertha-yellow-button2 my-3 btn btn-lg yellow-fixed-button btn-size"
+                    :
+                    'bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow'
                 }
                 href={url + "/es-" + country + "/seleccionar"}
             >
