@@ -23,7 +23,7 @@ export default function FramePrincipal({ url, country }) {
                 }
                 href={url + "/es-" + country + "/seleccionar"}
             >
-                <b>Seleccionar</b>
+                <b>{display === 'desktop' ? 'Seleccionar' : 'Empezar'}</b>
             </a>
         );
     }
