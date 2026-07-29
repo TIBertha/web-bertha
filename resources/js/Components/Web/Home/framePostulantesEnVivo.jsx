@@ -78,7 +78,7 @@ export default function FramePostulantesEnVivo({url, country}) {
     return(
         <>
             {(postulantes.length > 0) &&
-                <div className={'row mx-0 justify-content-center'}>
+                <div className={'row mx-0'}>
                     <div className={'bertha-section-padding'}>
                         <div className={'col-12'}>
                             <div>
@@ -98,7 +98,7 @@ export default function FramePostulantesEnVivo({url, country}) {
                                                         <div className={'col-auto px-0'}>
                                                             <img src={p.foto} className="card-img-top img-fluid img-testimonial-trabajador" loading="lazy" alt=""/>
                                                         </div>
-                                                        <div className={'col px-0 vertical-align'}>
+                                                        <div className={'col px-0 vertical-align text-purple card-name'}>
                                                             {p.nombres}
                                                         </div>
                                                     </div>

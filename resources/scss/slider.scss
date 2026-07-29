@@ -115,13 +115,17 @@ $backdrop-color: rgba(0, 0, 0, .75);
 
     .card-postulanteenvivo{
 
+        .card-name{
+            color: $purple_bertha;
+            font-weight: bold;
+        }
 
         -webkit-box-align: center;
         display: -webkit-box;
 
-        border-radius: 2.8rem !important;
-        -moz-border-radius: 2.8rem !important;
-        -webkit-border-radius: 2.8rem !important;
+        border-radius: 1.5rem !important;
+        -moz-border-radius: 1.5rem !important;
+        -webkit-border-radius: 1.5rem !important;
 
         img{
             border: none;
@@ -137,9 +141,7 @@ $backdrop-color: rgba(0, 0, 0, .75);
             width: 70px !important;
             height: 70px !important;
             border-radius: 50% !important;
-            padding: .25rem;
-            background-color: var(--bs-body-bg);
-            border: var(--bs-border-width) solid var(--bs-border-color);
+            padding: .5rem;
             max-width: 100%;
         }
     }
