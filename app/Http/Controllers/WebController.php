@@ -218,9 +218,10 @@ class WebController extends Controller
             ->get();
 
         foreach ($postulantes as $p){
+
             $data[] = [
                 'foto'                  => $p->foto,
-                'nombres'               => explode(' ', trim($p->nombres))[0] . ' ' . strtoupper(substr(explode(' ', trim($p->apellidos))[0], 0, 1)) . '.',
+                'nombres'               => mb_convert_case(explode(' ', trim($p->nombres))[0], MB_CASE_TITLE, "UTF-8") . ' ' . strtoupper(substr(explode(' ', trim($p->apellidos))[0], 0, 1)) . '.',
             ];
         }
 
