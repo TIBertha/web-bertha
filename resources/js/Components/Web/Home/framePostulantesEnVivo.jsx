@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function FramePostulantesEnVivo({url, country}) {
 
+    let display = mobileDesktop();
     const [postulantes, setPostulantes] = useState([]);
     const [isLoading, setLoading] = useState(false);
 

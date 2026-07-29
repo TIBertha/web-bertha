@@ -20,6 +20,9 @@ export default function Index({url, num, country}){
             <FramePrincipal url={url} country={country} />
 
             <section>
+                {display === "mobile" && (
+                    <div className="coustom-wave inverted border-0"></div>
+                )}
                 <div className="alterative-bg-gray border-0">
                     <FramePostulantesEnVivo url={url} country={country} />
                 </div>

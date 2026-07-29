@@ -39,31 +39,33 @@ export default function FramePrincipal({ url, country }) {
                 {button()}
             </div>
 
-            <div className="col-12 col-lg-7 px-0 align-self-end div2">
-                <img
-                    className="pi-conf mx-auto w-75 w-lg-100"
-                    src={principalImg}
-                    alt="Bertha | Trabajadoras del Hogar"
-                />
-            </div>
-
             {display === "desktop" && (
-                <div className={"col-12 purple-label div3"}>
-                    <p className={"m-0 py-2 text"}>
-                        Solicita también a tu trabajadora del hogar vía
-                        WhatsApp, escribiendo al{" "}
-                        <a
-                            className="tlf-whatsapp-lg"
-                            href={
-                                "https://api.whatsapp.com/send?phone=" +
-                                countryData.whatsAppLink
-                            }
-                            target="_blank"
-                        >
-                            {countryData.whatsApp}
-                        </a>
-                    </p>
-                </div>
+                <>
+                    <div className="col-12 col-lg-7 px-0 align-self-end div2">
+                        <img
+                            className="pi-conf mx-auto w-75 w-lg-100"
+                            src={principalImg}
+                            alt="Bertha | Trabajadoras del Hogar"
+                        />
+                    </div>
+
+                    <div className={"col-12 purple-label div3"}>
+                        <p className={"m-0 py-2 text"}>
+                            Solicita también a tu trabajadora del hogar vía
+                            WhatsApp, escribiendo al{" "}
+                            <a
+                                className="tlf-whatsapp-lg"
+                                href={
+                                    "https://api.whatsapp.com/send?phone=" +
+                                    countryData.whatsAppLink
+                                }
+                                target="_blank"
+                            >
+                                {countryData.whatsApp}
+                            </a>
+                        </p>
+                    </div>
+                </>
             )}
         </div>
     );
