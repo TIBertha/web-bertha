@@ -61,6 +61,12 @@ export default function FramePostulantesEnVivo({url, country}) {
         ajaxGetPostulantesSlider().then(r => {
             if(r.code === 200){
                 setPostulantes(r.data);
+
+                r.data.forEach(p => {
+                    const img = new Image();
+                    img.src = p.foto;
+                });
+
                 setLoading(false);
             }else if(r.code === 500){
                 showAlert('error', r.msj);
@@ -90,7 +96,7 @@ export default function FramePostulantesEnVivo({url, country}) {
                                                 <div className="card card-postulanteenvivo shadow-sm" key={key} >
                                                     <div className={'row mx-0'}>
                                                         <div className={'col-auto px-0'}>
-                                                            <img src={p.foto} className="card-img-top img-fluid img-testimonial-trabajador"/>
+                                                            <img src={p.foto} className="card-img-top img-fluid img-testimonial-trabajador" loading="lazy" alt=""/>
                                                         </div>
                                                         <div className={'col px-0 vertical-align'}>
                                                             {p.nombres}
