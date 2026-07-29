@@ -84,7 +84,7 @@ export default function FrameContadorIndex({num, nombrePais, country}) {
 
                         <AnimatedCounter num={num}/>
 
-                        <p className="mb-0 mb-lg-2">{contadorText}</p>
+                        <p className="mb-3">{contadorText}</p>
 
                     </div>
                 </div>

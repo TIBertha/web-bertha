@@ -39,6 +39,25 @@ $menu_mobile_height: 4rem;
     }
 }
 
+.wg-15-gray{
+    height: 60px;
+    margin:0;
+    background-image: url(../../public/img/ph-ban-5.png);
+    background-repeat: no-repeat;
+    background-size: 100% 101%;
+
+    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+        background-attachment: scroll;
+        background-size: cover;
+        background-position: center;
+    }
+
+    img{
+        width: auto;
+
+    }
+}
+
 .wg-60{
     img{
         width: 450px;
