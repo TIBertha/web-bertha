@@ -19,14 +19,14 @@ export default function Index({url, num, country}){
         <>
             <FramePrincipal url={url} country={country} />
 
-            <section>
-                {display === "mobile" && (
+            {display === "mobile" && (
+                <section>
                     <div className="wg-15-gray inverted border-0 mt-5"></div>
-                )}
-                <div className={'alterative-bg-gray border-0 pb-5 pb-md-0'}>
-                    <FramePostulantesEnVivo url={url} country={country} />
-                </div>
-            </section>
+                    <div className={'alterative-bg-gray border-0 pb-5 pb-md-0'}>
+                        <FramePostulantesEnVivo url={url} country={country} />
+                    </div>
+                </section>
+            )}
 
             <FrameVideoBackground />
 
