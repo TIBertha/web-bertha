@@ -88,8 +88,14 @@ export default function FramePostulantesEnVivo({url, country}) {
                                             <div className="slot">
 
                                                 <div className="card card-postulanteenvivo shadow-sm" key={key} >
-                                                    <img src={p.foto} className="card-img-top img-fluid img-testimonial-trabajador"/>
-                                                    <span>{p.nombres}</span>
+                                                    <div className={'row mx-0'}>
+                                                        <div className={'col-auto px-0'}>
+                                                            <img src={p.foto} className="card-img-top img-fluid img-testimonial-trabajador"/>
+                                                        </div>
+                                                        <div className={'col px-0 vertical-align'}>
+                                                            {p.nombres}
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
