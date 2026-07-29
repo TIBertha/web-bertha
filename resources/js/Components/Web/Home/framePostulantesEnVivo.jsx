@@ -81,9 +81,9 @@ export default function FramePostulantesEnVivo({url, country}) {
                 <div className={'row mx-0'}>
                     <div className={'bertha-section-padding'}>
                         <div className={'col-12'}>
-                            <div>
+                            <div className={'postulantesenvivo-title'}>
                                 <span className="green-dot me-2"></span>
-                                <span className={'text-purple font-weight-bold'}>Postulantes en vivo</span>
+                                <span className={'pev-title'}>Postulantes en vivo</span>
                             </div>
                         </div>
                         <div className={'col-12 centerSlider'}>
