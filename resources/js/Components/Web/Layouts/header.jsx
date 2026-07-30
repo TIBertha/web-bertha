@@ -63,6 +63,14 @@ export default function Header({url, path}) {
                                             </li>
                                         );
                                 })}
+
+                                <li>
+                                    <a href={'https://api.whatsapp.com/send?phone=51999256807'} target={'_blank'}
+                                       className={verticalNavbar.button + ' text-purple font-weight-bold text-decoration-underline'}>
+                                        <span className={verticalNavbar.label}>Soporte</span>
+                                        <i className="fa-regular fa-circle-question "></i>
+                                    </a>
+                                </li>
                             </ul>
                         }
 
@@ -87,6 +95,14 @@ export default function Header({url, path}) {
                                     </li>
                                 );
                             })}
+
+                            <li>
+                                <a href={'https://api.whatsapp.com/send?phone=51999256807'} target={'_blank'}
+                                   className={verticalNavbar.button + ' text-purple font-weight-bold text-decoration-underline'}>
+                                    <span className={verticalNavbar.label}>Soporte</span>
+                                    <i className="fa-regular fa-circle-question "></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
