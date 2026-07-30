@@ -8,7 +8,7 @@ export default function FramePrincipal({ url, country }) {
 
     let frameTitle = {
         main: "Consigue a trabajadoras del hogar cama adentro, cama afuera y por días en ",
-        second: "Selecciona a trabajadoras del hogar sin antecedentes y con recomendaciones.",
+        second: "Selecciona a trabajadoras del hogar sin antecedentes y con experiencia.",
     };
 
 

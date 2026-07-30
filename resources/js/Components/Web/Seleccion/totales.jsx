@@ -1,6 +1,9 @@
 import React from "react";
+import {mobileDesktop} from "../../Functions/General.jsx";
 
 export default function Totales({ total, cart, finalizar, country }) {
+
+    let display = mobileDesktop();
     return (
         <>
             <div className="row pb-3 mx-2">
@@ -13,16 +16,20 @@ export default function Totales({ total, cart, finalizar, country }) {
                 <div className="col-6 px-0">
                     <div className="text-end text-muted text-result">
                         {"Entrevista hasta 2 trabajadoras"}
-                        {cart.length > 0 ? (
-                            <button
-                                className="btn bertha-green-button btn-sm ms-3 font-weight-bold btn-finalizar-seleccion"
-                                onClick={() => finalizar()}
-                            >
-                                Continuar
-                            </button>
-                        ) : (
-                            ""
-                        )}
+                        {display === 'desktop' &&
+                            <>
+                                {cart.length > 0 ? (
+                                    <button
+                                        className="btn bertha-green-button btn-sm ms-3 font-weight-bold btn-finalizar-seleccion"
+                                        onClick={() => finalizar()}
+                                    >
+                                        Continuar
+                                    </button>
+                                ) : (
+                                    ""
+                                )}
+                            </>
+                        }
                     </div>
                 </div>
             </div>

@@ -5,12 +5,15 @@ import imgTable from "../../../../../public/img/icons/table.png";
 import imgPeriodoPrueba from "../../../../../public/img/icons/periodo-prueba.png"
 import imgReemplazos from "../../../../../public/img/icons/reemplazos.png";
 import imgGirl from "../../../../../public/img/new_version/bertha_girl_img.png";
+import {mobileDesktop} from "../../Functions/General.jsx";
 
 export default function FrameTuTrabajadoraDelHogar({url, country}) {
+    let display = mobileDesktop();
+
     let frameText = {
         title : 'Tu trabajadora del hogar como nunca antes',
-        s1: 'Sin antecedentes policiales, judiciales ni penales',
-        su1: 'Validamos que las trabajadoras no tengan antecedentes ni denuncias.',
+        s1: 'Sin antecedentes',
+        su1: 'Validamos que no tengan antecedentes policiales, judiciales y/o penales.',
     };
 
     return(
@@ -49,8 +52,8 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                                 </div>
 
                                 <div className="col-8 px-lg-0">
-                                    <h5 className="responsive-description-size">Con recomendaciones</h5>
-                                    <p className="responsive-content-size">Verificamos su experiencia con sus empleadores anteriores. Si deseas, puedes validarlas durante la entrevista.</p>
+                                    <h5 className="responsive-description-size">Con experiencia</h5>
+                                    <p className="responsive-content-size">Verificamos su experiencia. Si deseas, puedes validarlas durante la entrevista y/o período de prueba.</p>
                                 </div>
 
                             </div>

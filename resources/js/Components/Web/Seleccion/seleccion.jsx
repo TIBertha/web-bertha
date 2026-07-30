@@ -4,7 +4,7 @@ import Drawer from 'rc-drawer';
 import { useMediaQuery } from 'react-responsive';
 import {ajaxFinalizarSeleccion, ajaxProcesarSeleccion, ajaxSaveCartSeleccion} from "../../Functions/Seleccion.jsx";
 import {ajaxVerifyDisableModalSeleccion} from "../../Functions/Home.jsx";
-import {getCountryData} from "../../Functions/General.jsx";
+import {getCountryData, mobileDesktop} from "../../Functions/General.jsx";
 import {isEmptyObject} from "../../Helpers/helpers.jsx";
 import {showAlert} from "../../Helpers/alerts.jsx";
 import Filtros from "./filtros.jsx";
@@ -36,6 +36,8 @@ export default function Seleccion({url, country}) {
     const [showModalComoFunciona, setShowModalComoFunciona] = useState(false);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 767px)' });
     let countryData = getCountryData(country);
+
+    let display = mobileDesktop();
 
     document.addEventListener('contextmenu', event => {
         event.preventDefault();
@@ -273,7 +275,7 @@ export default function Seleccion({url, country}) {
 
                         <ModalMenu filtrosSelected={filtrosSelected} addFilter={addFilter} removeFilter={removeFilter} actividades={actividades} modalidades={modalidades} />
 
-                        <div className="row">
+                        <div className="row mx-0">
 
                             <div className="col-12">
                                 <Totales total={trabajadores.total} cart={cart} finalizar={finalizar} country={country}/>
@@ -285,9 +287,11 @@ export default function Seleccion({url, country}) {
                                         <Cart cart={cart} removeCart={removeCart} />
                                     </div>
 
-                                    <div className="col-12 mt-3 btn-finalizar-seleccion-mobile">
-                                        <button className="btn bertha-pink-button btn-block font-weight-bold" onClick={ () => finalizar() } >Finalizar</button>
-                                    </div>
+                                    {display === 'mobile' &&
+                                        <div className="col-12 mt-3 btn-finalizar-seleccion-mobile">
+                                            <button className="btn bertha-green-button btn-full-width btn-sm font-weight-bold btn-finalizar-seleccion" onClick={ () => finalizar() } >Continuar</button>
+                                        </div>
+                                    }
 
                                     <div className="col-12">
                                         <hr/>
