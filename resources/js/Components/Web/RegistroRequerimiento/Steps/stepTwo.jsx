@@ -11,7 +11,7 @@ export default function StepTwo({requerimiento, handleChange, semiModalidades, m
 
     return (
         <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
-            <h4 className="mb-0 texto-pasos">2. Selecciona una moodalidad de trabajo</h4>
+            <h4 className="mb-0 texto-pasos">2. Selecciona una modalidad de trabajo</h4>
             <div className={'secRl'}>Escoge la opción que mejor se adapte a tu hogar</div>
 
             <section className="row">

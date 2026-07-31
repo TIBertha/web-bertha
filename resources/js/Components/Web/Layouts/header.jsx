@@ -20,6 +20,9 @@ export default function Header({url, path}) {
             includedPath: "es-pe",
             drowpdown: false,
             sublist: [],
+            showMobile:  display === 'desktop' ? true : false,
+            icon: null,
+            aClass: '',
         },
         {
             label: "Seleccionar",
@@ -27,6 +30,9 @@ export default function Header({url, path}) {
             includedPath: "es-pe/seleccionar",
             drowpdown: false,
             sublist: [],
+            showMobile: true,
+            icon: null,
+            aClass: ''
         }
     ];
 
@@ -40,70 +46,37 @@ export default function Header({url, path}) {
             <nav className={'navbar-bertha'}>
                 <div className={'menu row mx-0 justify-content-between'}>
                     <div className={'col-auto p-0'}>
-                        {(display === 'desktop') &&
-                            logoTag
-                        }
-
-                        {(display === 'mobile') &&
-                            <div className={'responsive-button'}>
-                                <i className={( isClicked ? "fa-solid fa-xmark" : "fa-solid fa-bars") + " finger-action" } onClick={(e) => setClick(e)}></i>
-                            </div>
-                        }
-
+                        <a href={'/es-pe'}>
+                            {logoTag}
+                        </a>
                     </div>
                     <div className={'col-auto p-0'}>
-                        {(display === 'desktop') &&
-                            <ul className={'desktop-menu'}>
-                                {menuList.map((m, index) => {
-                                        return (
-                                            <li>
-                                                <a href={m.href} className={ verticalNavbar.button + (path === m.includedPath ? " selected" : "")}>
-                                                    <span className={verticalNavbar.label} > {m.label} </span>
-                                                </a>
-                                            </li>
-                                        );
-                                })}
 
-                                <li>
-                                    <a href={'https://api.whatsapp.com/send?phone=51999256807'} target={'_blank'}
-                                       className={verticalNavbar.button + ' text-purple font-weight-bold text-decoration-underline'}>
-                                        <span className={verticalNavbar.label}>Soporte</span>
-                                        <i className="fa-regular fa-circle-question "></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        }
-
-                        {(display === 'mobile') &&
-                            logoTag
-                        }
-                    </div>
-                    <div className={'col-auto p-0'}>
-                        <span className={'flag-icon flag-icon-pe flag-icon-squared flag-style'} data-toggle="tooltip" data-placement="bottom" title={'Bertha disponible en Perú'}></span>
-                    </div>
-                </div>
-
-                <div className={'overlay animated fadeIn responsive-sidebar' + (isClicked ? ' open' : ' close')}>
-                    <div className={'sidepanel'}>
-                        <ul className={'mobile-menu'}>
+                        <ul className={'desktop-menu'}>
                             {menuList.map((m, index) => {
-                                return (
-                                    <li>
-                                        <a href={m.href} className={ verticalNavbar.button + (path === m.includedPath ? " selected" : "")}>
-                                            <span className={verticalNavbar.label} > {m.label} </span>
-                                        </a>
-                                    </li>
-                                );
+                                if (m.showMobile){
+                                    return (
+                                        <li>
+                                            <a href={m.href} className={ verticalNavbar.button + (path === m.includedPath ? " selected" : "")}>
+                                                <span className={verticalNavbar.label} > {m.label} </span>
+                                            </a>
+                                        </li>
+                                    );
+                                }
                             })}
 
                             <li>
                                 <a href={'https://api.whatsapp.com/send?phone=51999256807'} target={'_blank'}
                                    className={verticalNavbar.button + ' text-purple font-weight-bold text-decoration-underline'}>
                                     <span className={verticalNavbar.label}>Soporte</span>
-                                    <i className="fa-regular fa-circle-question "></i>
+                                    <i className="fa-regular fa-circle-question"></i>
                                 </a>
                             </li>
                         </ul>
+                    </div>
+
+                    <div className={'col-auto p-0'}>
+                        <span className={'flag-icon flag-icon-pe flag-icon-squared flag-style'} data-toggle="tooltip" data-placement="bottom" title={'Bertha disponible en Perú'}></span>
                     </div>
                 </div>
             </nav>
