@@ -1,8 +1,10 @@
 import React, {useState } from "react";
+import {mobileDesktop} from "../../Functions/General.jsx";
 
 export default function ContactLabel({url, path}) {
+    let display = mobileDesktop();
 
-    const text = path.includes('/es-pe/busco-trabajo') ? 'Escríbenos también al ' : 'Solicita también a tu trabajadora del hogar vía WhatsApp, escribiendo al ';
+    const text = path.includes('/es-pe/busco-trabajo') ? 'Escríbenos también al ' : 'Solicita también a tu trabajadora' + (display === 'desktop' ? ' del hogar' : '') + ' vía WhatsApp, escribiendo al ';
 
     return (
         <section id="cintillo" className="px-3 px-md-5 py-2 px-md-4 contact-label bgb-pink">
