@@ -20,7 +20,10 @@ export default function Header({url, path}) {
             includedPath: "es-pe",
             drowpdown: false,
             sublist: [],
-            showMobile:  display === 'desktop' ? true : false,
+            showMobile: display === 'desktop'
+                ? true
+                : (path === 'es-pe/seleccionar' ? true : false),
+            show: true,
             icon: null,
             aClass: '',
         },
@@ -30,11 +33,16 @@ export default function Header({url, path}) {
             includedPath: "es-pe/seleccionar",
             drowpdown: false,
             sublist: [],
-            showMobile: true,
+            showMobile: display === 'desktop'
+                ? true
+                : (path === 'es-pe' ? true : false),
+            show: true,
             icon: null,
             aClass: ''
         }
     ];
+
+    console.log(path, menuList);
 
     let verticalNavbar = {
         button: "btn button",
@@ -53,17 +61,21 @@ export default function Header({url, path}) {
                     <div className={'col-auto p-0'}>
 
                         <ul className={'desktop-menu'}>
-                            {menuList.map((m, index) => {
-                                if (m.showMobile){
-                                    return (
-                                        <li>
-                                            <a href={m.href} className={ verticalNavbar.button + (path === m.includedPath ? " selected" : "")}>
-                                                <span className={verticalNavbar.label} > {m.label} </span>
-                                            </a>
-                                        </li>
-                                    );
-                                }
-                            })}
+                            {menuList
+                                .filter(m => m.show && m.showMobile)
+                                .map((m, index) => (
+                                    <li key={index}>
+                                        <a
+                                            href={m.href}
+                                            className={
+                                                verticalNavbar.button +
+                                                (path === m.includedPath ? " selected" : "")
+                                            }
+                                        >
+                                            <span className={verticalNavbar.label}>{m.label}</span>
+                                        </a>
+                                    </li>
+                                ))}
 
                             <li>
                                 <a href={'https://api.whatsapp.com/send?phone=51999256807'} target={'_blank'}
@@ -73,6 +85,8 @@ export default function Header({url, path}) {
                                 </a>
                             </li>
                         </ul>
+
+
                     </div>
 
                     <div className={'col-auto p-0'}>
