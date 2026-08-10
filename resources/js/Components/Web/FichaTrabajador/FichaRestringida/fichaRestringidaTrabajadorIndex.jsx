@@ -12,7 +12,7 @@ import ColumnaInformacionBasica from "../Columns/columnaInformacionBasica.jsx";
 import ColumnaFirmaCompromiso from "../Columns/columnaFirmaCompromiso.jsx";
 import ColumnaEstudios from "../Columns/columnaEstudios.jsx";
 
-export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccion = false, usuario, country, extension = false, cart = [], closeDrawer = () => {}, addCart = () => {}, removeCart = () => {}}) {
+export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccion = false, usuario, country, extension = false, cart = [], closeDrawer = () => {}, addCart = () => {}, removeCart = () => {}, lang = 'es'}) {
 
     const [state, setState] = useState({
         dataseleccion: [],
@@ -140,7 +140,10 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
     const iconDocumentoIdentidad = "fas fa-id-card icono";
     const iconFile = "fas fa-file-alt icono";
     const iconShield = "fas fa-shield-alt icono-shield";
-    const defaultMessage = "Accederás a los datos una vez que hayas coordinado con la agencia";
+    const defaultMessage = {
+        es: "Accederás a los datos una vez que hayas coordinado con la agencia",
+        en: "You will access the data once you have coordinated with the agency"
+    };
 
     return (
         <section className="perfil-trabajador">
@@ -157,6 +160,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                 name={name}
                 extension={extension}
                 isSeleccion={isSeleccion}
+                lang={lang}
             />
 
             <div className="row px-3 px-md-5 my-0 justify-content-center mx-0 curriculum-area pb-5">
@@ -176,8 +180,8 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                         modalidad={modalidad}
                         informacionBasica={informacionBasica}
                         identificacion={identificacion}
-                        defaultMessageTelefono={defaultMessage}
-                        defaultMessageWhatsapp={defaultMessage}
+                        defaultMessageTelefono={defaultMessage[lang]}
+                        defaultMessageWhatsapp={defaultMessage[lang]}
                         iconTelefono={iconTelefono}
                         iconWhatsapp={iconWhatsapp}
                         iconDocumentoIdentidad={iconDocumentoIdentidad}
@@ -188,6 +192,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                         closeDrawer={closeDrawer}
                         sueldopromedio={sueldopromedio}
                         disponibilidad={disponibilidad}
+                        lang={lang}
                     />
                 </div>
 
@@ -204,6 +209,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                         legal={legal}
                         iconFile={iconFile}
                         idioma={idioma}
+                        lang={lang}
                     />
                 </div>
 
@@ -220,6 +226,7 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                             listaudio={listaudio}
                             iconShield={iconShield}
                             iconFile={iconFile}
+                            lang={lang}
                         />
                     )}
 
@@ -232,9 +239,13 @@ export default function FichaRestringidaTrabajadorIndex({ url, token, isSeleccio
                         estudio={estudio}
                         iconFile={iconFile}
                         nivelEducativo={nivelEducativo}
+                        lang={lang}
                     />
 
-                    {firma && <ColumnaFirmaCompromiso firmaImg={firma} />}
+                    {firma && <ColumnaFirmaCompromiso
+                        firmaImg={firma}
+                        lang={lang}
+                    />}
                 </div>
 
             </div>

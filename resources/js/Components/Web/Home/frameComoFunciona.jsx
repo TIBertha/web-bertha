@@ -5,7 +5,7 @@ import img1 from "../../../../../public/img/new_version/bertha_fcf_p1.png";
 import img2 from "../../../../../public/img/new_version/bertha_fcf_p2.png";
 import img3 from "../../../../../public/img/new_version/bertha_fcf_p3.png";
 
-export default function FrameComoFunciona({ url, showButton, country = "pe" }) {
+export default function FrameComoFunciona({ url, showButton, country = "pe", lang = 'es'}) {
     useEffect(() => {
         AOS.init({
             duration: 800,
@@ -15,34 +15,61 @@ export default function FrameComoFunciona({ url, showButton, country = "pe" }) {
 
     function redirectSeleccion(e) {
         disableSeleccionModal().then((r) => {
-            window.location.href = url + "/es-" + country + "/seleccionar";
+            window.location.href = url + '/' + lang + '-' + country + "/seleccionar";
         });
     }
 
-    let elements = [
+    const elements = [
         {
             img: img1,
-            title: "Requerimiento",
-            description: "Llena tu solicitud detalladamente.",
+            title: {
+                es: "Requerimiento",
+                en: "Requirement",
+            },
+            description: {
+                es: "Llena tu solicitud detalladamente.",
+                en: "Fill out your request in detail.",
+            },
         },
         {
             img: img2,
-            title: "Selección",
-            description:
-                "Seleccionaremos al personal ideal para ti. Tienes 1 mes de prueba.",
+            title: {
+                es: "Selección",
+                en: "Selection",
+            },
+            description: {
+                es: "Seleccionaremos al personal ideal para ti. Tienes 1 mes de prueba.",
+                en: "We will select the ideal worker for you. You have a 1‑month trial period.",
+            },
         },
         {
             img: img3,
-            title: "Inicio",
-            description: "Recibe a la trabajadora el día y hora acordado.",
+            title: {
+                es: "Inicio",
+                en: "Start",
+            },
+            description: {
+                es: "Recibe a la trabajadora el día y hora acordado.",
+                en: "Receive the worker on the agreed day and time.",
+            },
         },
     ];
+
+    const selectButtonText = {
+        es: "Seleccionar",
+        en: "Select",
+    };
+
+    const textHowWorks = {
+        es: '¿Cómo funciona?',
+        en: 'How does it work?'
+    };
 
     return (
         <section className="fondo-procesos-wh py-0 py-lg-4">
             <div className="titulo-seccion py-2">
                 <h3 className="display-5 titulo text-purple responsive-title-size">
-                    ¿Cómo funciona?
+                    {textHowWorks[lang]}
                 </h3>
             </div>
 
@@ -64,10 +91,10 @@ export default function FrameComoFunciona({ url, showButton, country = "pe" }) {
                                         </div>
                                         <div className="col-9 col-sm-7 col-md-12 my-auto my-md-0 text-start text-md-center">
                                             <h4 className="text-pink">
-                                                {e.title}
+                                                {e.title[lang]}
                                             </h4>
                                             <p className="mt-md-3 lead">
-                                                {e.description}
+                                                {e.description[lang]}
                                             </p>
                                         </div>
                                     </div>
@@ -76,13 +103,13 @@ export default function FrameComoFunciona({ url, showButton, country = "pe" }) {
                         })}
                     </div>
 
-                    {showButton == true && (
+                    {showButton === true && (
                         <div className="my-3 text-center">
                             <a
                                 className="btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow"
                                 onClick={(e) => redirectSeleccion(e)}
                             >
-                                Seleccionar
+                                {selectButtonText[lang]}
                             </a>
                         </div>
                     )}

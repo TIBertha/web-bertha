@@ -35,6 +35,10 @@ body{
     user-select: none; /* Standard syntax */
 }
 
+body.modal-open {
+    padding-right: unset !important;
+}
+
 p{
     margin-bottom: 0 !important;
 }

@@ -7,13 +7,61 @@ import imgReemplazos from "../../../../../public/img/icons/reemplazos.png";
 import imgGirl from "../../../../../public/img/new_version/bertha_girl_img.png";
 import {mobileDesktop} from "../../Functions/General.jsx";
 
-export default function FrameTuTrabajadoraDelHogar({url, country}) {
+export default function FrameTuTrabajadoraDelHogar({url, country, lang = 'es'}) {
     let display = mobileDesktop();
 
-    let frameText = {
-        title : 'Tu trabajadora del hogar como nunca antes',
-        s1: 'Sin antecedentes',
-        su1: 'Validamos que no tengan antecedentes policiales, judiciales y/o penales.',
+    const tuTrabajadoraText = {
+        es: {
+            desktop: "Tu trabajadora del hogar como nunca antes",
+            mobile: "Seguridad y confianza",
+
+            items: [
+                {
+                    title: "Sin antecedentes",
+                    description: "Validamos que no tengan antecedentes policiales, judiciales y/o penales.",
+                },
+                {
+                    title: "Con experiencia",
+                    description: "Verificamos su experiencia. Si deseas, puedes validarlas durante la entrevista y/o período de prueba.",
+                },
+                {
+                    title: "Con periodo de prueba",
+                    description: "Durante este tiempo evalúa a tu trabajadora del hogar.",
+                },
+                {
+                    title: "Con reemplazos",
+                    description: "Si no estás conforme, solicita los reemplazos que necesites.",
+                },
+            ],
+
+            button: "Solicitar",
+        },
+
+        en: {
+            desktop: "Your domestic worker like never before",
+            mobile: "Safety and trust",
+
+            items: [
+                {
+                    title: "No criminal record",
+                    description: "We verify that they have no police, judicial, or criminal records.",
+                },
+                {
+                    title: "With experience",
+                    description: "We verify their experience. If you wish, you can validate it during the interview and/or trial period.",
+                },
+                {
+                    title: "With trial period",
+                    description: "During this time, evaluate your domestic worker.",
+                },
+                {
+                    title: "With replacements",
+                    description: "If you're not satisfied, request as many replacements as needed.",
+                },
+            ],
+
+            button: "Request",
+        },
     };
 
     return(
@@ -22,8 +70,9 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
             <div className="p-3 px-md-5 m-0">
 
                 <div className="titulo-seccion titulo-seccion py-2">
-                    <h3 className="display-5 titulo text-pink d-none d-xl-block responsive-title-size">{frameText.title}</h3>
-                    <h3 className="display-5 titulo d-block d-xl-none responsive-title-size">Seguridad y confianza</h3>
+                    <h3 className="display-5 titulo responsive-title-size text-pink">
+                        {tuTrabajadoraText[lang][display]}
+                    </h3>
                     <CircledHr num={15}/>
                 </div>
 
@@ -39,8 +88,8 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                                 </div>
 
                                 <div className="col-8 px-lg-0">
-                                    <h5 className="responsive-description-size">{frameText.s1}</h5>
-                                    <p className="responsive-content-size">{frameText.su1}</p>
+                                    <h5 className="responsive-description-size">{tuTrabajadoraText[lang].items[0].title}</h5>
+                                    <p className="responsive-content-size">{tuTrabajadoraText[lang].items[0].description}</p>
                                 </div>
 
                             </div>
@@ -52,15 +101,17 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                                 </div>
 
                                 <div className="col-8 px-lg-0">
-                                    <h5 className="responsive-description-size">Con experiencia</h5>
-                                    <p className="responsive-content-size">Verificamos su experiencia. Si deseas, puedes validarlas durante la entrevista y/o período de prueba.</p>
+                                    <h5 className="responsive-description-size">{tuTrabajadoraText[lang].items[1].title}</h5>
+                                    <p className="responsive-content-size">{tuTrabajadoraText[lang].items[1].description}</p>
                                 </div>
 
                             </div>
 
                         </div>
 
-                        <img className="col-auto d-none d-lg-block description-activity-image" src={imgGirl} alt="Trabajador del hogar"/>
+                        {display === 'desktop' &&
+                            <img className="col-auto description-activity-image" src={imgGirl} alt="Trabajador del hogar"/>
+                        }
 
                         <div className="col-12 col-lg-4 description-column">
 
@@ -71,8 +122,8 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                                 </div>
 
                                 <div className="col-8 px-lg-0">
-                                    <h5 className="responsive-description-size">Con periodo de prueba</h5>
-                                    <p className="responsive-content-size">Durante este tiempo evalúa a tu trabajadora del hogar.</p>
+                                    <h5 className="responsive-description-size">{tuTrabajadoraText[lang].items[2].title}</h5>
+                                    <p className="responsive-content-size">{tuTrabajadoraText[lang].items[2].description}</p>
                                 </div>
 
                             </div>
@@ -84,8 +135,8 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                                 </div>
 
                                 <div className="col-8 px-lg-0">
-                                    <h5 className="responsive-description-size">Con reemplazos</h5>
-                                    <p className="responsive-content-size">Si no estás conforme, solicita los reemplazos que necesites.</p>
+                                    <h5 className="responsive-description-size">{tuTrabajadoraText[lang].items[3].title}</h5>
+                                    <p className="responsive-content-size">{tuTrabajadoraText[lang].items[3].description}</p>
                                 </div>
 
                             </div>
@@ -95,7 +146,7 @@ export default function FrameTuTrabajadoraDelHogar({url, country}) {
                 </div>
 
                 <div className="col-12 pt-md-3 pb-md-4 text-center">
-                    <a className="bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow" href={url + '/es-' + country + '/seleccionar'}>Solicitar</a>
+                    <a className="bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow" href={url + '/' + lang + '-' + country + '/seleccionar'}>{tuTrabajadoraText[lang].button}</a>
                 </div>
 
             </div>

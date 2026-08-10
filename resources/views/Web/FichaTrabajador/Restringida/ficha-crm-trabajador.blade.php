@@ -24,7 +24,7 @@
 @section('content')
 
     <div>
-        <div id="ficha-restringida-trabajador-index" data-url="{{ url('/') }}" data-token="{{ $token }}" data-usuario="{{ $usuario }}" data-accessverif="1"></div>
+        <div id="ficha-restringida-trabajador-index" data-url="{{ url('/') }}" data-token="{{ $token }}" data-usuario="{{ $usuario }}" data-accessverif="1" data-lang="{{$lang}}"></div>
     </div>
 
 @endsection

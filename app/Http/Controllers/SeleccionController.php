@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\Registro;
 use App\Models\Empleador;
-use App\Models\Trabajador;
 use App\Models\Usuario;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -21,27 +19,33 @@ class SeleccionController extends Controller
 {
     public function index()
     {
-        return redirect('/es-pe/seleccionar');
+        // Detectar idioma por sesión o default
+        $lang = session('lang', 'es');
+        $country = session('country', 'pe');
+
+        return redirect("/{$lang}-{$country}/seleccionar");
     }
 
-    public function viewIndex($country){
-
-        $data['country'] = $country;
-        session()->forget('country');
+    public function viewCountry($lang, $country)
+    {
+        // Guardar idioma y país en sesión
+        session()->put('lang', $lang);
         session()->put('country', $country);
 
-        if(\Auth::check()){
-            $data['checksession'] = true;
-        }else{
-            $data['checksession'] = false;
-        }
+        // Registrar vista dinámica
+        countViewWeb("/{$lang}-{$country}/seleccionar");
 
-        return view('Web.seleccion', $data);
+        return $this->viewIndex($lang, $country);
     }
 
-    public function viewPeru(){
-        countViewWeb('/es-pe/seleccionar');
-        return $this->viewIndex('pe');
+    public function viewIndex($lang, $country)
+    {
+        $data['lang'] = $lang;
+        $data['country'] = $country;
+
+        $data['checksession'] = \Auth::check();
+
+        return view('Web.seleccion', $data);
     }
 
     public function ajaxProcesarSeleccion(Request $request){
@@ -179,8 +183,6 @@ class SeleccionController extends Controller
 
             DB::rollback();
 
-            dd($e);
-
             return response()->json([
                 'code' => 500,
                 'msj' => 'Ocurrio un problema al crear cuenta. Consulte al administrador'
@@ -221,7 +223,15 @@ class SeleccionController extends Controller
     }
 
     public function viewSeleccionConfirmar(){
-        return view('Web.seleccion-confirmar');
+
+        $lang = session('lang') ?? 'es';
+
+        $country = session('country');
+
+        return view('Web.seleccion-confirmar', [
+            'country' => $country,
+            'lang' => $lang,
+        ]);
     }
 
     public function ajaxGetCartSeleccion(Request $request){
@@ -230,13 +240,15 @@ class SeleccionController extends Controller
         $country = session('country');
         $usuarioID = session('usuarioID');
 
-        $nombreusuario = showName(Usuario::find($usuarioID));
+        $lang = session('lang') ?? 'es';
+
+        $nombreusuario = showName(Usuario::find($usuarioID), $lang);
 
         return response()->json([
             'code' => 200,
             'nombreusuario' => $nombreusuario,
             'cart' => $cart,
-            'country' => $country
+            'country' => $country,
         ]);
 
     }

@@ -10,7 +10,7 @@ import {ajaxCheckPhone} from "../../../Functions/Registro.jsx";
 import FormularioRegistro from "../Forms/formularioRegistro.jsx";
 import FormularioLogin from "../Forms/formularioLogin.jsx";
 
-export default function ModalIniciarSesion({url, showModal, setShowModal, country}) {
+export default function ModalIniciarSesion({url, showModal, setShowModal, country, lang}) {
 
     const [nombres, setNombres] = useState('');
     const [apellidos, setApellidos] = useState('');
@@ -54,7 +54,7 @@ export default function ModalIniciarSesion({url, showModal, setShowModal, countr
             }
         }).catch( function (error){
             setIsLoading(false);
-            if (error.response.status == 422){
+            if (error.response.status === 422){
                 setAlertErrorCredenciales(true);
                 setTypeError('danger');
                 setAlertErrorMensaje(error.response.data);
@@ -93,42 +93,61 @@ export default function ModalIniciarSesion({url, showModal, setShowModal, countr
     const handleRegister = (e) => {
         e.preventDefault();
 
-        if (celular){
-            if(celular.length >= 9){
+        const textPhoneExists = {
+            es: 'El número de teléfono ingresado ya tiene cuenta de cliente registrada.',
+            en: 'The phone number you entered already has a registered customer account.'
+        };
+
+        const textGeneralError = {
+            es: 'Ha ocurrido un error. Consulte al administrador.',
+            en: 'An error has occurred. Please contact the administrator.'
+        };
+
+        const textPhoneLength = {
+            es: 'El número de teléfono debe tener 9 dígitos.',
+            en: 'The phone number must have 9 digits.'
+        };
+
+        const textPhoneRequired = {
+            es: 'Ingrese el número de teléfono',
+            en: 'Please enter the phone number'
+        };
+
+        if (celular) {
+            if (celular.length >= 9) {
 
                 setIsLoading(true);
 
                 ajaxCheckPhone(celular, tipousuario).then(r => {
 
-                    if(r.code === 100) {
+                    if (r.code === 100) {
 
                         setCodeOperacion('100');
                         setAlertErrorCredenciales(true);
                         setTypeError('secondary');
-                        setAlertErrorMensaje('El número de teléfono ingresado ya tiene cuenta de cliente registrada.');
+                        setAlertErrorMensaje(textPhoneExists[lang]);
                         setIsLoading(false);
 
-                    }else{
+                    } else {
                         setCodeOperacion('200');
                         save(nombres, apellidos, celular, politica, tipousuario, codeOperacion);
-
                     }
 
-                }).catch(function (error){
+                }).catch(function () {
                     setAlertErrorCredenciales(true);
                     setTypeError('danger');
-                    setAlertErrorMensaje('Ha ocurrido un error. Consulte al administrador.');
+                    setAlertErrorMensaje(textGeneralError[lang]);
                 });
 
-            }else{
+            } else {
                 setAlertErrorCredenciales(true);
                 setTypeError('danger');
-                setAlertErrorMensaje('El número de teléfono debe tener 9 digitos.');
+                setAlertErrorMensaje(textPhoneLength[lang]);
             }
-        }else{
-            setAlertErrorMensaje(true);
+        } else {
+            setAlertErrorCredenciales(true);
             setTypeError('danger');
-            setAlertErrorMensaje('Ingrese el numero de teléfono');
+            setAlertErrorMensaje(textPhoneRequired[lang]);
         }
     };
 
@@ -155,7 +174,9 @@ export default function ModalIniciarSesion({url, showModal, setShowModal, countr
                             password={password}
                             setPassword={setPassword}
                             changeVista={changeVista}
-                            handleLogin={handleLogin}/>
+                            handleLogin={handleLogin}
+                            lang={lang}
+                        />
                     }
 
                     {vistaRegistro === 'registro' &&
@@ -180,7 +201,9 @@ export default function ModalIniciarSesion({url, showModal, setShowModal, countr
                             password={password}
                             setPassword={setPassword}
                             changeVista={changeVista}
-                            handleRegister={handleRegister} />
+                            handleRegister={handleRegister}
+                            lang={lang}
+                        />
                     }
 
                 </ModalBody>

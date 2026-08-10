@@ -1,21 +1,49 @@
-export function getDisponibilidad(disponibilidad){
-    let result = {text: '', tooltip: '', class: '' };
+export function getDisponibilidad(disponibilidad, lang = 'es') {
+    let result = { text: '', tooltip: '', class: '' };
 
-    const textoDisponibilidadAlta = 'Buscó trabajo en los últimos 15 días';
-    const textoDisponibilidadMedia = 'Buscó trabajo hace más de 15 y menos de 30 días';
-    const textoDisponibilidadBaja = 'Buscó trabajo hace más de 30 días';
+    const textoES = {
+        alta: {
+            text: 'Probabilidad alta de Disponibilidad',
+            tooltip: 'Buscó trabajo en los últimos 15 días'
+        },
+        media: {
+            text: 'Probabilidad media de Disponibilidad',
+            tooltip: 'Buscó trabajo hace más de 15 y menos de 30 días'
+        },
+        baja: {
+            text: 'Probabilidad baja de Disponibilidad',
+            tooltip: 'Buscó trabajo hace más de 30 días'
+        }
+    };
 
-    if(disponibilidad == 'A'){
-        result.text = 'Probabilidad alta de Disponibilidad';
-        result.tooltip = textoDisponibilidadAlta;
+    const textoEN = {
+        alta: {
+            text: 'High availability probability',
+            tooltip: 'Searched for work within the last 15 days'
+        },
+        media: {
+            text: 'Medium availability probability',
+            tooltip: 'Searched for work more than 15 but less than 30 days ago'
+        },
+        baja: {
+            text: 'Low availability probability',
+            tooltip: 'Searched for work more than 30 days ago'
+        }
+    };
+
+    const dict = lang === 'es' ? textoES : textoEN;
+
+    if (disponibilidad === 'A') {
+        result.text = dict.alta.text;
+        result.tooltip = dict.alta.tooltip;
         result.class = 'pt-3 badge-seleccion-disponibilidad badge-alta';
-    }else if(disponibilidad == 'M'){
-        result.text = 'Probabilidad media de Disponibilidad';
-        result.tooltip = textoDisponibilidadMedia;
+    } else if (disponibilidad === 'M') {
+        result.text = dict.media.text;
+        result.tooltip = dict.media.tooltip;
         result.class = 'pt-3 badge-seleccion-disponibilidad badge-media';
-    }else if(disponibilidad == 'B'){
-        result.text = 'Probabilidad baja de Disponibilidad';
-        result.tooltip = textoDisponibilidadBaja;
+    } else if (disponibilidad === 'B') {
+        result.text = dict.baja.text;
+        result.tooltip = dict.baja.tooltip;
         result.class = 'pt-3 badge-seleccion-disponibilidad badge-baja';
     }
 

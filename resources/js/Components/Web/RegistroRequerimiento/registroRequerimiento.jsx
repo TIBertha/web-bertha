@@ -36,7 +36,8 @@ function match(value, cases) {
     return cases[value] ?? cases._;
 }
 
-export default function RegistroRequerimiento({url, token}) {
+export default function RegistroRequerimiento({url, token, lang = 'es'}) {
+
     const initialStateRequerimiento = {
         id: '',
         empleador_id: '',
@@ -237,7 +238,7 @@ export default function RegistroRequerimiento({url, token}) {
             {!loading && (
                 <>
                     {msjExito ? (
-                        <SuccessMessage  url={url} nombreEmpleador={fullNameEmp} />
+                        <SuccessMessage  url={url} nombreEmpleador={fullNameEmp} lang={lang}/>
                     ) : (
                         <form method="POST" onSubmit={sendMailReq} encType="multipart/form-data" >
                             {/* Contador */}
@@ -265,6 +266,8 @@ export default function RegistroRequerimiento({url, token}) {
                                     handleDelete={onDelete}
                                     handleAddition={onAdittion}
                                     handleDrag={onDrag}
+
+                                    lang={lang}
                                 />
                             )}
 
@@ -274,6 +277,8 @@ export default function RegistroRequerimiento({url, token}) {
                                     modalidadesHorarios={modalidadesHorarios}
                                     semiModalidades={semiModalidades}
                                     requerimiento={requerimiento}
+
+                                    lang={lang}
                                 />
                             )}
 
@@ -281,7 +286,11 @@ export default function RegistroRequerimiento({url, token}) {
                             <div className="row mt-5">
                                 {step.current !== step.first && (
                                     <span className="col-6 text-end">
-                                    <ButtonPrevious step={step} prev={prev} />
+                                    <ButtonPrevious
+                                        step={step}
+                                        prev={prev}
+                                        lang={lang}
+                                    />
                                 </span>
                                 )}
 
@@ -291,6 +300,7 @@ export default function RegistroRequerimiento({url, token}) {
                                         step={step}
                                         next={next}
                                         requerimiento={requerimiento}
+                                        lang={lang}
                                     />
                                 </span>
                                 )}
@@ -300,7 +310,7 @@ export default function RegistroRequerimiento({url, token}) {
                                     <button type="submit" className="btn bertha-green-button button-registro" disabled={lastStepToFinish(requerimiento)}>
                                         <b>
                                             {loading && (<i className="fas fa-sync fa-spin me-2"></i>)}
-                                            Finalizar
+                                            {lang === 'en' ? 'Finish' : 'Finalizar'}
                                         </b>
                                     </button>
                                 </span>

@@ -26,20 +26,24 @@ function getNameAndFirstCharacterFullNameSimple($nombres, $apellidos){
 
 }
 
-function formatInformacionBasica($trabajadora){
+function formatInformacionBasica($trabajadora, $lang){
     $result = [];
 
     if ($trabajadora){
         $fechaHoy = new DateTime(Carbon::now()->format('Y-m-d'));
         $fechaNacimiento = new DateTime($trabajadora->fecha_nacimiento);
-        $diffEdad = armarEdad($fechaHoy->diff($fechaNacimiento));
+        $diffEdad = armarEdad($fechaHoy->diff($fechaNacimiento), $lang);
         $result =[
             'aceptamascotas'        => $trabajadora->aceptamascotas == 1 ? true : false,
             'procedencia'           => formatTextFirstCharacterToUpper($trabajadora->lugarnacimiento),
             'pais_procedencia'      => ($trabajadora->pais_id == 54 ? 'Perú' : formatTextFirstCharacterToUpper($trabajadora->pais)),
             'fechaNacimiento'       => date("d/m/Y", strtotime($trabajadora->fecha_nacimiento)),
             'edad'                  => $diffEdad,
-            'estadoCivil'           => formatTextFirstCharacterToUpper($trabajadora->estadocivil),
+            'estadoCivil'           => formatTextFirstCharacterToUpper(
+                $lang === 'en'
+                    ? ($trabajadora->estadocivil_en ?? $trabajadora->estadocivil)
+                    : ($trabajadora->estadocivil ?? $trabajadora->estadocivil_en)
+            )
         ];
     }
 
@@ -91,7 +95,7 @@ function formatDomicilio($trabajador){
         $result =[
             'ubicacion' => formatTextFirstCharacterToUpper($distritoView->distritostres),
             'declaracionJurada'=> ( ($trabajador->direccion) ? true : false),
-            'recibo'=> $trabajador->recibos ? $trabajador->recibos : false,
+            'recibo'=> $trabajador->recibos ?? false,
             'direccion'=> str_repeat("*", strlen($trabajador->direccion)),
         ];
 
@@ -101,36 +105,38 @@ function formatDomicilio($trabajador){
     return $result;
 }
 
-function formatLegal($trabajador){
-
-    $result = [];
-
-    if ($trabajador){
-
-        if ($trabajador->certificado_antecedente){
-
-            $certificado = $trabajador->certificado_antecedente ? json_decode($trabajador->certificado_antecedente) : null;
-            $muestracerti = 'https://adjuntosexperta.s3.amazonaws.com/Archivos/muestra-certi.jpg';
-
-            $result = [
-                'antecedetesPoliciales'    => 'NO REGISTRA',
-                'antecedetesJudiciales'    => 'NO REGISTRA',
-                'antecedetesPenales'       => 'NO REGISTRA',
-                'certificado'              => $trabajador->certificado_antecedente ? $muestracerti : null,
-            ];
-        }else{
-            $result =[
-                'antecedetesPoliciales'    => $trabajador->policial_conclusion == 0 ? 'NO REGISTRA' : null,
-                'antecedetesJudiciales'    => $trabajador->judicial_conclusion == 0 ? 'NO REGISTRA' : null,
-                'antecedetesPenales'       => $trabajador->penal_conclusion == 0 ? 'NO REGISTRA' : null,
-                'certificado'              => null
-            ];
-        }
-
-
+function formatLegal($trabajador, $lang = 'es')
+{
+    if (!$trabajador) {
+        return [];
     }
 
-    return $result;
+    // Diccionario multilanguage
+    $t = [
+        'es' => ['noRecord' => 'NO REGISTRA',],
+        'en' => ['noRecord' => 'NO RECORD FOUND',]
+    ];
+
+    $tx = $t[$lang] ?? $t['es'];
+
+    // Si tiene certificado, todo es "NO REGISTRA" y se muestra la imagen
+    if ($trabajador->certificado_antecedente) {
+
+        return [
+            'antecedetesPoliciales' => $tx['noRecord'],
+            'antecedetesJudiciales' => $tx['noRecord'],
+            'antecedetesPenales'    => $tx['noRecord'],
+            'certificado'           => 'https://adjuntosexperta.s3.amazonaws.com/Archivos/muestra-certi.jpg',
+        ];
+    }
+
+    // Si NO tiene certificado, usar conclusiones individuales
+    return [
+        'antecedetesPoliciales' => $trabajador->policial_conclusion == 0 ? $tx['noRecord'] : null,
+        'antecedetesJudiciales' => $trabajador->judicial_conclusion == 0 ? $tx['noRecord'] : null,
+        'antecedetesPenales'    => $trabajador->penal_conclusion == 0 ? $tx['noRecord'] : null,
+        'certificado'           => null,
+    ];
 }
 
 function formatSalud($trabajador){
@@ -139,8 +145,6 @@ function formatSalud($trabajador){
     $muestraAdjunto = 'https://adjuntosexperta.s3.amazonaws.com/Archivos/muestra-carnetvacunacion.jpg';
 
     if ($trabajador){
-
-        $adjuntoCartillaVacuna = $trabajador->adjunto_cartilla_vacuna ? json_decode(str_replace('\/','/',$trabajador->adjunto_cartilla_vacuna)) : null;
 
         $result = [
             'tuvoCovid'                 => $trabajador->tuvo_covid ? $trabajador->tuvo_covid : null,
@@ -243,17 +247,17 @@ function formatAdjuntoEducacionNew($educacion){
 
 }
 
-function formatActividad($actividad, $paisPostulando){
+function formatActividad($actividad, $paisPostulando, $lang){
     $result = [];
 
     if($actividad){
 
         foreach (json_decode($actividad) as $a){
 
-            $act = Actividad::find($a);
+            $table = Actividad::find($a);
 
             $result[] =[
-                'nombre' => formatTextFirstCharacterToUpper((($paisPostulando == 11 ? $act->nombre_ch : $act->nombre))),
+                'nombre' => formatTextFirstCharacterToUpper($lang == 'en' ? $table->name : $table->nombre),
             ];
         }
     }
@@ -261,15 +265,17 @@ function formatActividad($actividad, $paisPostulando){
     return $result;
 }
 
-function formatIdioma($idioma){
+function formatIdioma($idioma, $lang){
     $result = [];
 
     if($idioma){
 
         foreach (json_decode($idioma) as $a){
 
+            $table = Idioma::find($a);
+
             $result[] =[
-                'nombre' => formatTextFirstCharacterToUpper(((Idioma::find($a)->nombre))),
+                'nombre' => formatTextFirstCharacterToUpper($lang == 'en' ? $table->name : $table->nombre),
             ];
         }
     }
@@ -353,10 +359,24 @@ function showTiposModalidadesID($ca, $cf, $pd){
 
 function showTiposModalidadesFichaModal($ca, $cf, $ph, $paisPostulando = 54){
 
+    $lang = session('lang', 'es');
+
+    $mod_es = [
+        1 => 'CAMA ADENTRO',
+        2 => 'CAMA AFUERA',
+        3 => 'POR DIAS',
+    ];
+
+    $mod_en = [
+        1 => 'LIVE-IN',
+        2 => 'LIVE-OUT',
+        3 => 'SCHEDULED DAYS ONLY',
+    ];
+
     $mod = [
-        $ca ? ($paisPostulando == 49 ? 'DE PLANTA' :'CAMA ADENTRO') : '',
-        $cf ? ($paisPostulando == 49 ? 'ENTRADA POR SALIDA' :'CAMA AFUERA') : '',
-        $ph ? 'POR DIAS' : '',
+        $ca ? ($lang === 'es' ? $mod_es[1] : $mod_en[1]) : '',
+        $cf ? ($lang === 'es' ? $mod_es[2] : $mod_en[2]) : '',
+        $ph ? ($lang === 'es' ? $mod_es[3] : $mod_en[3]) : '',
     ];
 
     $filterMod = array_filter($mod);
@@ -382,62 +402,112 @@ function showTiposModalidadesFichaModal($ca, $cf, $ph, $paisPostulando = 54){
 
 }
 
-function showTiposActividadesFichaModal($actividades, $limit = '', $separador = ', ', $conector = false, $paisPedido = 54){
+function calcularTiempoServicioEn($inicio, $fin){
+    if (!$inicio || !$fin) {
+        return null;
+    }
 
+    $start = Carbon::parse($inicio);
+    $end   = Carbon::parse($fin);
+
+    $diff = $start->diff($end);
+
+    $years  = $diff->y;
+    $months = $diff->m;
+    $days   = $diff->d;
+
+    $parts = [];
+
+    if ($years > 0) {
+        $parts[] = $years . ' ' . ($years === 1 ? 'year' : 'years');
+    }
+
+    if ($months > 0) {
+        $parts[] = $months . ' ' . ($months === 1 ? 'month' : 'months');
+    }
+
+    if ($days > 0) {
+        $parts[] = $days . ' ' . ($days === 1 ? 'day' : 'days');
+    }
+
+    if (count($parts) === 0) {
+        return '0 days';
+    }
+
+    if (count($parts) === 1) {
+        return $parts[0];
+    }
+
+    if (count($parts) === 2) {
+        return $parts[0] . ' and ' . $parts[1];
+    }
+
+    return $parts[0] . ', ' . $parts[1] . ' and ' . $parts[2];
+}
+
+function showTiposActividadesFichaModal($actividades, $limit = '', $separador = ', ', $conector = false, $paisPedido = 54)
+{
+    $lang = (session('lang') ?: 'es');
     $result = [];
 
-    if($actividades){
+    if ($actividades) {
 
-        foreach (json_decode($actividades) as $d){
-
-            $cantidadAct = count($result);
+        foreach (json_decode($actividades) as $d) {
 
             $act = Actividad::find($d);
+            $cantidadAct = count($result);
 
-            if($d == 10){
-                $nameAct = formatTextFirstCharacterToUpper('CUIDADO ADULTO');
-            }else{
-                $nameAct = formatTextFirstCharacterToUpper($paisPedido == 11 ? $act->nombre_ch : $act->nombre);
+            // Nombre multilanguage
+            if ($d == 10) {
+                // Caso especial: CUIDADO ADULTO
+                $nameAct = $lang === 'es'
+                    ? 'Cuidado adulto'
+                    : 'Senior caregiver';
+            } else {
+                $nameAct = $lang === 'es'
+                    ? formatTextFirstCharacterToUpper($act->nombre)
+                    : formatTextFirstCharacterToUpper($act->name);
             }
 
-            //dd($act, $nameAct);
+            // Conector multilanguage
+            $connectorText = $lang === 'es'
+                ? strtolower($act->conector)
+                : strtolower($act->connector);
 
-            if($cantidadAct == 0){
-
-                if($conector){
-                    $result[] = strtolower($act->conector) . ' '.$nameAct;
-                }else{
+            // Primera actividad
+            if ($cantidadAct == 0) {
+                if ($conector) {
+                    $result[] = $connectorText . ' ' . $nameAct;
+                } else {
                     $result[] = $nameAct;
                 }
-
-            }else{
+            } else {
                 $result[] = $nameAct;
             }
-
         }
 
-        $newArray = $result;
+        // Limitar cantidad
+        $newArray = $limit ? array_slice($result, 0, $limit) : $result;
 
-        if($limit){
-            $newArray = array_slice($result, 0, $limit);
-        }
-
-        if(count($newArray) > 1){
+        // Construcción final multilanguage
+        if (count($newArray) > 1) {
 
             $lastValue = array_pop($newArray);
             $resultado = implode($separador, $newArray);
-            $resultado .= ' y '.$lastValue;
 
-        }else{
+            // Conector final ES/EN
+            $y = $lang === 'es' ? ' y ' : ' and ';
+
+            $resultado .= $y . $lastValue;
+
+        } else {
             $resultado = implode('', $newArray);
         }
 
         return $resultado;
-
     }
 
     return $result;
-
 }
 
 function in_range($number, $min, $max){

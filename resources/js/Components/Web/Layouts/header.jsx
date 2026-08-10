@@ -1,99 +1,133 @@
-import React, {useState } from "react";
+import React from "react";
 import imgLogo from "../../../../../public/img/logo.png";
 import { mobileDesktop } from "../../Functions/General.jsx";
+import ModalChangeLanguage from "./modalChangeLanguage.jsx";
 
-export default function Header({url, path}) {
-    const [isClicked, setIsClicked] = useState(false);
-    const [openMobileMenu, setOpenMobileMenu] = useState(false);
-    let display = mobileDesktop();
+export default function Header({ url, path, lang = 'es' }) {
 
-    function setClick(e) {
-        setIsClicked((prev) => !prev);
-    }
+    const display = mobileDesktop();
 
-    let logoTag = <img src={imgLogo} className={'logo'} alt={'Bertha - Hola Bertha - Logo'} />;
+    const headerText = {
+        es: {
+            home: "Inicio",
+            select: "Seleccionar",
+            support: "Soporte",
+            countryTooltip: "Bertha disponible en Perú",
+        },
+        en: {
+            home: "Home",
+            select: "Select",
+            support: "Support",
+            countryTooltip: "Bertha available in Peru",
+        }
+    };
 
-    let menuList = [
+    const logoTag = (
+        <img src={imgLogo} className="logo" alt="Bertha - Hola Bertha - Logo" />
+    );
+
+    const menuList = [
         {
-            label: "Inicio",
-            href: "/es-pe",
-            includedPath: "es-pe",
+            label: headerText[lang].home,
+            href: `/${lang}-pe`,
+            includedPath: `${lang}-pe`,
             drowpdown: false,
             sublist: [],
-            showMobile: display === 'desktop'
-                ? true
-                : (path === 'es-pe/seleccionar' ? true : false),
+            showMobile:
+                display === "desktop"
+                    ? true
+                    : path === `${lang}-pe/seleccionar`,
             show: true,
             icon: null,
-            aClass: '',
+            aClass: "",
         },
         {
-            label: "Seleccionar",
-            href: "/es-pe/seleccionar",
-            includedPath: "es-pe/seleccionar",
+            label: headerText[lang].select,
+            href: `/${lang}-pe/seleccionar`,
+            includedPath: `${lang}-pe/seleccionar`,
             drowpdown: false,
             sublist: [],
-            showMobile: display === 'desktop'
-                ? true
-                : (path === 'es-pe' ? true : false),
+            showMobile:
+                display === "desktop"
+                    ? true
+                    : path === `${lang}-pe`,
             show: true,
             icon: null,
-            aClass: ''
-        }
+            aClass: "",
+        },
     ];
 
-    console.log(path, menuList);
-
-    let verticalNavbar = {
+    const verticalNavbar = {
         button: "btn button",
         label: "nav-label",
     };
 
-    return(
+    return (
         <header>
-            <nav className={'navbar-bertha'}>
-                <div className={'menu row mx-0 justify-content-between'}>
-                    <div className={'col-auto p-0'}>
-                        <a href={'/es-pe'}>
+            <nav className="navbar-bertha">
+                <div className="menu row mx-0 justify-content-between">
+
+                    {/* LOGO */}
+                    <div className="col-auto p-0">
+                        <a href={`/${lang}-pe`}>
                             {logoTag}
                         </a>
                     </div>
-                    <div className={'col-auto p-0'}>
 
-                        <ul className={'desktop-menu'}>
+                    {/* MENU */}
+                    <div className="col-auto p-0">
+                        <ul className="desktop-menu">
                             {menuList
-                                .filter(m => m.show && m.showMobile)
+                                .filter((m) => m.show && m.showMobile)
                                 .map((m, index) => (
                                     <li key={index}>
                                         <a
                                             href={m.href}
                                             className={
                                                 verticalNavbar.button +
-                                                (path === m.includedPath ? " selected" : "")
+                                                (path === m.includedPath
+                                                    ? " selected"
+                                                    : "")
                                             }
                                         >
-                                            <span className={verticalNavbar.label}>{m.label}</span>
+                                            <span className={verticalNavbar.label}>
+                                                {m.label}
+                                            </span>
                                         </a>
                                     </li>
                                 ))}
 
+                            {/* SOPORTE */}
                             <li>
-                                <a href={'https://api.whatsapp.com/send?phone=51999256807'} target={'_blank'}
-                                   className={verticalNavbar.button + ' text-purple font-weight-bold text-decoration-underline'}>
-                                    <span className={verticalNavbar.label}>Soporte</span>
+                                <a
+                                    href="https://api.whatsapp.com/send?phone=51999256807"
+                                    target="_blank"
+                                    className={
+                                        verticalNavbar.button +
+                                        " text-purple font-weight-bold text-decoration-underline"
+                                    }
+                                >
+                                    <span className={verticalNavbar.label}>
+                                        {headerText[lang].support}
+                                    </span>
                                     <i className="fa-regular fa-circle-question"></i>
                                 </a>
                             </li>
                         </ul>
-
-
                     </div>
 
-                    <div className={'col-auto p-0'}>
-                        <span className={'flag-icon flag-icon-pe flag-icon-squared flag-style'} data-toggle="tooltip" data-placement="bottom" title={'Bertha disponible en Perú'}></span>
+                    {/* FLAG */}
+                    <div className="col-auto p-0">
+                        <ModalChangeLanguage
+                            url={url}
+                            path={path}
+                            lang={lang}
+                            countryTooltip={headerText[lang].countryTooltip}
+                        />
                     </div>
+
                 </div>
             </nav>
         </header>
-    )
+    );
 }

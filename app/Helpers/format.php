@@ -27,7 +27,7 @@ function quitarTildes($cadena) {
     return $texto;
 }
 
-function convertToFormatSelectRegistroRequerimiento($id, $type =  null, $paispedido = null){
+function convertToFormatSelectRegistroRequerimiento($id, $type =  null, $paispedido = null, $lang = 'es'){
     $result = '';
 
     if ($id){
@@ -35,14 +35,14 @@ function convertToFormatSelectRegistroRequerimiento($id, $type =  null, $paisped
             $data = \App\Models\Actividad::find($id);
 
             $result = [
-                'label' => mb_convert_case(($paispedido == 11 ? $data->nombre_ch : $data->nombre), MB_CASE_TITLE, "UTF-8") . ' ' . $data->descripcion,
+                'label' => mb_convert_case($data->nombre, MB_CASE_TITLE, "UTF-8") . ' ' . $data->descripcion,
                 'value' => $data->id,
             ];
         }else if ($type == 'modalidad'){
             $data = \App\Models\Modalidad::find($id);
 
             $result = [
-                'label' => mb_convert_case(($paispedido == 11 ? $data->nombre_ch : $data->nombre), MB_CASE_TITLE, "UTF-8") . ' ' . $data->descripcion,
+                'label' => mb_convert_case($data->nombre, MB_CASE_TITLE, "UTF-8") . ' ' . $data->descripcion,
                 'value' => $data->id,
             ];
         }else if ($type == 'nacionalidad'){
@@ -63,7 +63,7 @@ function convertToFormatSelectRegistroRequerimiento($id, $type =  null, $paisped
             $data = \App\Models\TipoVivienda::find($id);
 
             $result = [
-                'label' => mb_convert_case($data->nombre, MB_CASE_TITLE, "UTF-8"),
+                'label' => mb_convert_case(($lang == 'en' ? $data->name : $data->nombre), MB_CASE_TITLE, "UTF-8"),
                 'value' => $data->id,
             ];
         }else if ($type == 'tipoBeneficio'){
@@ -486,7 +486,7 @@ function convertToFormatSelectHour($data)
 }
 
 
-function convertFormatSimpleSelect($data, $capitalize = true, $uppercase = false, $paisPedido = 54){
+function convertFormatSimpleSelect($data, $capitalize = true, $uppercase = false, $paisPedido = 54, $lang = 'es'){
 
     $result = [];
 
@@ -494,12 +494,12 @@ function convertFormatSimpleSelect($data, $capitalize = true, $uppercase = false
         foreach($data as $d){
             if($uppercase){
                 $result[] = [
-                    'label' => mb_convert_case(($paisPedido == 11 ? $d->nombre_ch : $d->nombre), MB_CASE_UPPER, "UTF-8"),
+                    'label' => mb_convert_case(($lang == 'en' ? $d->name : $d->nombre), MB_CASE_UPPER, "UTF-8"),
                     'value' => $d->id
                 ];
             }else{
                 $result[] = [
-                    'label' => $capitalize ? mb_convert_case(($paisPedido == 11 ? $d->nombre_ch : $d->nombre), MB_CASE_TITLE, "UTF-8") : ucfirst(mb_convert_case(($paisPedido == 11 ? $d->nombre_ch : $d->nombre), MB_CASE_LOWER, "UTF-8")) ,
+                    'label' => $capitalize ? mb_convert_case(($lang == 'en' ? $d->name : $d->nombre), MB_CASE_TITLE, "UTF-8") : ucfirst(mb_convert_case(($lang == 'en' ? $d->name : $d->nombre), MB_CASE_LOWER, "UTF-8")) ,
                     'value' => $d->id
                 ];
             }
@@ -669,18 +669,63 @@ function unaccent($string){
 
 }
 
-function armarEdad($fechaDiff){
-    $result = null;
-    if ($fechaDiff){
-        $anios = $fechaDiff->format('%y');
-        $meses = $fechaDiff->format('%m');
-        $dias = $fechaDiff->format('%d');
-
-        $result = $anios . ($anios > 1 ? ' años' : ' año') . ($meses == 0 ? '' : ($dias > 0 ? ',' : ' y')) . ( $meses > 0 ? (' ' . $meses . ($meses > 1 ? ' meses ' : ' mes ')) : '') .  ($dias > 0 ? ' y' : '')  . ($dias > 0 ? (' ' . $dias . ($dias > 1 ? ' días' : ' día')) : '');
+function armarEdad($fechaDiff, $lang = 'es'){
+    if (!$fechaDiff) {
+        return null;
     }
 
-    return $result;
+    $years  = (int) $fechaDiff->format('%y');
+    $months = (int) $fechaDiff->format('%m');
+    $days   = (int) $fechaDiff->format('%d');
 
+    // Diccionario multilanguage
+    $t = [
+        'es' => [
+            'year'  => ['año', 'años'],
+            'month' => ['mes', 'meses'],
+            'day'   => ['día', 'días'],
+            'and'   => ' y ',
+            'comma' => ', ',
+        ],
+        'en' => [
+            'year'  => ['year', 'years'],
+            'month' => ['month', 'months'],
+            'day'   => ['day', 'days'],
+            'and'   => ' and ',
+            'comma' => ', ',
+        ]
+    ];
+
+    $tx = $t[$lang] ?? $t['es'];
+
+    $parts = [];
+
+    // Años
+    if ($years > 0) {
+        $parts[] = $years . ' ' . ($years === 1 ? $tx['year'][0] : $tx['year'][1]);
+    }
+
+    // Meses
+    if ($months > 0) {
+        $parts[] = $months . ' ' . ($months === 1 ? $tx['month'][0] : $tx['month'][1]);
+    }
+
+    // Días
+    if ($days > 0) {
+        $parts[] = $days . ' ' . ($days === 1 ? $tx['day'][0] : $tx['day'][1]);
+    }
+
+    // Unir partes
+    if (count($parts) === 1) {
+        return $parts[0];
+    }
+
+    if (count($parts) === 2) {
+        return $parts[0] . $tx['and'] . $parts[1];
+    }
+
+    // 3 partes → años, meses y días
+    return $parts[0] . $tx['comma'] . $parts[1] . $tx['and'] . $parts[2];
 }
 
 function restringirInformacion($texto){

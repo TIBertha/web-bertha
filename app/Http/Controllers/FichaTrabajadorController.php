@@ -55,50 +55,58 @@ class FichaTrabajadorController extends Controller
 
     }
 
-    public function viewFichaCRMTrabajador($token = null){
+    public function viewFichaCRMTrabajador(Request $request, $token = null)
+    {
+        // 1. Validar token
+        if (!$token) {
+            return redirect('/');
+        }
 
-        if(!$token){
-                return redirect('/');
-            }else{
+        // 2. Idioma: sesión → navegador → default
+        $lang = session('lang');
 
-                $existToken = HistorialToken::where('token', $token)->first();
+        if (!$lang) {
+            $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $lang = ($browserLang === 'es') ? 'es' : 'en';
+        }
 
-                if ($existToken){
-                    $tra = TrabajadorView::where('usuario_id', $existToken->usuario_id)->first();
+        $lang = $lang ?? 'es';
 
-                    if($tra){
+        // 3. Buscar token
+        $existToken = HistorialToken::where('token', $token)->first();
+        if (!$existToken) {
+            return redirect('/');
+        }
 
-                        if ($tra->foto){
+        // 4. Buscar trabajadora
+        $tra = TrabajadorView::where('usuario_id', $existToken->usuario_id)->first();
+        if (!$tra) {
+            return redirect('/');
+        }
 
-                            $estatusPostulante = $tra->estatuspostulante_id;
+        // 5. Validar foto
+        if (!$tra->foto) {
+            return redirect('/');
+        }
 
-                            if(in_array($estatusPostulante, [2,3,4,5,6])){
-                                return redirect()->route('pedidos');
-                            }
+        // 6. Validar estatus
+        if (in_array($tra->estatuspostulante_id, [2,3,4,5,6])) {
+            return redirect()->route('pedidos');
+        }
 
-                            $f = null;
+        // 7. Preparar datos
+        $data = [
+            'nombreTrabajadora' => formatTextFirstCharacterToUpper(
+                convert_from_latin1_to_utf8_recursively(getNameAndFirstCharacterFullName($tra->nombres, $tra->apellidos))),
+            'foto'          => $tra->foto,
+            'videoYoutube'  => checkVideoYoutube($tra->video_introduccion_youtube),
+            'token'         => $token,
+            'usuario'       => $existToken->usuario_id,
+            'accessverif'   => true,
+            'lang'          => $lang,
+        ];
 
-                            // = \Thumbnail::src($tra->foto, null)->smartcrop(310, 310)->url(true);
-
-                            $data['nombreTrabajadora'] = formatTextFirstCharacterToUpper(convert_from_latin1_to_utf8_recursively(getNameAndFirstCharacterFullName($tra->nombres, $tra->apellidos)));
-                            //$data['foto'] = $tra->foto ? strtok($f, '?') : null;
-                            $data['foto'] = $tra->foto;
-                            $data['videoYoutube'] = checkVideoYoutube($tra->video_introduccion_youtube);
-                            $data['token'] = $token;
-                            $data['usuario'] = $existToken->usuario_id;
-                            $data['accessverif'] = true;
-                        }else{
-                            return redirect('/');
-                        }
-
-                    }else{
-                        return redirect('/');
-                    }
-                }else{
-                    return redirect('/');
-                }
-            }
-            return view('Web.FichaTrabajador.Restringida.ficha-crm-trabajador', $data);
+        return view('Web.FichaTrabajador.Restringida.ficha-crm-trabajador', $data);
     }
 
     public function getListAudioVerificaciones($verificaciones, $privada = null, $access = null){
@@ -132,7 +140,7 @@ class FichaTrabajadorController extends Controller
 
     }
 
-    public function getVerificacionesLaborales($verificaciones, $privada = null, $access){
+    public function getVerificacionesLaborales($verificaciones, $privada = null, $access, $lang){
 
         $result = null;
 
@@ -172,7 +180,7 @@ class FichaTrabajadorController extends Controller
                     'actividades'     => strtoupper(showTiposActividadesFichaModal($data['actividad'], '', ', ')),
                     'fechainicio'     => isset($data['inicioLabores']) ? ( $data['inicioLabores'] ? Carbon::parse($data['inicioLabores'])->format('m/Y') : null ) : null,
                     'fechafin'        => isset($data['finLabores']) ? ( $data['finLabores'] ? Carbon::parse($data['finLabores'])->format('m/Y') : null ) : null,
-                    'duracion'        => isset($data['tiempo']) ? ($data['tiempo'] ? $data['tiempo'] : null) : null,
+                    'duracion'        => isset($data['tiempo']) ? ($lang == 'en' ? calcularTiempoServicioEn($data['inicioLabores'], $data['finLabores']) : $data['tiempo']) : null,
                     'adjunto'         => $adjunto,
                     'verificacion'    => isset($data['adjuntos']) ? $verificacion : null,
                     'docsVerificacion' => isset($data['adjuntos']) ? $docsVerificacion : null,
@@ -188,6 +196,14 @@ class FichaTrabajadorController extends Controller
     }
 
     public function ajaxGetDataFichaRestringidaTrabajador(Request $request){
+
+        $lang = session('lang');
+
+        if (!$lang) {
+            $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $lang = ($browserLang === 'es') ? 'es' : 'en';
+        }
+
         $tra = null;
         $token = $request->input('token');
         countViewFicha($token);
@@ -216,27 +232,28 @@ class FichaTrabajadorController extends Controller
 
         return response()->json([
             'code'                  => 200,
+            'lang'                  => $lang,
             'disponibilidad'        => $disponibilidad,
             'dataseleccion'         => $dataSeleccion,
             'name'                  => mb_convert_case(getNameAndFirstCharacterFullNameSimple($tra->nombres, $tra->apellidos), MB_CASE_TITLE, "UTF-8") ,
             'nombreTrabajador'      => mb_convert_case($nombreTrabajadorRestringido, MB_CASE_UPPER, "UTF-8"),
-            'informacionBasica'     => formatInformacionBasica($tra),
-            'identificacion'        => formatIdentificacion($tra),
+            'informacionBasica'     => formatInformacionBasica($tra, $lang),
+            'identificacion'        => formatIdentificacion($tra, $lang),
             'licencia'              => formatLicencia($tra),
             'domicilio'             => formatDomicilio($tra),
-            'legal'                 => formatLegal($tra),
-            'salud'                 => formatSalud($tra),
+            'legal'                 => formatLegal($tra, $lang),
+            'salud'                 => formatSalud($tra, $lang),
             'testPsicologico'       => !!$tra->test_psicologico,
             'retrato'               => $tra->foto,
-            'experiencia'           => $this->getVerificacionesLaborales($tra->verificaciones_laborales, null, $accessverif),
+            'experiencia'           => $this->getVerificacionesLaborales($tra->verificaciones_laborales, null, $accessverif, $lang),
             'listaudio'             => $this->getListAudioVerificaciones($tra->verificaciones_laborales, null, $accessverif),
             'numExperiencia'        => $tra->cantidad_verificaciones_laborales,
             'estudio'               => $tra->adjunto_educacion ? formatAdjuntoEducacionNew($tra->adjunto_educacion) : null,
-            'nivelEducativo'        => $tra->niveleducativo,
+            'nivelEducativo'        => $lang == 'en' ? $tra->niveleducativo_en : $tra->niveleducativo,
             'numEstudio'            => $tra->cantidad_adjunto_educacion,
-            'actividad'             => formatActividad($tra->actividad_id, $tra->postulando_pais_id),
+            'actividad'             => formatActividad($tra->actividad_id, $tra->postulando_pais_id, $lang),
             'redesContacto'         => formatRedesContacto($tra),
-            'idioma'                => formatIdioma($tra->idioma_id),
+            'idioma'                => formatIdioma($tra->idioma_id, $lang),
             'modalidad'             => formatModalidad($tra),
             'video'                 => $tra->video_introduccion_youtube ?: null,
             'video_amazon'          => $tra->video_introduccion_youtube ? null : $tra->videointroduccion,

@@ -115,6 +115,6 @@
         @endforeach
     @endif
 
-    <div id="index" data-url="{{ url('/') }}" data-num="{{($totaltrabajadores)}}" data-country="{{$country}}"></div>
+    <div id="index" data-url="{{ url('/') }}" data-num="{{($totaltrabajadores)}}" data-country="{{$country}}" data-lang="{{$lang}}"></div>
 
 @endsection

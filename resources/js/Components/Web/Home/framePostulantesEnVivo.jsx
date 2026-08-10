@@ -2,15 +2,24 @@ import React, {useEffect, useState} from "react";
 import {ajaxGetPostulantesSlider} from "../../Functions/Home.jsx";
 import {showAlert} from "../../Helpers/alerts.jsx";
 import Slider from 'react-slick';
-import {getWindowSize, mobileDesktop} from "../../Functions/General.jsx";
+import {getWindowSize} from "../../Functions/General.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function FramePostulantesEnVivo({url, country}) {
+export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
 
-    let display = mobileDesktop();
+    const postulantesText = {
+        es: {
+            title: "Postulantes en vivo",
+            more: "Ver más",
+        },
+        en: {
+            title: "Live applicants",
+            more: "See more",
+        },
+    };
+
     const [postulantes, setPostulantes] = useState([]);
-    const [isLoading, setLoading] = useState(false);
 
     const [windowSize, setWindowSize] = useState(getWindowSize());
     useEffect(() => {
@@ -57,8 +66,6 @@ export default function FramePostulantesEnVivo({url, country}) {
 
     useEffect(() => {
 
-        setLoading(true);
-
         ajaxGetPostulantesSlider().then(r => {
             if(r.code === 200){
                 setPostulantes(r.data);
@@ -67,8 +74,6 @@ export default function FramePostulantesEnVivo({url, country}) {
                     const img = new Image();
                     img.src = p.foto;
                 });
-
-                setLoading(false);
             }else if(r.code === 500){
                 showAlert('error', r.msj);
             }
@@ -84,7 +89,7 @@ export default function FramePostulantesEnVivo({url, country}) {
                         <div className={'col-12'}>
                             <div className={'postulantesenvivo-title'}>
                                 <span className="green-dot me-2"></span>
-                                <span className={'pev-title'}>Postulantes en vivo</span>
+                                <span className={'pev-title'}>{postulantesText[lang].title}</span>
                             </div>
                         </div>
                         <div className={'col-12 centerSlider'}>
@@ -114,7 +119,7 @@ export default function FramePostulantesEnVivo({url, country}) {
 
                         <div className={'col-12 centerSlider'}>
                             <div className='py-2'>
-                                <a className='btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow mt-0 btn-full-width' href={url + '/es-' + country + '/seleccionar'}>Ver más</a>
+                                <a className='btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow mt-0 btn-full-width' href={url + '/' + lang + '-' + country + '/seleccionar'}>{postulantesText[lang].more}</a>
                             </div>
                         </div>
                     </div>

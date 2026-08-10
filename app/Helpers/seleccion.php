@@ -226,6 +226,8 @@ function getQuerySeleccionTrabajadores($filtros = null, $isMobile = null){
 
 function formatDataTrabajadores($trabajadores){
 
+    $lang = session('lang');
+
     $result = [];
 
     if($trabajadores){
@@ -241,7 +243,7 @@ function formatDataTrabajadores($trabajadores){
                 'token'                    => $d->token,
                 'foto'                     => $d->foto,
                 'usuario'                  => $d->usuario_id,
-                'nacionalidad'             => mb_convert_case($d->nacionalidad, MB_CASE_TITLE, "UTF-8"),
+                'nacionalidad'             => mb_convert_case($lang === 'es' ? $d->nacionalidad : $d->nationality, MB_CASE_TITLE, "UTF-8"),
                 'nacionalidad_id'          => $d->nacionalidad_id,
                 'nombre'                   => convert_from_latin1_to_utf8_recursively(getNameAndFirstCharacterFullName($d->nombres, $d->apellidos)),
                 'edad'                     => $d->edad,

@@ -17,44 +17,53 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return redirect('/es-pe');
+        // Detectar idioma del navegador (primeros 2 caracteres)
+        $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+
+        // Si es español → es-pe
+        // Si es cualquier otro idioma → en-pe
+        $lang = ($browserLang === 'es') ? 'es' : 'en';
+
+        return redirect("/{$lang}-pe");
     }
 
-    public function viewPeru(){
-        countViewWeb('/es-pe');
-        return $this->viewIndex('pe');
+    public function viewPeru($lang)
+    {
+        countViewWeb("/{$lang}-pe");
+        return $this->viewIndex('pe', $lang);
     }
 
     public function cleanPass(){
         session()->forget('getPass');
     }
 
-    public function viewIndex($country){
-
+    public function viewIndex($country, $lang)
+    {
+        $data['lang'] = $lang;
         $data['country'] = $country;
 
-        $s = session()->get('country');
-
-        session()->forget('country');
+        // Guardar país e idioma en sesión
         session()->put('country', $country);
+        session()->put('lang', $lang);
 
-        $data['blogs'] = PrensaView::orderBy('num', 'DESC')->whereNotNull('fuente')->get();
+        $data['blogs'] = PrensaView::orderBy('num', 'DESC')
+            ->whereNotNull('fuente')
+            ->get();
 
         $data['totalBlogs'] = count($data['blogs']);
 
         $empleadores = Contrato::groupBy('empleador_id')->get('empleador_id','id');
-
         $data['totalempleadores'] = count($empleadores) + 9763;
 
         $trabajadores = Contrato::count();
-
         $data['totaltrabajadores'] = $trabajadores + 29338;
 
         $data['seoH1'] = [
             'Encuentra Trabajadores del Hogar | Bertha'
         ];
+
         $data['seoH2'] = [
             'Trabajadoras del Hogar',
             'Empleadas domesticas',
@@ -73,8 +82,7 @@ class WebController extends Controller
     }
 
     public function ajaxGetCountryCode(Request $request){
-        $s = $s = session()->get('country');
-        dd($s);
+        $s = session()->get('country');
     }
 
     public function ajaxGetViews(Request $request)
@@ -89,29 +97,62 @@ class WebController extends Controller
         ]);
     }
 
-    public function viewCondiciones($country)
+    public function condicionesRedirect(Request $request)
     {
-        $data['country'] = $country;
+        // Detectar idioma del navegador
+        $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
 
-        $s = session()->get('country');
+        // Si es español → es-pe
+        // Si es cualquier otro idioma → en-pe
+        $lang = ($browserLang === 'es') ? 'es' : 'en';
 
-        session()->forget('country');
+        return redirect("/{$lang}-pe/condiciones");
+    }
+
+    public function viewCondiciones(Request $request)
+    {
+        $country = 'pe';
+        $lang = $request->lang ?? session('lang', 'es');
+
         session()->put('country', $country);
+        session()->put('lang', $lang);
 
         $this->cleanPass();
 
-        return view('Web.condiciones', $data);
+        return view('Web.condiciones', [
+            'country' => $country,
+            'lang' => $lang,
+        ]);
     }
 
-    public function condiciones()
+    public function privacidadRedirect()
     {
-        return $this->viewCondiciones('pe');
+        // 1. Si ya hay lang en sesión → usarlo
+        $lang = session('lang');
+
+        // 2. Si no hay sesión → detectar navegador
+        if (!$lang) {
+            $browserLang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $lang = in_array($browserLang, ['es', 'en']) ? $browserLang : 'es';
+            session()->put('lang', $lang);
+        }
+
+        // 3. Redirigir a la ruta multilanguage correcta
+        return redirect("/{$lang}-pe/privacidad");
     }
 
-    public function viewPrivacidad()
+    public function viewPrivacidad(Request $request)
     {
-        countViewWeb('/privacidad');
-        return view('Web.privacidad');
+        $country = 'pe';
+        $lang = $request->lang ?? session('lang', 'es');
+
+        session()->put('country', $country);
+        session()->put('lang', $lang);
+
+        return view('Web.privacidad', [
+            'country' => $country,
+            'lang' => $lang,
+        ]);
     }
 
     public function ajaxGetRedesSociales(){
@@ -233,7 +274,14 @@ class WebController extends Controller
     public  function cuentaBancariaView()
     {
         $this->cleanPass();
-        return view('Web.cuenta-bancaria');
+
+        $lang = session('lang') ?? 'es';
+        $country = session('country');
+
+        return view('Web.cuenta-bancaria', [
+            'country' => $country,
+            'lang' => $lang,
+        ]);
     }
 
 }

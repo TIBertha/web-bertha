@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import parse from "html-react-parser";
 
-export default function StepTwo({requerimiento, handleChange, semiModalidades, modalidadesHorarios}) {
+export default function StepTwo({requerimiento, handleChange, semiModalidades, modalidadesHorarios, lang = 'es'}) {
 
     const [selectedHorario, setSelectedHorario] = useState(null);
 
@@ -9,10 +9,22 @@ export default function StepTwo({requerimiento, handleChange, semiModalidades, m
         setSelectedHorario(horarioId);
     };
 
+    const st2Text = {
+        es: {
+            title: '2. Selecciona una modalidad de trabajo',
+            subTitle: 'Escoge la opción que mejor se adapte a tu hogar'
+
+        },
+        en: {
+            title: '2. Select a work modality',
+            subTitle: 'Choose the option that best fits your home'
+        }
+    }
+
     return (
         <div className="opacity-inputs form-group texto-formulario mb-0 no-select-text pt-3 pt-lg-0">
-            <h4 className="mb-0 texto-pasos">2. Selecciona una modalidad de trabajo</h4>
-            <div className={'secRl'}>Escoge la opción que mejor se adapte a tu hogar</div>
+            <h4 className="mb-0 texto-pasos">{st2Text[lang].title}</h4>
+            <div className={'secRl'}>{st2Text[lang].subTitle}</div>
 
             <section className="row">
 
@@ -21,7 +33,7 @@ export default function StepTwo({requerimiento, handleChange, semiModalidades, m
                     return(
                         <div key={semi.id} className={'col-12 col-md-6 ' + semi.id}>
                             <div className={'horariosMod-group' + (semi.id === 1 ? ' mb-0' : '')}>
-                                <p className={'semi_mod'}>{semi.nombre}</p>
+                                <p className={'semi_mod'}>{lang === 'en' ? semi.name : semi.nombre}</p>
 
                                 {modalidadesHorarios
                                     .filter(h => h.semimodalidad_id === semi.id)
@@ -37,7 +49,7 @@ export default function StepTwo({requerimiento, handleChange, semiModalidades, m
                                                                 onChange={() => handleChange(h.id, 'modalidadHorario', 'modalidadHorario')}
                                                                 className={'me-2'}
                                                             />
-                                                            {h.nombre}
+                                                            {lang === 'en' ? h.name : h.nombre}
                                                         </label>
                                                     </div>
                                                 </div>

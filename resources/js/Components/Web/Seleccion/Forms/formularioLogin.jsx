@@ -18,7 +18,39 @@ export default function FormularioLogin({
     setPassword,
     changeVista,
     handleLogin,
+    lang = 'es'
 }) {
+
+    const textTitle = {
+        es: "Ingresa tu número de celular",
+        en: "Enter your mobile number"
+    };
+
+    const textSubtitle = {
+        es: "Ahora más dinámico, menos procesos, misma calidad",
+        en: "Now more dynamic, fewer steps, same quality"
+    };
+
+    const textPlaceholder = {
+        es: "Ingresar celular",
+        en: "Enter mobile number"
+    };
+
+    const textLogin = {
+        es: "Iniciar sesión",
+        en: "Log in"
+    };
+
+    const textNewHere = {
+        es: "¿Eres nuevo?",
+        en: "New here?"
+    };
+
+    const textRegister = {
+        es: "Regístrate",
+        en: "Sign up"
+    };
+
     return (
         <section className="login-form">
             <div className="text-center">
@@ -30,8 +62,8 @@ export default function FormularioLogin({
             </div>
 
             <div className="login-form-content mt-0">
-                <h1 className="title-form">Ingresa tu número de celular</h1>
-                <p className={'pb-3'}>Ahora más dinámico, menos procesos, misma calidad</p>
+                <h1 className="title-form">{textTitle[lang]}</h1>
+                <p className={'pb-3'}>{textSubtitle[lang]}</p>
 
                 {alertErrorCredenciales && (
                     <AlertError
@@ -55,7 +87,7 @@ export default function FormularioLogin({
                                     ? celular.split(" ").join("")
                                     : celular
                             }
-                            placeholder={"Ingresar celular"}
+                            placeholder={textPlaceholder[lang]}
                             onChange={(e) => setCelular(e)}
                             preferredCountries={["pe", "us", "cl", "co", "ve"]}
                             inputClass="w-100 form-control no-box-shadow"
@@ -71,17 +103,17 @@ export default function FormularioLogin({
                         {isLoading && (
                             <i className="fas fa-sync fa-spin me-2"></i>
                         )}
-                        Iniciar sesión
+                        {textLogin[lang]}
                     </button>
 
                     <div className="text-center mt-4">
                         <div>
-                            ¿Eres nuevo?{" "}
+                            {textNewHere[lang]}{" "}
                             <a
                                 className="link-tc"
                                 onClick={() => changeVista()}
                             >
-                                Regístrate
+                                {textRegister[lang]}
                             </a>
                         </div>
                     </div>

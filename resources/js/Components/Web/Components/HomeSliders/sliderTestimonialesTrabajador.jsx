@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import LoadingScreen from "../loadingScreen.jsx";
 import {mobileDesktop } from "../../../Functions/General.jsx";
 
-export default function SliderTestimonialesTrabajador({url, trabajadora}) {
+export default function SliderTestimonialesTrabajador({url, trabajadora, lang = 'es'}) {
 
     const [testimoniales, setTestimoniales] = useState([]);
     const [isLoading, setLoading] = useState(false);
@@ -36,6 +36,19 @@ export default function SliderTestimonialesTrabajador({url, trabajadora}) {
         });
     }, []);
 
+    const trabajadorasText = {
+        es: {
+            colocadas: "Nuestras trabajadoras colocadas",
+            felices: "Trabajadoras felices",
+            total: (n) => `(${n} testimoniales)`,
+        },
+        en: {
+            colocadas: "Our placed workers",
+            felices: "Happy workers",
+            total: (n) => `(${n} testimonials)`,
+        },
+    };
+
     if(isLoading) return <LoadingScreen load={isLoading}/>;
     return(
         <>
@@ -46,8 +59,10 @@ export default function SliderTestimonialesTrabajador({url, trabajadora}) {
                     <div className="p-3 px-md-5 m-0">
 
                         <div className="titulo-seccion py-2 text-center">
-                            <h3 className="display-5 titulo text-purple responsive-title-size">{trabajadora == true ? 'Nuestras trabajadoras colocados' : 'Trabajadoras felices'}</h3>
-                            <p className="testimonial-total text-purple responsive-description-size">({testimoniales.length} testimoniales)</p>
+                            <h3 className="display-5 titulo text-purple responsive-title-size">{trabajadora
+                                ? trabajadorasText[lang].colocadas
+                                : trabajadorasText[lang].felices}</h3>
+                            <p className="testimonial-total text-purple responsive-description-size">{trabajadorasText[lang].total(testimoniales.length)}</p>
                         </div>
 
                         <div className="container slide-testimonial">

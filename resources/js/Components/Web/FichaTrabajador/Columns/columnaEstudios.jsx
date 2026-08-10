@@ -1,17 +1,28 @@
 import React from 'react';
 import VerEstudio from "../Components/verEstudio.jsx";
 
-export default function ColumnaEstudios({url, privado, nivelEducativo, numEstudio, estudio, iconFile, margin}) {
+export default function ColumnaEstudios({url, privado, nivelEducativo, numEstudio, estudio, iconFile, margin, lang = 'es'}) {
+
+    const colText = {
+        es: {
+            sec1: 'Estudios',
+            su1: 'Nivel Educativo: '
+        },
+        en: {
+            sec1: 'Education',
+            su1: 'Education Level: '
+        }
+    };
     return(
         <section className={'map p-3 ' + margin}>
             <div className="py-3">
-                <p className="titulo-seccions m-0">Estudios</p>
+                <p className="titulo-seccions m-0">{colText[lang].sec1}</p>
                 <div className="row mx-0 justify-content-end detalles mt-2">
 
                     <div className={'col-12 col-xl-10 px-0 pb-3'}>
                         <div className="row mx-0">
                             <div className="col-12 my-auto">
-                                <p>Nivel Educativo: {nivelEducativo}</p>
+                                <p>{colText[lang].su1 + nivelEducativo}</p>
                             </div>
                         </div>
                     </div>

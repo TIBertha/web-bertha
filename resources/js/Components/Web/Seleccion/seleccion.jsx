@@ -25,7 +25,7 @@ const setParametrosURL = (parametros) => {
 
 };
 
-export default function Seleccion({url, country}) {
+export default function Seleccion({url, country, lang = 'es'}) {
     const [filtrosSelected, setFiltrosSelected] = useState([]);
     const [trabajadores, setTrabajadores] = useState([]);
     const [cart, setCart] = useState([]);
@@ -136,42 +136,32 @@ export default function Seleccion({url, country}) {
 
     const addCart = (data) => {
 
-        const tra = {id: data.id, nombre: data.nombre, foto: data.foto, modalidad: data.modalidades, modalidad_id: data.modalidad_id, actividad: data.actividades, actividad_id: data.actividad_id, edad: data.edad, nacionalidad_id: data.nacionalidad_id };
+        const tra = {
+            id: data.id,
+            nombre: data.nombre,
+            foto: data.foto,
+            modalidad: data.modalidades,
+            modalidad_id: data.modalidad_id,
+            actividad: data.actividades,
+            actividad_id: data.actividad_id,
+            edad: data.edad,
+            nacionalidad_id: data.nacionalidad_id
+        };
 
         const newItem = [...cart, tra];
+
+        const cartText = {
+            es: "Solo puedes agregar hasta un máximo de 2 trabajadoras",
+            en: "You can only add up to a maximum of 2 domestic workers",
+        };
 
         if(cart.length > 0){
 
             if(cart.length >= 2){
-                showAlert('error', 'Solo puedes agregar hasta un máximo de 2 trabajadores')
+                showAlert('error', cartText[lang])
             }else{
-
                 setCart(newItem);
                 ajaxSaveCartSeleccion(newItem);
-
-                /*if(isValidoTrabajadorForAddCart(cart, tra)){
-                    setCart(newItem);
-                    ajaxSaveCartSeleccion(newItem);
-                }else{
-
-                    Swal.fire({
-                        title: '<i class="fas fa-exclamation-circle icon-warning"></i>',
-                        text: 'El trabajador que deseas agregar no es de la misma actividad y/o modalidad de los que están en tu carrito.  Si deseas agregarlo, tu selección anterior se borrará. ¿Estás de acuerdo?',
-                        showCancelButton: true,
-                        cancelButtonText: 'No',
-                        confirmButtonColor: '#ff0080',
-                        confirmButtonText: 'Si'
-                    }).then((result) => {
-
-                        if (result.value) {
-                            setCart([tra]);
-                            ajaxSaveCartSeleccion([tra]);
-                        }
-
-                    });
-
-                }*/
-
             }
 
         }else{
@@ -182,21 +172,15 @@ export default function Seleccion({url, country}) {
     };
 
     const removeCart = (id) => {
-
         let newArray = cart.filter(item => item.id !== id);
         setCart( newArray);
         ajaxSaveCartSeleccion(newArray);
-
     };
 
     const finalizar = () => {
-
         ajaxFinalizarSeleccion(cart, filtrosSelected, country).then(result => {
-
             setShowModalRegistro(true);
-
         });
-
     };
 
     useEffect(() => {
@@ -225,25 +209,99 @@ export default function Seleccion({url, country}) {
 
     let tot = trabajadores.totalesfiltros;
 
-    let actividades = [
-        {name: (country === 'cl' ? 'Nana' : 'Todo Servicio'), value: 1, total: (tot ? tot.todoservicio : 0), tooltipContent: 'Limpia, lava, plancha y cocina'},
-        {name: ('Enfermería'), value: 3, total: (tot ? tot.enfermeria : 0), tooltipContent: 'Alimenta, asea y trata al paciente'},
-        {name: (country === 'cl' ? 'Niñera' :'Nana'), value: 6, total: (tot ? tot.nana : 0), tooltipContent: 'Alimenta, asea y cuida a tu niño'},
-        {name: ('Cuidado Adulto'), value: 10, total: (tot ? tot.cuidadoadulto : 0), tooltipContent: 'Alimenta, asea y cuida al adulto mayor'},
+    const actividades = [
+        {
+            name: lang === 'es'
+                ? (country === 'cl' ? 'Nana' : 'Todo Servicio')
+                : (country === 'cl' ? 'Nanny' : 'General domestic work'),
+            value: 1,
+            total: tot ? tot.todoservicio : 0,
+            tooltipContent: lang === 'es'
+                ? 'Limpia, lava, plancha y cocina'
+                : 'Cleans, washes, irons and cooks'
+        },
+        {
+            name: lang === 'es' ? 'Enfermería' : 'Nursing care',
+            value: 3,
+            total: tot ? tot.enfermeria : 0,
+            tooltipContent: lang === 'es'
+                ? 'Alimenta, asea y trata al paciente'
+                : 'Feeds, bathes and assists the patient'
+        },
+        {
+            name: lang === 'es'
+                ? (country === 'cl' ? 'Niñera' : 'Nana')
+                : 'Nanny',
+            value: 6,
+            total: tot ? tot.nana : 0,
+            tooltipContent: lang === 'es'
+                ? 'Alimenta, asea y cuida a tu niño'
+                : 'Feeds, bathes and cares for your child'
+        },
+        {
+            name: lang === 'es' ? 'Cuidado Adulto' : 'Elderly care',
+            value: 10,
+            total: tot ? tot.cuidadoadulto : 0,
+            tooltipContent: lang === 'es'
+                ? 'Alimenta, asea y cuida al adulto mayor'
+                : 'Feeds, bathes and cares for the elderly'
+        },
     ];
 
-    let modalidades = [
-        {name: countryData.ca, value: 1, total: (tot ? tot.camaadentro : 0), tooltipContent: 'Labora y vive en tu residencia'},
-        {name: countryData.cf, value: 2, total: (tot ? tot.camaafuera : 0), tooltipContent: 'Labora según tu horario'},
-        {name: ('Por días'), value: 3, total: (tot ? tot.pordias : 0), tooltipContent: 'Labora  1, 2, 3 o 4 veces por semana'},
+    const modalidades = [
+        {
+            name: lang === 'es'
+                ? countryData.ca
+                : 'Live-in',
+            value: 1,
+            total: tot ? tot.camaadentro : 0,
+            tooltipContent: lang === 'es'
+                ? 'Labora y vive en tu residencia'
+                : 'Works and lives in your residence'
+        },
+        {
+            name: lang === 'es'
+                ? countryData.cf
+                : 'Live-out',
+            value: 2,
+            total: tot ? tot.camaafuera : 0,
+            tooltipContent: lang === 'es'
+                ? 'Labora según tu horario'
+                : 'Works according to your schedule'
+        },
+        {
+            name: lang === 'es'
+                ? 'Por días'
+                : 'Scheduled days only',
+            value: 3,
+            total: tot ? tot.pordias : 0,
+            tooltipContent: lang === 'es'
+                ? 'Labora 1, 2, 3 o 4 veces por semana'
+                : 'Works 1 to 4 days per week'
+        },
     ];
+
+    const textMarketSalary = {
+        es: "Revisa los sueldos del mercado ",
+        en: "Check market salaries "
+    };
+
+    const textContinue = {
+        es: "Continuar",
+        en: "Continue"
+    };
+
+    const textCartInfo = {
+        es: 'Dale clic en “Continuar” y cuéntanos tu requerimiento, así sabrás si la trabajadora(s) que escogiste acepta tu oferta. Si no la acepta, nosotros buscaremos su reemplazo',
+        en: 'Click “Continue” and tell us your requirements so we can confirm whether the domestic worker(s) you selected accept your offer. If they don’t, we will find a replacement for you.'
+    };
 
     return (
         <>
 
             <section className={'pink-label-seleccion'}>
                 <div>
-                    Revisa los sueldos del mercado <ModalSueldos country={country} />
+                    {textMarketSalary[lang]} <ModalSueldos country={country} lang={lang}/>
                 </div>
 
             </section>
@@ -260,36 +318,36 @@ export default function Seleccion({url, country}) {
                         handler={null}
                         level={null}
                     >
-                        {Boolean(tokenTrabajador) && <FichaRestringidaTrabajadorIndex country={countryData.code} url={url} usuario={usuarioTrabajador} token={tokenTrabajador} isSeleccion={true} closeDrawer={closeDrawer} addCart={addCart} removeCart={removeCart} cart={cart} />}
+                        {Boolean(tokenTrabajador) && <FichaRestringidaTrabajadorIndex country={countryData.code} url={url} usuario={usuarioTrabajador} token={tokenTrabajador} isSeleccion={true} closeDrawer={closeDrawer} addCart={addCart} removeCart={removeCart} cart={cart} lang={lang}/>}
                     </Drawer>
 
-                    <ModalIniciarSesion url={url} showModal={showModalRegistro} setShowModal={setShowModalRegistro} country={country}/>
+                    <ModalIniciarSesion url={url} showModal={showModalRegistro} setShowModal={setShowModalRegistro} country={country} lang={lang}/>
 
-                    <ModalComoFunciona url={url} country={country} showModal={showModalComoFunciona} setShowModal={setShowModalComoFunciona} closeModal={closeModalComoFunciona}/>
+                    <ModalComoFunciona url={url} country={country} showModal={showModalComoFunciona} setShowModal={setShowModalComoFunciona} closeModal={closeModalComoFunciona} lang={lang}/>
 
                     <div className="col-2 d-none d-md-block">
-                        <Filtros filtrosSelected={filtrosSelected} add={addFilter} remove={removeFilter} actividades={actividades} modalidades={modalidades}/>
+                        <Filtros filtrosSelected={filtrosSelected} add={addFilter} remove={removeFilter} actividades={actividades} modalidades={modalidades} lang={lang}/>
                     </div>
 
                     <div className="col-12 col-md-10">
 
-                        <ModalMenu filtrosSelected={filtrosSelected} addFilter={addFilter} removeFilter={removeFilter} actividades={actividades} modalidades={modalidades} />
+                        <ModalMenu filtrosSelected={filtrosSelected} addFilter={addFilter} removeFilter={removeFilter} actividades={actividades} modalidades={modalidades} lang={lang}/>
 
                         <div className="row mx-0">
 
                             <div className="col-12">
-                                <Totales total={trabajadores.total} cart={cart} finalizar={finalizar} country={country}/>
+                                <Totales total={trabajadores.total} cart={cart} finalizar={finalizar} country={country} lang={lang}/>
                             </div>
 
                             {cart.length > 0 &&
                                 <>
                                     <div className="col-12">
-                                        <Cart cart={cart} removeCart={removeCart} />
+                                        <Cart cart={cart} removeCart={removeCart} lang={lang}/>
                                     </div>
 
                                     {display === 'mobile' &&
                                         <div className="col-12 mt-3 btn-finalizar-seleccion-mobile">
-                                            <button className="btn bertha-green-button btn-full-width btn-sm font-weight-bold btn-finalizar-seleccion" onClick={ () => finalizar() } >Continuar</button>
+                                            <button className="btn bertha-green-button btn-full-width btn-sm font-weight-bold btn-finalizar-seleccion" onClick={ () => finalizar() } >{textContinue[lang]}</button>
                                         </div>
                                     }
 
@@ -298,7 +356,7 @@ export default function Seleccion({url, country}) {
                                     </div>
 
                                     <div className={'col-12 my-2 info-hover-seleccion text-gray-2 text-center'}>
-                                        Dale clic en “Continuar” y cuéntanos tu requerimiento, así sabrás si la trabajadora(s) que escogiste acepta tu oferta. Si no la acepta, nosotros buscaremos su reemplazo
+                                        {textCartInfo[lang]}
                                     </div>
 
                                     <div className="col-12">
@@ -308,7 +366,7 @@ export default function Seleccion({url, country}) {
                             }
 
                             <div className="col-12">
-                                <Trabajadores url={url} trabajadores={trabajadores.items ? trabajadores.items : []} page={trabajadores.page} total={trabajadores.total} changePagination={changePagination} cart={cart} addCart={addCart} removeCart={removeCart} openDrawer={openDrawer} isTabletOrMobile={isTabletOrMobile} country={country}/>
+                                <Trabajadores url={url} trabajadores={trabajadores.items ? trabajadores.items : []} page={trabajadores.page} total={trabajadores.total} changePagination={changePagination} cart={cart} addCart={addCart} removeCart={removeCart} openDrawer={openDrawer} isTabletOrMobile={isTabletOrMobile} country={country} lang={lang}/>
                             </div>
 
                         </div>

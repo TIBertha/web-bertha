@@ -10,7 +10,7 @@
 @section('content')
     <div class="row mx-0 form-div justify-content-center">
         <div class="col-11 ret-a px-0 mx-auto mb-auto m-md-auto">
-            <div id="registro-requerimiento" data-url="{{ url('/') }}" data-token="{{ $token }}" ></div>
+            <div id="registro-requerimiento" data-url="{{ url('/') }}" data-token="{{ $token }}" data-lang="{{ $lang }}" ></div>
         </div>
     </div>
 @endsection

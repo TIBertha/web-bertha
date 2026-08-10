@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 
-function formatDataRegistroRequerimiento($data, $placeholder, $sueldoActividad){
+function formatDataRegistroRequerimiento($data, $placeholder, $sueldoActividad, $lang = 'es'){
 
     $result = [];
 
@@ -28,7 +28,7 @@ function formatDataRegistroRequerimiento($data, $placeholder, $sueldoActividad){
             'placeHolderSueldo'       => $placeholder,
             'sueldoActividad'         => $sueldoActividad,
             'ubicacion_id'            => $data->distrito_id ? convertToFormatSelectRegistroRequerimiento($data->distrito_id, 'ubicacion') : '',
-            'tipoVivienda_id'         => $data->tipovivienda_id ? convertToFormatSelectRegistroRequerimiento($data->tipovivienda_id, 'tipoVivienda') : '',
+            'tipoVivienda_id'         => $data->tipovivienda_id ? convertToFormatSelectRegistroRequerimiento($data->tipovivienda_id, 'tipoVivienda', 54, $lang) : '',
             'numeroPisos'             => convertToFormatSelectNumeroPisos($data->numero_pisos, $data->tipovivienda_id),
             'numeroBebes'             => convertToFormatSelectRegistroRequerimiento($data->numero_bebes),
             'numeroNinos'             => convertToFormatSelectRegistroRequerimiento($data->numero_ninos),

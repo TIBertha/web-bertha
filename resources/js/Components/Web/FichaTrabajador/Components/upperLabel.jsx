@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ModalVideo from "../../Components/modalVideo.jsx";
 import Compartir from "./Compartir/compartir.jsx";
 import LikesAndViews from "./likesAndViews.jsx";
@@ -15,7 +15,20 @@ export default function UpperLabel({
     isOpenModalVideo,
     closeModalVideo,
     openModalVideo,
+    lang = 'es'
 }) {
+
+    const textFicha = {
+        es: "Ficha Personal",
+        en: "Personal Profile"
+    };
+
+    const textWatchVideo = {
+        es: "Ver video",
+        en: "Watch video"
+    };
+
+
     return (
         <>
             <ModalVideo
@@ -30,18 +43,14 @@ export default function UpperLabel({
                     {retrato && <img className="retrato align-middle" src={retrato} />}
                     <span className="d-none px-1 align-middle">|</span>
                     <span className="ps-2 align-middle">
-                        Ficha
-                        <span className="d-none d-md-inline-block mx-1">
-                            Personal
-                        </span>
-                        : {name}
+                        {textFicha[lang]}: {name}
                     </span>
                 </div>
 
                 <div className="col-auto px-0 d-flex align-items-center">
                     <LikesAndViews token={token} />
 
-                    <Compartir url={url} token={token} name={name} />
+                    <Compartir url={url} token={token} name={name} lang={lang}/>
 
                     {isSeleccion || extension ? (
                         <i
@@ -58,7 +67,7 @@ export default function UpperLabel({
                                 >
                                     <i className="fab fa-youtube"></i>
                                     <span className="d-none d-sm-inline ms-1">
-                                        Ver video
+                                        {textWatchVideo[lang]}
                                     </span>
                                 </div>
                             )}

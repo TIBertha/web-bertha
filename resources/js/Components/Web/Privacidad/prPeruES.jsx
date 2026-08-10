@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Privacidad({url}) {
+export default function PrPeruES({}){
     return(
         <>
             <h1 className="seo-h1" hidden>Política de Privacidad</h1>
@@ -142,5 +142,5 @@ export default function Privacidad({url}) {
                 </div>
             </section>
         </>
-    )
+    );
 }

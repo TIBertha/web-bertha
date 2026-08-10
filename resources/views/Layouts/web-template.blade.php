@@ -38,17 +38,17 @@
 @include('Components.GTMnoscript')
 
 <!-- HEADER -->
-<div id="header" data-url="{{ url('/') }}" data-path="{{ request()->path() }}"></div>
+<div id="header" data-url="{{ url('/') }}" data-path="{{ request()->path() }}" data-lang="{{ session('lang') }}"></div>
 
 <section class="main-content">
     @yield('content')
 </section>
 
 <!-- CONTACT LABEL -->
-<div id="contact-label" data-url="{{ url('/') }}" data-path="{{ request()->path() }}"></div>
+<div id="contact-label" data-url="{{ url('/') }}" data-path="{{ request()->path() }}" data-lang="{{ session('lang') }}"></div>
 
 <!-- FOOTER -->
-<div id="footer" data-url="{{ url('/') }}"></div>
+<div id="footer" data-url="{{ url('/') }}" data-lang="{{ session('lang') }}"></div>
 
 
 

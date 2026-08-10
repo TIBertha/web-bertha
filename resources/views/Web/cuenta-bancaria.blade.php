@@ -8,5 +8,5 @@
 @endsection
 
 @section('content')
-    <div id="cuenta-bancaria" data-url="{{ url('/') }}" ></div>
+    <div id="cuenta-bancaria" data-url="{{ url('/') }}" data-country="{{$country}}" data-lang="{{$lang}}"></div>
 @endsection

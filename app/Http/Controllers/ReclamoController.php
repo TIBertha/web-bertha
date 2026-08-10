@@ -12,12 +12,35 @@ use DB;
 
 class ReclamoController extends Controller
 {
-    public function viewLibroReclamaciones()
-    {
-        countViewWeb('/reclamos');
-        cleanPass();
-        return view('Web.libro-reclamaciones');
 
+    public function reclamosRedirect()
+    {
+        // 1. Si ya hay lang en sesión → usarlo
+        $lang = session('lang');
+
+        // 2. Si no hay sesión → detectar navegador
+        if (!$lang) {
+            $browserLang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $lang = in_array($browserLang, ['es', 'en']) ? $browserLang : 'es';
+            session()->put('lang', $lang);
+        }
+
+        // 3. Redirigir a la ruta multilanguage correcta
+        return redirect("/{$lang}-pe/reclamos");
+    }
+
+    public function viewLibroReclamaciones($lang)
+    {
+        $country = 'pe';
+        $lang = $request->lang ?? session('lang', 'es');
+
+        session()->put('country', $country);
+        session()->put('lang', $lang);
+
+        return view('Web.libro-reclamaciones', [
+            'country' => $country,
+            'lang' => $lang,
+        ]);
     }
 
     public function ajaxNew(ValidateReclamo $request){

@@ -30,8 +30,16 @@ function checkTipoUsuario($tipousuario, $usuario_id){
     }
 }
 
-function showName($userID){
-    return '¡Hola, '.formatTextFirstCharacterToUpper($userID->nombres).'!';
+function showName($userID, $lang){
+
+    $texts = [
+        'es' => '¡Hola, ',
+        'en' => 'Hello, ',
+    ];
+
+    $prefix = $texts[$lang] ?? $texts['es'];
+
+    return $prefix . formatTextFirstCharacterToUpper($userID->nombres) . '!';
 }
 
 function getEmpleadorID($userID){

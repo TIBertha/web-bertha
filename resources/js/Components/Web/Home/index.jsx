@@ -12,50 +12,50 @@ import {mobileDesktop} from "../../Functions/General.jsx";
 import FrameVideoBackground from "./frameVideoBackground.jsx";
 import FramePostulantesEnVivo from "./framePostulantesEnVivo.jsx";
 
-export default function Index({url, num, country}){
+export default function Index({url, num, country, lang}){
     let display = mobileDesktop();
     let movie = display === 'desktop' ? 'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-home-video.mp4' : 'https://adjuntosexperta.s3.us-east-1.amazonaws.com/holabertha-home-video-mobile.mp4';
     return(
         <>
-            <FramePrincipal url={url} country={country} />
+            <FramePrincipal url={url} country={country} lang={lang} />
 
             {display === "mobile" && (
                 <section>
                     <div className="wg-15-gray inverted border-0 mt-5"></div>
                     <div className={'alterative-bg-gray border-0 pb-5 pb-md-0'}>
-                        <FramePostulantesEnVivo url={url} country={country} />
+                        <FramePostulantesEnVivo url={url} country={country} lang={lang} />
                     </div>
                 </section>
             )}
 
             <FrameVideoBackground />
 
-            <FrameSoyBertha url={url} country={country} />
+            <FrameSoyBertha url={url} country={country} lang={lang}/>
 
-            <FrameComoFunciona url={url} country={country} showButton={true} />
+            <FrameComoFunciona url={url} country={country} showButton={true} lang={lang}/>
 
-            <FrameContadorIndex num={num} country={country}/>
+            <FrameContadorIndex num={num} country={country} lang={lang}/>
 
-            <FrameTuTrabajadoraDelHogar url={url} country={country}/>
+            <FrameTuTrabajadoraDelHogar url={url} country={country} lang={lang}/>
 
             <section>
                 <div className="coustom-wave inverted border-0"></div>
                 <div className="alterative-bg-gray border-0">
-                    <SliderTestimonialesEmpleador url={url} trabajadora={false} />
+                    <SliderTestimonialesEmpleador url={url} trabajadora={false} lang={lang}/>
                 </div>
                 <div className="coustom-wave border-0"></div>
             </section>
 
             <section>
                 <div className="border-0">
-                    <SliderTestimonialesTrabajador url={url} trabajadora={false} />
+                    <SliderTestimonialesTrabajador url={url} trabajadora={false} lang={lang}/>
                 </div>
             </section>
 
             <section >
                 <div className="coustom-wave inverted border-0"></div>
                 <div className="alterative-bg-gray border-0">
-                    <SliderPrensa url={url} />
+                    <SliderPrensa url={url} lang={lang}/>
                 </div>
             </section>
 

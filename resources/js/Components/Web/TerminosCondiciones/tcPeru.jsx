@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TcPeru({url}) {
+export default function TcPeru({url, lang}) {
     return(
         <div className="legal-content">
             <div className="resume">

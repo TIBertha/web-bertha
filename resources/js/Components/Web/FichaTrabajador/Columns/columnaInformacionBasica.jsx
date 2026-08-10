@@ -27,6 +27,7 @@ export default function ColumnaInformacionBasica({
     isSeleccion,
     cart,
     disponibilidad,
+    lang = 'es',
 }) {
     const [force, setForce] = useState(null);
     let isInCart = checkInCart(cart, dataseleccion.id);
@@ -42,9 +43,56 @@ export default function ColumnaInformacionBasica({
         setForce(2);
     };
 
-    let disponibilidadCSS = getDisponibilidad(disponibilidad);
+    let disponibilidadCSS = getDisponibilidad(disponibilidad, lang);
 
-    console.log(disponibilidadCSS);
+    const colText = {
+        es: {
+            verVideoButton: 'Ver video',
+            quitarButton: 'Quitar',
+            entrevistarButton: 'Entrevistar',
+            sec1: 'Aspecto Laboral',
+            actTitle: 'Actividades:',
+            modTitle: 'Modalidades:',
+            ca: 'Cama Adentro',
+            cf: 'Cama Afuera',
+            pd: 'Por Días',
+            petTitle: 'Mascotas:',
+            petY: 'Si Acepta',
+            petN: 'No Acepta',
+            sec2: 'Información Básica',
+            birthPlace: 'Lugar de Nacimiento:',
+            birthCountry: 'País de Nacimiento:',
+            birthDate: 'Fecha de Nacimiento:',
+            age: 'Edad:',
+            sec3: 'Identificación',
+            idType: 'Tipo Documento:',
+            idNum: 'Número Documento:',
+
+
+        },
+        en: {
+            verVideoButton: 'Watch video',
+            quitarButton: 'Remove',
+            entrevistarButton: 'Interview',
+            sec1: 'Work Information',
+            actTitle: 'Activities:',
+            modTitle: 'Work Modalities:',
+            ca: 'Live-in',
+            cf: 'Live-out',
+            pd: 'Per Day',
+            petTitle: 'Pets:',
+            petY: 'Accepts',
+            petN: 'Does not accept',
+            sec2: 'Basic Information',
+            birthPlace: 'Place of Birth:',
+            birthCountry: 'Country of Birth:',
+            birthDate: 'Date of Birth:',
+            age: 'Age:',
+            sec3: 'Identification',
+            idType: 'ID Type:',
+            idNum: 'ID Number:',
+        }
+    }
 
     return (
         <section className="map p-3">
@@ -66,7 +114,7 @@ export default function ColumnaInformacionBasica({
                                     role="button"
                                     onClick={() => openModalVideo(video)}
                                 >
-                                    <i className="fab fa-youtube me-1"></i>Ver video
+                                    <i className="fab fa-youtube me-1"></i>{colText[lang].verVideoButton}
                                 </div>
                             </div>
                         )}
@@ -82,10 +130,8 @@ export default function ColumnaInformacionBasica({
                                     }}
                                 >
                                     {isInCart
-                                        ? "Quitar"
-                                        : country === 11
-                                          ? "Escoger"
-                                          : "Entrevistar"}
+                                        ? colText[lang].quitarButton
+                                        : colText[lang].entrevistarButton}
                                 </div>
                             </div>
                         )}
@@ -117,12 +163,12 @@ export default function ColumnaInformacionBasica({
             <hr />
 
             <div className="py-3">
-                <p className="titulo-seccions m-0">Aspecto Laboral</p>
+                <p className="titulo-seccions m-0">{colText[lang].sec1}</p>
                 <div className="row mx-0 justify-content-end detalles mt-2">
                     <div className="col-12 col-xl-10">
                         {actividad && (
                             <>
-                                <p>Actividades:</p>
+                                <p>{colText[lang].actTitle}</p>
                                 <div className="mb-2 actividad-modalidad-idioma">
                                     {actividad.map((data, index) => {
                                         return (
@@ -135,37 +181,21 @@ export default function ColumnaInformacionBasica({
                             </>
                         )}
 
-                        <p>Modalidades:</p>
+                        <p>{colText[lang].modTitle}</p>
 
                         <div className="mb-2 actividad-modalidad-idioma">
-                            {modalidad.camaAdentro ? (
-                                <span>
-                                    {country === 49
-                                        ? "De Planta"
-                                        : "Cama Adentro"}
-                                </span>
-                            ) : (
-                                ""
-                            )}
-                            {modalidad.camaAfuera ? (
-                                <span>
-                                    {country === 49
-                                        ? "Entrada por Salida"
-                                        : "Cama Afuera"}
-                                </span>
-                            ) : (
-                                ""
-                            )}
-                            {modalidad.porDias ? <span>Por Días</span> : ""}
+                            {modalidad.camaAdentro ? <span>{colText[lang].ca}</span> : ''}
+                            {modalidad.camaAfuera ? <span>{colText[lang].cf}</span> : ''}
+                            {modalidad.porDias ? <span>{colText[lang].pd}</span> : ""}
                         </div>
 
-                        <p>Mascotas:</p>
+                        <p>{colText[lang].petTitle}</p>
 
                         <div className="mb-2 actividad-modalidad-idioma">
                             <span>
                                 {informacionBasica.aceptamascotas === true
-                                    ? "Si Acepta"
-                                    : "No Acepta"}
+                                    ? colText[lang].petY
+                                    : colText[lang].petN}
                             </span>
                         </div>
                     </div>
@@ -175,21 +205,13 @@ export default function ColumnaInformacionBasica({
             <hr />
 
             <div className="py-3">
-                <p className="titulo-seccions m-0">Información Básica</p>
+                <p className="titulo-seccions m-0">{colText[lang].sec2}</p>
                 <div className="row mx-0 justify-content-end detalles mt-2">
                     <div className="col-12 col-xl-10">
-                        <p>
-                            Lugar de Nacimiento: {informacionBasica.procedencia}
-                        </p>
-                        <p>
-                            País de Nacimiento:{" "}
-                            {informacionBasica.pais_procedencia}
-                        </p>
-                        <p>
-                            Fecha de Nacimiento:{" "}
-                            {informacionBasica.fechaNacimiento}
-                        </p>
-                        <p>Edad: {informacionBasica.edad}</p>
+                        <p>{colText[lang].birthPlace + ' ' + informacionBasica.procedencia}</p>
+                        <p>{colText[lang].birthCountry + ' ' + informacionBasica.pais_procedencia}</p>
+                        <p>{colText[lang].birthDate + ' ' + informacionBasica.fechaNacimiento}</p>
+                        <p>{colText[lang].age + ' ' + informacionBasica.edad}</p>
                     </div>
                 </div>
             </div>
@@ -197,19 +219,13 @@ export default function ColumnaInformacionBasica({
             <hr />
 
             <div className="py-3">
-                <p className="titulo-seccions m-0">Identificación</p>
+                <p className="titulo-seccions m-0">{colText[lang].sec3}</p>
                 <div className="row mx-0 justify-content-end detalles mt-2">
                     <div className="col-12 col-xl-10 px-0">
                         <div className="row mx-0">
                             <div className="col-10 my-auto">
-                                <p>
-                                    Tipo Documento:{" "}
-                                    {identificacion.tipoDocumento}
-                                </p>
-                                <p>
-                                    Número Documento:{" "}
-                                    {identificacion.numeroDocumento}
-                                </p>
+                                <p>{colText[lang].idType + ' ' + identificacion.tipoDocumento}</p>
+                                <p>{colText[lang].idNum + ' ' + identificacion.numeroDocumento}</p>
                             </div>
                             <div className="col-2 my-auto text-center">
                                 {
@@ -224,9 +240,7 @@ export default function ColumnaInformacionBasica({
                                                             identificacion.fotoDocumentoPosterior +
                                                             '"/>',
                                                     )}
-                                                    iconclass={
-                                                        iconDocumentoIdentidad
-                                                    }
+                                                    iconclass={iconDocumentoIdentidad}
                                                     estilo={"tooltip-perfil"}
                                                     placement={"bottom"}
                                                     icon={'fas fa-id-card'}
@@ -243,9 +257,7 @@ export default function ColumnaInformacionBasica({
                                                             identificacion.fotoDocumentoDelantera +
                                                             '"/>',
                                                     )}
-                                                    iconclass={
-                                                        iconDocumentoIdentidad
-                                                    }
+                                                    iconclass={iconDocumentoIdentidad}
                                                     estilo={"tooltip-perfil"}
                                                     placement={"bottom"}
                                                     icon={'fas fa-id-card'}
@@ -262,9 +274,7 @@ export default function ColumnaInformacionBasica({
                                                             identificacion.fotoDocumentoPosterior +
                                                             '"/>',
                                                     )}
-                                                    iconclass={
-                                                        iconDocumentoIdentidad
-                                                    }
+                                                    iconclass={iconDocumentoIdentidad}
                                                     estilo={"tooltip-perfil"}
                                                     placement={"bottom"}
                                                     icon={'fas fa-id-card'}

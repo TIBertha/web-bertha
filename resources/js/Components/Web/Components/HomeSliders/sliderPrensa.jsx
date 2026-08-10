@@ -6,7 +6,7 @@ import LoadingScreen from "../loadingScreen.jsx";
 import {str_limit} from "../../../Helpers/strings.jsx";
 import {mobileDesktop } from "../../../Functions/General.jsx";
 
-export default function SliderPrensa({url}) {
+export default function SliderPrensa({url, lang = 'es'}) {
 
     const [arPrensa, setArPrensa] = useState([]);
     const [isLoading, setLoading] = useState(false);
@@ -42,6 +42,17 @@ export default function SliderPrensa({url}) {
 
     if(isLoading) return <LoadingScreen load={isLoading}/>;
 
+    const prensaText = {
+        es: {
+            title: "Bertha en prensa",
+            total: (n) => `(${n} resultados)`,
+        },
+        en: {
+            title: "Bertha in the press",
+            total: (n) => `(${n} results)`,
+        },
+    };
+
     return(
         <>
             { (arPrensa.length > 0) &&
@@ -51,8 +62,8 @@ export default function SliderPrensa({url}) {
                     <div className="p-3 px-md-5 m-0">
 
                         <div className="titulo-seccion py-2 text-center">
-                            <h3 className="display-5 titulo text-purple responsive-title-size">Bertha en prensa</h3>
-                            <p className="testimonial-total text-purple responsive-description-size">{'(' + arPrensa.length + ' resultados)'}</p>
+                            <h3 className="display-5 titulo text-purple responsive-title-size">{prensaText[lang].title}</h3>
+                            <p className="testimonial-total text-purple responsive-description-size">{prensaText[lang].total(arPrensa.length)}</p>
                         </div>
 
                         <div className="container slide-testimonial">

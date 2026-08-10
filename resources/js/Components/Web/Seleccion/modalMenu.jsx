@@ -9,13 +9,24 @@ import {
 import FiltrosMobile from "./filtrosMobile.jsx";
 
 export default function ModalMenu({
-    filtrosSelected,
-    addFilter,
-    removeFilter,
-    actividades,
-    modalidades,
+  filtrosSelected,
+  addFilter,
+  removeFilter,
+  actividades,
+  modalidades,
+  lang = 'es'
 }) {
     const [show, setShow] = useState(false);
+
+    const textFilters = {
+        es: "Filtros",
+        en: "Filters"
+    };
+
+    const textViewResults = {
+        es: "Ver resultados",
+        en: "View results"
+    };
 
     function actionClose() {
         setShow(false);
@@ -41,7 +52,8 @@ export default function ModalMenu({
                     onClick={() => handleShow()}
                 >
                     <div>
-                        <i className="fas fa-sliders-h me-2"></i>Filtros{" "}
+                        <i className="fas fa-sliders-h me-2"></i>
+                        {textFilters[lang]}
                         {isNotFiltroPage ? (
                             <span className="ms-2 badge bgb-pink">
                                 {cantidadFiltros}
@@ -62,7 +74,7 @@ export default function ModalMenu({
                                             type="button"
                                             className="filtro-tag"
                                         >
-                                            {data.label}{" "}
+                                            {data.label}
                                             <i
                                                 className="fas fa-times icon-close-filtro-tag"
                                                 onClick={() =>
@@ -82,7 +94,8 @@ export default function ModalMenu({
                 <ModalHeader className="border-0 modal-compartir" closeButton>
                     <ModalTitle>
                         <div className="tittle-area text-center font-weight-bold">
-                            <i className="fas fa-sliders-h me-2"></i>Filtros{" "}
+                            <i className="fas fa-sliders-h me-2"></i>
+                            {textFilters[lang]}
                             {isNotFiltroPage ? (
                                 <span className="ms-2 badge badge-secondary badge-pink-bertha">
                                     {cantidadFiltros}
@@ -93,6 +106,7 @@ export default function ModalMenu({
                         </div>
                     </ModalTitle>
                 </ModalHeader>
+
                 <ModalBody className="row mx-0 justify-content-center modal-compartir">
                     <div className="tc-modal-document text-center col-12 px-0 m-0">
                         <FiltrosMobile
@@ -101,17 +115,19 @@ export default function ModalMenu({
                             remove={removeFilter}
                             actividades={actividades}
                             modalidades={modalidades}
+                            lang={lang}
                         />
                     </div>
                 </ModalBody>
-                <ModalFooter className="">
+
+                <ModalFooter>
                     <section className="w-100">
-                        <div className="" onClick={() => handleClose()}>
+                        <div onClick={() => handleClose()}>
                             <button
                                 className="filtro-pink-button btn-lg btn-block btn"
                                 type="button"
                             >
-                                Ver resultados
+                                {textViewResults[lang]}
                             </button>
                         </div>
                     </section>

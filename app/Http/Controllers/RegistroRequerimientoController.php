@@ -25,20 +25,32 @@ use Illuminate\Support\Facades\DB;
 
 class RegistroRequerimientoController extends Controller
 {
-    public function viewRegistroRequerimiento($token = null){
-        if(!$token){
-                return redirect('/');
-            }
+    public function viewRegistroRequerimiento(Request $request, $token = null)
+    {
+        if (!$token) {
+            return redirect('/');
+        }
 
-            $r = RequerimientoLink::borrado(false)->where('token', $token)->first();
+        $r = RequerimientoLink::borrado(false)->where('token', $token)->first();
 
-            if (!$r){
-                return redirect('/');
-            }
+        if (!$r) {
+            return redirect('/');
+        }
 
-            $data['token'] = $token;
+        // Detectar idioma: sesión → navegador → default 'es'
+        $lang = session('lang');
 
-            return view('Web.formulario-requerimiento', $data);
+        if (!$lang) {
+            $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $lang = ($browserLang === 'en') ? 'en' : 'es';
+        }
+
+        $lang = $lang ?? 'es';
+
+        $data['token'] = $token;
+        $data['lang']  = $lang;
+
+        return view('Web.formulario-requerimiento', $data);
     }
 
     public function ajaxLoadDataRegistroRequerimiento(Request $request){
@@ -47,6 +59,14 @@ class RegistroRequerimientoController extends Controller
         $emp = null;
         $r = null;
         $procedencia = 'CRM';
+
+        // Detectar idioma: sesión → navegador → default 'es'
+        $lang = session('lang');
+
+        if (!$lang) {
+            $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
+            $lang = ($browserLang === 'en') ? 'en' : 'es';
+        }
 
         if($token){
 
@@ -124,11 +144,11 @@ class RegistroRequerimientoController extends Controller
             'code'              =>      200,
             'semiModalidades'   =>     $semiModalidades,
             'modalidadesHorarios' =>     $modalidadesHorarios,
-            'requerimiento'     =>      $r->requerimiento_id ? formatDataRegistroRequerimiento($requerimiento, $placeholder, $sueldoActividad) : null,
+            'requerimiento'     =>      $r->requerimiento_id ? formatDataRegistroRequerimiento($requerimiento, $placeholder, $sueldoActividad, $lang) : null,
             'nacionalidades'    =>      convertFormatSimpleSelect($nacionalidades),
             'edades'            =>      convertFormatSimpleSelect($edades, false),
             'ubicaciones'       =>      convertFormatDistritosSelect($ubicaciones),
-            'tiposViviendas'    =>      convertFormatSimpleSelect($tiposViviendas),
+            'tiposViviendas'    =>      convertFormatSimpleSelect($tiposViviendas,true, false, 54,  $lang),
             'diasI'             =>      convertFormatSimpleSelect($dias),
             'diasS'             =>      convertFormatSimpleSelect($dias),
             'dias'              =>      convertFormatSimpleSelect($dias),

@@ -2,13 +2,29 @@ import React from "react";
 import MobileSeeDetails from "./mobileSeeDetails.jsx";
 
 export default function FiltrosMobile({
-    filtrosSelected,
-    add,
-    remove,
-    actividades,
-    modalidades,
-}) {
+                                          filtrosSelected,
+                                          add,
+                                          remove,
+                                          actividades,
+                                          modalidades,
+                                          lang = 'es'
+                                      }) {
     let classFilterOption = "seleccion-filter-option font-weight-bold";
+
+    const textFilters = {
+        es: "Filtros",
+        en: "Filters"
+    };
+
+    const textModality = {
+        es: "Modalidad",
+        en: "Work modality"
+    };
+
+    const textActivity = {
+        es: "Actividad",
+        en: "Activity"
+    };
 
     const isSelectedOption = (filtro, valor) => {
         let isExist = filtrosSelected.some(
@@ -31,7 +47,8 @@ export default function FiltrosMobile({
     return (
         <>
             <h5 className="d-none d-md-block">
-                <i className="fas fa-sliders-h me-2"></i>Filtros{" "}
+                <i className="fas fa-sliders-h me-2"></i>
+                {textFilters[lang]}
                 {isNotFiltroPage ? (
                     <span className="ms-2 badge badge-secondary badge-pink-bertha">
                         {cantidadFiltros}
@@ -53,7 +70,7 @@ export default function FiltrosMobile({
                                         type="button"
                                         className="filtro-tag"
                                     >
-                                        {data.label}{" "}
+                                        {data.label}
                                         <i
                                             className="fas fa-times icon-close-filtro-tag"
                                             onClick={() => remove(data.filtro)}
@@ -68,7 +85,7 @@ export default function FiltrosMobile({
             )}
 
             <div className="text-start mx-2 mx-sm-3 mx-md-0">
-                <div className="seleccion-filter-title">Modalidad</div>
+                <div className="seleccion-filter-title">{textModality[lang]}</div>
 
                 {modalidades.map((mod, key) => {
                     return (
@@ -85,7 +102,7 @@ export default function FiltrosMobile({
             <hr />
 
             <div className="text-start mx-2 mx-sm-3 mx-md-0">
-                <div className="seleccion-filter-title">Actividad</div>
+                <div className="seleccion-filter-title">{textActivity[lang]}</div>
 
                 {actividades.map((act, key) => {
                     if (act.total > 0) {

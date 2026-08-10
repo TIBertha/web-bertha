@@ -19,7 +19,9 @@ Route::post('/ajax-upload-file', [MasterController::class, 'ajaxUploadFile']);
 
 //ruta de Inicio
 Route::get('/', [WebController::class, 'index'])->name('inicio');
-Route::get('/es-pe', [WebController::class, 'viewPeru'])->name('inicio-pe');
+Route::get('/{lang}-pe', [WebController::class, 'viewPeru'])
+    ->where('lang', 'es|en')
+    ->name('inicio-pe');
 Route::post('/ajax-disable-modal-seleccion', [WebController::class, 'ajaxDisableModal']);
 Route::post('/ajax-verify-disable-modal-seleccion', [WebController::class, 'ajaxVerifyDisableModal']);
 Route::post('/ajax-get-data-prensa', [WebController::class, 'ajaxGetDataPrensa']);
@@ -31,14 +33,25 @@ Route::post('/ajax-get-views', [WebController::class, 'ajaxGetViews']);
 Route::post('/ajax-get-redes-sociales', [WebController::class, 'ajaxGetRedesSociales']);
 
 //ruta de condiciones
-Route::get('/condiciones', [WebController::class, 'condiciones'])->name('condiciones');
-Route::get('es-pe/condiciones', [WebController::class, 'condiciones'])->name('condiciones-pe');
+Route::get('/condiciones', [WebController::class, 'condicionesRedirect']);
+Route::get('/{lang}-pe/condiciones', [WebController::class, 'viewCondiciones'])
+    ->where('lang', 'es|en')
+    ->name('condiciones');
 
 //ruta de privacidad
-Route::get('/privacidad', [WebController::class, 'viewPrivacidad'])->name('privacidad');
+Route::get('/privacidad', [WebController::class, 'privacidadRedirect']);
+Route::get('/{lang}-pe/privacidad', [WebController::class, 'viewPrivacidad'])
+    ->where('lang', 'es|en')
+    ->name('privacidad');
 
 //ruta post reclamos
-Route::get('/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])->name('libro-reclamaciones');
+Route::get('/{lang}-pe/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])
+    ->where('lang', 'es|en')
+    ->name('libro-reclamaciones');
+Route::get('/reclamos', [ReclamoController::class, 'reclamosRedirect']);
+
+//Route::get('/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])->name('libro-reclamaciones');
+
 Route::post('/ajax-reclamos-new', [ReclamoController::class, 'ajaxNew']);
 Route::post('/ajax-get-data-reclamos', [ReclamoController::class, 'ajaxGetData']);
 
@@ -46,8 +59,14 @@ Route::post('/ajax-get-data-reclamos', [ReclamoController::class, 'ajaxGetData']
 Route::get('/cuenta-bancaria', [WebController::class, 'cuentaBancariaView'])->name('cuenta-bancaria');
 
 //ruta de seleccionar
+Route::get('/{lang}-{country}/seleccionar', [SeleccionController::class, 'viewCountry'])
+    ->where([
+        'lang' => 'es|en',
+        'country' => 'pe'
+    ])
+    ->name('pedidos-country');
 Route::get('/seleccionar', [SeleccionController::class, 'index'])->name('pedidos');
-Route::get('/es-pe/seleccionar', [SeleccionController::class, 'viewPeru'])->name('pedidos-pe');
+
 Route::post('/ajax-procesar-seleccion', [SeleccionController::class, 'ajaxProcesarSeleccion']);
 Route::post('/ajax-save-cart-seleccion', [SeleccionController::class, 'ajaxSaveCartSeleccion']);
 Route::post('/ajax-get-seleccion-card-trabajadores', [SeleccionController::class, 'ajaxGetSeleccionCard']);
@@ -103,8 +122,12 @@ Route::get('/pdf/ver-comprobante-adelanto/{link}', [ShortURLController::class, '
 Route::get('/pdf/ver-adelanto/{link}', [ShortURLController::class, 'ajaxOpenEncodePDFVerAdelanto']);
 Route::get('/docs/foto-referencial', [ShortURLController::class, 'ajaxOpenFotoReferencial']);
 
-
-
 Route::get('/mis-contratos/{link}', [ShortURLController::class, 'ajaxOpenEncodeContratoAdjuntos']);
 Route::get('/mis-contratos/antecedentes-trabajador/{link}', [MisContratosController::class, 'ajaxOpenEncodeAntecedentesTrabajador']);
 
+
+//funcion switchLang
+Route::get('/change-lang/{lang}', function($lang) {
+    session()->put('lang', $lang);
+    return back();
+});

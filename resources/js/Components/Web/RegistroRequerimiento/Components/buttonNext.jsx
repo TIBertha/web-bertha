@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ButtonNext({ step, next, requerimiento }) {
+export default function ButtonNext({ step, next, requerimiento, lang = 'es' }) {
 
     let disable = false;
 
@@ -52,7 +52,7 @@ export default function ButtonNext({ step, next, requerimiento }) {
                 onClick={next}
                 disabled={disable}
             >
-                <b>Siguiente</b>
+                <b>{lang === 'en' ? 'Next' :'Siguiente'}</b>
             </button>
         );
     }

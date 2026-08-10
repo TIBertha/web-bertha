@@ -15,10 +15,36 @@ export default function VerExperiencia({
     iconFile,
     iconShield,
     listaudio,
+    lang = 'es'
 }) {
     let [show, setShow] = useState(false);
 
     let verificacion = experiencia.verificacion;
+
+    const expText = {
+        es: {
+            t1: 'Ex-empleador:',
+            t2: 'Teléfono del empleador',
+            t3: 'Lugar de Labores:',
+            t4: 'Actividades Realizadas:',
+            t5: 'Fecha de Inicio:',
+            t6: 'Fecha de Fin:',
+            t7: 'Tiempo del Servicio:',
+            t8: 'Verificaciones:',
+            t9: 'Recomendación verificada'
+        },
+        en: {
+            t1: 'Former employer:',
+            t2: 'Employer’s phone number',
+            t3: 'Workplace:',
+            t4: 'Tasks performed:',
+            t5: 'Start date:',
+            t6: 'End date:',
+            t7: 'Length of service:',
+            t8: 'Verifications:',
+            t9: 'Verified recommendation'
+        }
+    };
     return (
         <>
             {experiencia.empleador &&
@@ -30,11 +56,11 @@ export default function VerExperiencia({
                             <div className="col-0 col-sm-2 mb-auto text-center ps-0 pe-2 px-sm-3"></div>
                             <div className="col col-sm-8 my-auto px-sm-3">
                                 <p>
-                                    Ex empleador: {experiencia.empleador}{" "}
+                                    {expText[lang].t1 + ' ' + experiencia.empleador + ' '}
                                     {verificacion && verificacion.length > 0 ? (
                                         <Tooltips
                                             text={parse(
-                                                "Recomendación verificada",
+                                                expText[lang].t9
                                             )}
                                             iconclass={iconShield}
                                             estilo={"tooltip-perfil"}
@@ -46,48 +72,30 @@ export default function VerExperiencia({
                                 </p>
 
                                 <InputTelefono
-                                    labelTitle={"Telefono del empleador"}
+                                    labelTitle={expText[lang].t2}
                                     codedPhone={experiencia.formatTel}
                                     phone={experiencia.telefono}
                                 />
 
-                                <p>
-                                    Lugar de Labores:{" "}
-                                    {experiencia.empleador == "NELLY" &&
-                                    experiencia.distrito == "SANTIAGO DE SURCO"
-                                        ? "SANTIAGO DE CHILE"
-                                        : experiencia.distrito}
-                                </p>
-                                <p>
-                                    Actividades Realizadas:{" "}
-                                    {experiencia.actividades}
-                                </p>
-                                {experiencia.fechainicio ? (
-                                    <p hidden={show}>
-                                        Fecha de Inicio:{" "}
-                                        {experiencia.fechainicio}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                                {experiencia.fechafin ? (
-                                    <p hidden={show}>
-                                        Fecha de Fin: {experiencia.fechafin}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
-                                {experiencia.duracion ? (
-                                    <p>
-                                        Tiempo del Servicio:{" "}
-                                        {experiencia.duracion}
-                                    </p>
-                                ) : (
-                                    ""
-                                )}
+                                <p>{expText[lang].t3 + ' ' + experiencia.distrito}</p>
+
+                                <p>{expText[lang].t4 + ' ' + experiencia.actividades}</p>
+
+                                {experiencia.fechainicio &&
+                                    <p hidden={show}>{expText[lang].t5 + ' ' + experiencia.fechainicio}</p>
+                                }
+
+                                {experiencia.fechafin &&
+                                    <p hidden={show}>{expText[lang].t6 + ' ' + experiencia.fechafin}</p>
+                                }
+
+                                {experiencia.duracion &&
+                                    <p hidden={show}>{expText[lang].t7 + ' ' + experiencia.duracion}</p>
+
+                                }
                                 {experiencia.docsVerificacion && (
                                     <div hidden={false}>
-                                        <p>Verificaciones:</p>
+                                        <p>{expText[lang].t8}</p>
                                         <div className="adjuntoverificacion">
                                             {experiencia.docsVerificacion.map(
                                                 (data, index) => {
@@ -107,9 +115,8 @@ export default function VerExperiencia({
                                                             ) : (
                                                                 <VisualizarImagen
                                                                     url={url}
-                                                                    imagen={
-                                                                        data.adjunto
-                                                                    }
+                                                                    imagen={data.adjunto}
+                                                                    lang={lang}
                                                                 />
                                                             )}
                                                         </div>

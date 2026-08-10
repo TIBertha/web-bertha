@@ -7,16 +7,32 @@ export default function ({
     remove,
     actividades,
     modalidades,
+    lang = 'es'
 }) {
     let isNotFiltroPage = filtrosSelected.some((e) => e.filtro !== "page");
     let cantidadFiltros = filtrosSelected.filter(
         (e) => e.filtro !== "page",
     ).length;
 
+    const textFilters = {
+        es: "Filtros ",
+        en: "Filters "
+    };
+
+    const textModality = {
+        es: "Modalidad",
+        en: "Work modality"
+    };
+
+    const textActivity = {
+        es: "Actividad",
+        en: "Activity"
+    };
+
     return (
         <>
             <h5 className="d-none d-md-block">
-                <i className="fas fa-sliders-h me-2"></i>Filtros{" "}
+                <i className="fas fa-sliders-h me-2"></i>{textFilters[lang]}
                 {isNotFiltroPage ? (
                     <span className="ms-2 badge badge-secondary badge-pink-bertha">
                         {cantidadFiltros}
@@ -53,7 +69,7 @@ export default function ({
             )}
 
             <div className="text-start mx-2 mx-sm-3 mx-md-0">
-                <div className="seleccion-filter-title">Modalidad</div>
+                <div className="seleccion-filter-title">{textModality[lang]}</div>
                 {modalidades.map((mod, key) => {
                     return (
                         <CampoFiltro
@@ -73,7 +89,7 @@ export default function ({
             <hr />
 
             <div className="text-start mx-2 mx-sm-3 mx-md-0">
-                <div className="seleccion-filter-title">Actividad</div>
+                <div className="seleccion-filter-title">{textActivity[lang]}</div>
 
                 {actividades.map((act, key) => {
                     if (act.total > 0) {

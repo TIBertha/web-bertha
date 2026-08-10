@@ -4,18 +4,19 @@ import ModalVideo from "../Components/modalVideo.jsx";
 import TrabajadorCard from "./trabajadorCard.jsx";
 
 export default function Trabajadores({
-    url,
-    trabajadores,
-    page,
-    total,
-    changePagination,
-    cart,
-    addCart,
-    removeCart,
-    openDrawer,
-    isTabletOrMobile,
-    country,
-}) {
+     url,
+     trabajadores,
+     page,
+     total,
+     changePagination,
+     cart,
+     addCart,
+     removeCart,
+     openDrawer,
+     isTabletOrMobile,
+     country,
+     lang = 'es'
+ }) {
     let cantidadPaginas = Math.ceil(
         (total ? total : 0) / (isTabletOrMobile ? 8 : 9),
     );
@@ -31,6 +32,14 @@ export default function Trabajadores({
     const closeVideoYoutube = () => {
         setIsOpenVideoYoutube(false);
         setVideo("");
+    };
+
+    const textPrev = { es: "Previo", en: "Previous" };
+    const textNext = { es: "Siguiente", en: "Next" };
+    const textEmptyTitle = { es: "No existen trabajadoras", en: "No domestic workers found" };
+    const textEmptyParagraph = {
+        es: "Si quieres ver más resultados intente con otros filtros.",
+        en: "If you want to see more results, try using different filters."
     };
 
     return (
@@ -54,6 +63,7 @@ export default function Trabajadores({
                             openVideoYoutube={openVideoYoutube}
                             openDrawer={openDrawer}
                             country={country}
+                            lang={lang}
                         />
                     ))}
 
@@ -65,8 +75,8 @@ export default function Trabajadores({
                                 forcePage={page ? page - 1 : 0}
                                 marginPagesDisplayed={2}
                                 pageRangeDisplayed={2}
-                                previousLabel={"Previo"}
-                                nextLabel={"Siguiente"}
+                                previousLabel={textPrev[lang]}
+                                nextLabel={textNext[lang]}
                                 containerClassName="pagination pagination-sm pagination-seleccion mb-0"
                                 breakClassName="page-item"
                                 breakLinkClassName="page-link"
@@ -85,14 +95,11 @@ export default function Trabajadores({
             ) : (
                 <div className="d-flex align-items-center">
                     <div className="row">
-                        <div className="col-12 d-flex align-items-center"></div>
-
                         <div className="col-12 text-center seleccion-title-empty-data mt-5">
-                            No existen trabajadoras
+                            {textEmptyTitle[lang]}
                         </div>
                         <div className="col-12 text-center seleccion-parrafo-empty-data">
-                            Si quieres ver más resultados intente con otros
-                            filtros.
+                            {textEmptyParagraph[lang]}
                         </div>
                     </div>
                 </div>
