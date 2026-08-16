@@ -37,7 +37,7 @@ export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
     let numberSlides;
 
     if (width <= 424) {
-        numberSlides = 1;
+        numberSlides = 2;
     } else if (width <= 576) {
         numberSlides = 2;
     } else if (width <= 768) {
@@ -101,10 +101,10 @@ export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
 
                                                 <div className="card card-postulanteenvivo shadow-sm" key={key} >
                                                     <div className={'row mx-0'}>
-                                                        <div className={'col-auto px-0'}>
+                                                        <div className={'col-12 col-md-auto px-0'}>
                                                             <img src={p.foto} className="card-img-top img-fluid img-testimonial-trabajador" loading="lazy" alt=""/>
                                                         </div>
-                                                        <div className={'col px-0 vertical-align text-purple card-name'}>
+                                                        <div className={'col-12 col-md px-0 vertical-align text-purple card-name'}>
                                                             {p.nombres}
                                                         </div>
                                                     </div>
