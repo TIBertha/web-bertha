@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import {getWindowSize} from "../../Functions/General.jsx";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LoadingScreen from "@/Components/Web/Components/loadingScreen.jsx";
 
 export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
 
@@ -20,6 +21,7 @@ export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
     };
 
     const [postulantes, setPostulantes] = useState([]);
+    const [isLoading, setLoading] = useState(false);
 
     const [windowSize, setWindowSize] = useState(getWindowSize());
     useEffect(() => {
@@ -65,11 +67,12 @@ export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
     };
 
     useEffect(() => {
+        setLoading(true);
 
         ajaxGetPostulantesSlider().then(r => {
             if(r.code === 200){
                 setPostulantes(r.data);
-
+                setLoading(false);
                 r.data.forEach(p => {
                     const img = new Image();
                     img.src = p.foto;
@@ -81,6 +84,8 @@ export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
 
         });
     }, []);
+
+    if(isLoading) return <LoadingScreen load={isLoading}/>;
     return(
         <>
             {(postulantes.length > 0) &&
