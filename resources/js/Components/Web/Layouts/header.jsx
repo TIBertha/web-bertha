@@ -110,7 +110,9 @@ export default function Header({ url, path, lang = 'es' }) {
                                     <span className={verticalNavbar.label}>
                                         {headerText[lang].support}
                                     </span>
-                                    <i className="fa-regular fa-circle-question"></i>
+                                    {display === 'desktop' &&
+                                        <i className="fa-regular fa-circle-question"></i>
+                                    }
                                 </a>
                             </li>
                         </ul>

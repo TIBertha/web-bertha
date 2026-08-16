@@ -485,6 +485,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
     &, &:hover{
         color: black;
         font-weight: bold;
+        text-decoration: none !important;
     }
 
     .langModal-div{
@@ -508,10 +509,86 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
 }
 
 .selectLangModal{
-    font-size: 1.2rem;
+
+    .selectLang-Area{
+        .optionStyle{
+
+            &:hover{
+                cursor: pointer;
+
+                background-color: #fceef5;
+                border-color: $pink_bertha;
+
+                .fa-chevron-right{
+                    color: $pink_bertha;
+                }
+            }
+
+            margin: 0.5rem 0;
+
+            &.selected{
+                background-color: #fceef5;
+                border-color: $pink_bertha;
+
+                .fa-chevron-right{
+                    color: $pink_bertha;
+                }
+            }
+
+            border: solid 2px #00000080;
+            padding: 0.75rem 1rem;
+            border-radius: 0.625rem;
+
+
+            .flag-icon{
+                font-size: 54px;
+                border-radius: 7px !important;
+            }
+
+            .option{
+                .title{
+                    font-size: 1.25rem;
+                }
+                .subtitle{
+                    font-size: 1rem;
+                }
+            }
+
+            .fa-chevron-right{
+                font-size: 32.5px;
+                vertical-align: -webkit-baseline-middle !Important;
+            }
+        }
+    }
+
+
+    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+
+        .title{
+            font-size: 1.125rem;
+        }
+
+        .peruMap{
+            img{
+                height: 150px;
+            }
+        }
+    }
+
+    font-size: 1.5rem;
+
+    .peruMap{
+        img{
+            height: 125px;
+            width: auto !important;
+        }
+    }
 
     .title{
-        font-size: 2rem;
+        font-size: 1.5rem;
+        .fa-house-circle-check{
+            color: $pink_bertha;
+        }
     }
 
     .sub{

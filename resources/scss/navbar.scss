@@ -234,10 +234,45 @@ $menu_mobile_height: 4rem;
         .menu{
             height: $menu_mobile_height;
             padding: 0.5rem 1rem;
+
+            .flag-style{
+                font-size: 20px;
+            }
         }
 
         .logo{
             height: 2rem;
+        }
+    }
+}
+@include media-breakpoint-down(sm){ /*--Less than 768px---*/
+    .navbar-bertha{
+        .menu{
+            height: $menu_mobile_height;
+            padding: 0.5rem 1rem;
+
+            .desktop-menu{
+                li{
+                    .button{
+                        font-size: 0.9rem;
+                        padding: 0.35rem 0.35rem;
+                    }
+                }
+
+            }
+        }
+
+        .logo{
+            height: 1.25rem;
+        }
+
+        .langModal-button{
+            .langModal-div{
+                box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.075) !important;
+                .lang{
+                    font-size: 0.9rem;
+                }
+            }
         }
     }
 }

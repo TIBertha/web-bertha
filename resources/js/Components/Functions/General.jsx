@@ -7,8 +7,15 @@ export function ajaxGetCountryCode() {
 
     return axios.post('/ajax-get-country-code', {} )
         .then(res => {
-            let r = res.data;
-            return r;
+            return  res.data;
+        });
+}
+
+export function ajaxCountLangModalView() {
+
+    return axios.post('/ajax-lang-modal-view', {} )
+        .then(res => {
+            return  res.data;
         });
 }
 
@@ -16,16 +23,21 @@ export function ajaxGetViews() {
 
     return axios.post('/ajax-get-views', {} )
         .then(res => {
-            let r = res.data;
-            return r;
+            return  res.data;
         });
 }
 
 export function ajaxGetRedesSociales() {
     return axios.post('/ajax-get-redes-sociales', {} )
         .then(res => {
-            let r = res.data;
-            return r;
+            return  res.data;
+        });
+}
+
+export function ajaxUploadFile(file, campo, tipoarchivo) {
+    return axios.post('/ajax-upload-file', {file, campo, tipoarchivo} )
+        .then(res => {
+            return  res.data
         });
 }
 
@@ -104,12 +116,4 @@ export function getCountryData(country) {
     }
 
     return result;
-}
-
-export function ajaxUploadFile(file, campo, tipoarchivo) {
-    return axios.post('/ajax-upload-file', {file, campo, tipoarchivo} )
-        .then(res => {
-            let r = res.data;
-            return r;
-        });
 }

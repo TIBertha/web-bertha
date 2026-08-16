@@ -79,42 +79,66 @@ export default function ModalSueldos({country, lang = 'es' }) {
         {
             es: "Cama afuera lunes a sábado de 8am a 1pm",
             en: "Live-out domestic worker: Mon–Sat 8am–1pm",
-            cost: "1350",
+            cost: {
+                es: "1350",
+                en: "1350",
+            }
         },
         {
             es: "Cama afuera de lunes a viernes 8am a 3pm o 9am a 4pm",
             en: "Live-out domestic worker: Mon–Fri 8am–3pm or 9am–4pm",
-            cost: "1350",
+            cost: {
+                es: "1350",
+                en: "1350",
+            }
         },
         {
             es: "Cama afuera de lunes a viernes 8am a 2pm o 12am a 6pm",
             en: "Live-out domestic worker: Mon–Fri 8am–2pm or 12pm–6pm",
-            cost: "1250",
+            cost: {
+                es: "1250",
+                en: "1250",
+            }
         },
         {
             es: "Cama afuera de lunes a viernes 8am a 1pm",
             en: "Live-out domestic worker: Mon–Fri 8am–1pm",
-            cost: "1150",
+            cost: {
+                es: "1150",
+                en: "1150",
+            }
         },
         {
             es: "4 veces: (Entre lunes y viernes) 8am a 5pm",
             en: "4 days a week: Mon–Fri 8am–5pm",
-            cost: "80 per day or 1280 monthly",
+            cost: {
+                es: "80 por día o 1280 mensual",
+                en: "80 per day or 1280 monthly",
+            }
         },
         {
             es: "3 veces: (lunes-miércoles-viernes o martes-jueves-sábado) 8am a 5pm",
             en: "3 days a week: M-W-F or T-Th-Sat 8am–5pm",
-            cost: "80 per day or 960 monthly",
+            cost: {
+                es: "80 por día o 960 mensual",
+                en: "80 per day or 960 monthly",
+            }
         },
         {
             es: "2 veces: (martes-jueves) 8am a 5pm",
             en: "2 days a week: Tue–Thu 8am–5pm",
-            cost: "80 per day or 640 monthly",
+            cost: {
+                es: "80 por día o 640 mensual",
+                en: "80 per day or 640 monthly",
+            }
         },
         {
             es: "1 vez: (martes o jueves) 8am a 5pm",
             en: "1 day a week: Tue or Thu 8am–5pm",
-            cost: "80 per day or 320 monthly",
+            cost: {
+                es: "80 por día o 320 mensual",
+                en: "80 per day or 320 monthly",
+            }
         },
     ];
 
@@ -166,7 +190,7 @@ export default function ModalSueldos({country, lang = 'es' }) {
                         <div className="ps-2 py-2">
                             {sueldoLista.lista2.map((d, i) => (
                                 <p key={i} className="pb-2 fw-100">
-                                    {d[lang] + ": " + d.cost}
+                                    {d[lang] + ": " + d.cost[lang]}
                                 </p>
                             ))}
                         </div>

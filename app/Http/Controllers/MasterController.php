@@ -2,10 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VistasWeb;
 use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
+
+    public function ajaxLangModalView(Request $request)
+    {
+        $vista = VistasWeb::find(19);
+
+        if ($vista) {
+            $vista->increment('num_vistas');
+        }
+
+        return response()->json(['code' => 200]);
+    }
+
     public function ajaxUploadFile(Request $request){
 
         try{

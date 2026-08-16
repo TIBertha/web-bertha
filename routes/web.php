@@ -15,6 +15,7 @@ use App\Http\Controllers\MisContratosController;
 
 //ruta subir archivos
 Route::post('/ajax-upload-file', [MasterController::class, 'ajaxUploadFile']);
+Route::post('/ajax-lang-modal-view', [MasterController::class, 'ajaxLangModalView']);
 
 
 //ruta de Inicio
