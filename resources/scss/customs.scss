@@ -510,6 +510,12 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
 
 .selectLangModal{
 
+    @include media-breakpoint-down(sm){ /*--Less than 768px---*/
+        .title {
+            font-size: 1.125rem !important;
+        }
+    }
+
     .selectLang-Area{
         .optionStyle{
 
