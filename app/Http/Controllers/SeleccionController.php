@@ -290,13 +290,14 @@ class SeleccionController extends Controller
             // Datos del requerimiento
             $data = [
                 'empleador_id'            => $empleador_id,
-                'actividad_id'            => $newCart['actividad_id'] ?? null,
-                'modalidad_id'            => $newCart['modalidad_id'] ?? null,
+                'actividad_id'            => null,
+                'modalidad_id'            => null,
                 'trabajadores_id'         => json_encode($traID),
                 'fecha'                   => Carbon::now(),
                 'tipocontrato_id'         => 1,
                 'paispedido_id'           => $sc->id,
-                'estatusrequerimiento_id' => 4
+                'estatusrequerimiento_id' => 4,
+                'pedido_web'              => true
             ];
 
             if ($empleador_id) {
