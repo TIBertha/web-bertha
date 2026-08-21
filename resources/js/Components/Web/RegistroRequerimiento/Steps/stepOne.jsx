@@ -267,7 +267,8 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label8}<Tooltips text={parse(st1Text[lang].ttLabel8)} estilo={"tooltip-formulario ms-2"} placement={'bottom'}/></div>
-                    <SelectFormExterno value={requerimiento.numeroMascotas} placeholder={st1Text[lang].phLabel8} nombrecampo="numeroMascotas" tipocampo="evento" opciones={options10} handleChange={handleChange} />
+
+                    <SelectFormExterno value={requerimiento.numeroMascotas} placeholder={st1Text[lang].phLabel8} nombrecampo="numeroMascotas" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} />
 
                     {requerimiento.numeroMascotas.value > 0 &&
                         <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
