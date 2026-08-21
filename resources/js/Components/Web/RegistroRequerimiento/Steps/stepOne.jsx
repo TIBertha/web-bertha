@@ -286,6 +286,19 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                     <SelectFormExterno value={requerimiento.ubicacion_id} isSearchable={true} placeholder={st1Text[lang].phLabel9} nombrecampo="ubicacion_id" tipocampo="evento" opciones={ubicaciones} handleChange={handleChange} />
                 </div>
 
+                <div className="col-12">
+                    <div className="mt-4 texto-casillas">{st1Text[lang].dav}</div>
+                    <div className={'secRl pb-1'}>{st1Text[lang].dav1}</div>
+                    <div className={'secRl'}>{st1Text[lang].dav2}</div>
+                    <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
+                           name="centro"
+                           type="text"
+                           value={requerimiento.input_domicilio}
+                           placeholder={st1Text[lang].dav3}
+                           onChange={ (e) => handleChange(e, 'input_domicilio', 'text') }
+                    />
+                </div>
+
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label10}</div>
                     <SelectFormExterno value={requerimiento.tieneTrabajadoraExtra} placeholder={st1Text[lang].phLabel10} nombrecampo="tieneTrabajadoraExtra" tipocampo="evento" opciones={optionsSN} handleChange={handleChange} />
