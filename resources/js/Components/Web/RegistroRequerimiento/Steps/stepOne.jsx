@@ -32,6 +32,14 @@ const optionsPisosDepa = [
     { value: '3', label: 'Triplex (3 pisos)' },
 ];
 
+const optionsSiNO = [
+    { value: 0, label: 'NO' },
+    { value: 1, label: 'SI' },
+];
+const optionsYesNo = [
+    { value: 0, label: 'NO' },
+    { value: 1, label: 'YES' },
+];
 
 const edadNinosES = [
     "Menor a 1 año",
@@ -87,6 +95,10 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
         ? optionsEdadNinosEN
         : optionsEdadNinosES;
 
+    const optionsSN = lang === 'en'
+        ? optionsYesNo
+        : optionsSiNO;
+
     const st1Text = {
         es: {
             inicio: '1. ¡Hola ' + nombreEmpleador + '! Llena todo tu requerimiento para que consigamos a tu trabajadora ideal. Son solo 2 pasos:',
@@ -114,10 +126,15 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
             label8: 'N° de mascotas',
             ttLabel8: 'Cuéntanos si tienes mascotas, ya que existen trabajadoras alérgicas y queremos buscar alguien que pueda querer a tu mascota',
             phLabel8: 'Ingresa tu n° de mascotas',
+            inputLb8: 'Escribe qué mascota(s) tiene.',
 
             label9: 'Ingresa el distrito de labores',
             ttLabel9: 'Escríbenos tu distrito, trabajamos en Lima Metropolitana, Callao y en todas las provincias de Lima',
             phLabel9: 'Escribe el distrito',
+
+            label10: '¿Hay otra trabajadora que laborará junto a la nueva?',
+            phLabel10: 'Seleccione una opción',
+            inputLb10: 'Escribe que hace la otra trabajadora',
 
             dav: 'Agrega tu dirección (es completamente confidencial y no la compartimos con nadie)',
             dav1: 'Avenida/calle/jirón/pasaje (o Manzana o Lote) + número (o s/n) + referencia',
@@ -149,10 +166,15 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
             label8: 'Number of pets',
             ttLabel8: 'Tell us if you have pets, since some workers are allergic and we want to find someone who can love your pet.',
             phLabel8: 'Enter the number of pets',
+            inputLb8: 'Please specify what pet(s) you have.',
 
             label9: 'Enter the work district',
-            ttLabel9: 'Write your district. We work in Lima Metropolitana, Callao, and all provinces of Lima.',
-            phLabel9: 'Write the district',
+            ttLabel9: 'Type your district. We work in Lima Metropolitana, Callao, and all provinces of Lima.',
+            phLabel9: 'Type the district',
+
+            label10: "Is there another worker who will be working alongside the new one?",
+            phLabel10: 'Select one option',
+            inputLb10: "Describe what the other worker does",
 
             dav: 'Add your address (it is completely confidential and we do not share it with anyone)',
             dav1: 'Avenue/street/alley/passage (or Block or Lot) + number (or n/a) + reference',
@@ -169,19 +191,15 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
             <section className="row">
 
-                {[1,4,5].includes(requerimiento.actividad_id.value) &&
-                    <div className={'col-12'}>
-                        <div className="mt-4 texto-casillas">{st1Text[lang].label1}</div>
-                        <SelectFormExterno value={requerimiento.tipoVivienda_id} placeholder={st1Text[lang].phLabel1} nombrecampo="tipoVivienda_id" tipocampo="evento" opciones={tiposViviendas} handleChange={handleChange} />
-                    </div>
-                }
+                <div className={'col-12'}>
+                    <div className="mt-4 texto-casillas">{st1Text[lang].label1}</div>
+                    <SelectFormExterno value={requerimiento.tipoVivienda_id} placeholder={st1Text[lang].phLabel1} nombrecampo="tipoVivienda_id" tipocampo="evento" opciones={tiposViviendas} handleChange={handleChange} />
+                </div>
 
-                {[1,4,5,9].includes(requerimiento.actividad_id.value) &&
-                    <div className={'col-12'}>
-                        <div className="mt-4 texto-casillas">{st1Text[lang].label2}</div>
-                        <SelectFormExterno value={requerimiento.numeroPisos} placeholder={st1Text[lang].phLabel2} nombrecampo="numeroPisos" tipocampo="evento" opciones={requerimiento.tipoVivienda_id.value === 2 ? optionsPisosDepa : optionsPisos} handleChange={handleChange} />
-                    </div>
-                }
+                <div className={'col-12'}>
+                    <div className="mt-4 texto-casillas">{st1Text[lang].label2}</div>
+                    <SelectFormExterno value={requerimiento.numeroPisos} placeholder={st1Text[lang].phLabel2} nombrecampo="numeroPisos" tipocampo="evento" opciones={requerimiento.tipoVivienda_id.value === 2 ? optionsPisosDepa : optionsPisos} handleChange={handleChange} />
+                </div>
 
                 {[8].includes(requerimiento.actividad_id.value) &&
                     <div className={'col-12'}>
@@ -190,60 +208,56 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                     </div>
                 }
 
-                {[1,2,4,5,6,7,9].includes(requerimiento.actividad_id.value) &&
-                    <div className={'col-12 pt-4'}>
+                <div className={'col-12 pt-4'}>
 
-                        <div className="mt-4 texto-casillas">{st1Text[lang].label4}</div>
+                    <div className="mt-4 texto-casillas">{st1Text[lang].label4}</div>
 
-                        <div className={'optionsEdadesNinos'}>
-                            <div className={'row mx-0'}>
-                                {optionsEdadNinos.map((d) =>  {
-                                    return(
-                                        <div className={'col-auto px-0'}>
-                                            <div className={'option'} onClick={(e) => handleAddition(e, 'edadNinos', d.id)}>
-                                                {d.text}
-                                            </div>
+                    <div className={'optionsEdadesNinos'}>
+                        <div className={'row mx-0'}>
+                            {optionsEdadNinos.map((d) =>  {
+                                return(
+                                    <div className={'col-auto px-0'}>
+                                        <div className={'option'} onClick={(e) => handleAddition(e, 'edadNinos', d.id)}>
+                                            {d.text}
                                         </div>
-                                    )
-                                })}
-                            </div>
-                        </div>
-
-                        <div
-                            className="my-2 edadninosAdvice"
-                            dangerouslySetInnerHTML={{ __html: '<i class="fa-solid fa-circle-info me-2"></i>' + st1Text[lang].advice }}
-                        ></div>
-
-
-                        {(requerimiento.edadNinos.length !== 0) &&
-                            <>
-                                <div className="mt-4 texto-casillas">{st1Text[lang].label5}</div>
-
-                                <div className={'edadesSeleccionadas'}>
-                                    <div className={'row mx-0'}>
-                                        {requerimiento.edadNinos.map((en, index) =>  {
-                                            return(
-                                                <div className={'col-auto px-0'}>
-                                                    <div className={'seleccionados'}>
-                                                        {en.text} <i className="fa-solid fa-xmark ms-3 deleteSeleccionado" onClick={(e) => handleDelete(index, 'edadNinos')}></i>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
                                     </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+
+                    <div
+                        className="my-2 edadninosAdvice"
+                        dangerouslySetInnerHTML={{ __html: '<i class="fa-solid fa-circle-info me-2"></i>' + st1Text[lang].advice }}
+                    ></div>
+
+
+                    {(requerimiento.edadNinos.length !== 0) &&
+                        <>
+                            <div className="mt-4 texto-casillas">{st1Text[lang].label5}</div>
+
+                            <div className={'edadesSeleccionadas'}>
+                                <div className={'row mx-0'}>
+                                    {requerimiento.edadNinos.map((en, index) =>  {
+                                        return(
+                                            <div className={'col-auto px-0'}>
+                                                <div className={'seleccionados'}>
+                                                    {en.text} <i className="fa-solid fa-xmark ms-3 deleteSeleccionado" onClick={(e) => handleDelete(index, 'edadNinos')}></i>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            </>
+                            </div>
+                        </>
 
-                        }
-                    </div>
-                }
+                    }
+                </div>
 
-                {[1,2,5,8,9].includes(requerimiento.actividad_id.value) &&
-                    <div className={'col-12'}>
-                        <div className="mt-4 texto-casillas">{st1Text[lang].label6}</div>
-                        <SelectFormExterno value={requerimiento.numeroAdultos} placeholder={st1Text[lang].phLabel6} nombrecampo="numeroAdultos" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} />
-                    </div>
-                }
+                <div className={'col-12'}>
+                    <div className="mt-4 texto-casillas">{st1Text[lang].label6}</div>
+                    <SelectFormExterno value={requerimiento.numeroAdultos} placeholder={st1Text[lang].phLabel6} nombrecampo="numeroAdultos" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} />
+                </div>
 
                 {[3,10].includes(requerimiento.actividad_id.value) &&
                     <div className={'col-12'}>
@@ -251,29 +265,39 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                     </div>
                 }
 
-                {[1,5,9].includes(requerimiento.actividad_id.value) &&
-                    <div className={'col-12'}>
-                        <div className="mt-4 texto-casillas">{st1Text[lang].label8}<Tooltips text={parse(st1Text[lang].ttLabel8)} estilo={"tooltip-formulario ms-2"} placement={'bottom'}/></div>
-                        <SelectFormExterno value={requerimiento.numeroMascotas} placeholder={st1Text[lang].phLabel8} nombrecampo="numeroMascotas" tipocampo="evento" opciones={options10} handleChange={handleChange} />
-                    </div>
-                }
+                <div className={'col-12'}>
+                    <div className="mt-4 texto-casillas">{st1Text[lang].label8}<Tooltips text={parse(st1Text[lang].ttLabel8)} estilo={"tooltip-formulario ms-2"} placement={'bottom'}/></div>
+                    <SelectFormExterno value={requerimiento.numeroMascotas} placeholder={st1Text[lang].phLabel8} nombrecampo="numeroMascotas" tipocampo="evento" opciones={options10} handleChange={handleChange} />
+
+                    {requerimiento.numeroMascotas.value > 0 &&
+                        <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
+                               name="detalleMascotas"
+                               type="text"
+                               value={requerimiento.detalleMascotas}
+                               placeholder={st1Text[lang].inputLb8}
+                               onChange={ (e) => handleChange(e, 'detalleMascotas', 'text') }
+                        />
+                    }
+
+                </div>
 
                 <div className="col-12">
                     <div className="mt-4 texto-casillas">{st1Text[lang].label9}<Tooltips text={parse(st1Text[lang].ttLabel9)} estilo={"tooltip-formulario ms-2"} placement={'bottom'}/></div>
                     <SelectFormExterno value={requerimiento.ubicacion_id} isSearchable={true} placeholder={st1Text[lang].phLabel9} nombrecampo="ubicacion_id" tipocampo="evento" opciones={ubicaciones} handleChange={handleChange} />
                 </div>
 
-                <div className="col-12">
-                    <div className="mt-4 texto-casillas">{st1Text[lang].dav}</div>
-                    <div className={'secRl pb-1'}>{st1Text[lang].dav1}</div>
-                    <div className={'secRl'}>{st1Text[lang].dav2}</div>
-                    <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
-                           name="centro"
-                           type="text"
-                           value={requerimiento.input_domicilio}
-                           placeholder={st1Text[lang].dav3}
-                           onChange={ (e) => handleChange(e, 'input_domicilio', 'text') }
-                    />
+                <div className={'col-12'}>
+                    <div className="mt-4 texto-casillas">{st1Text[lang].label10}</div>
+                    <SelectFormExterno value={requerimiento.tieneTrabajadoraExtra} placeholder={st1Text[lang].phLabel10} nombrecampo="tieneTrabajadoraExtra" tipocampo="evento" opciones={optionsSN} handleChange={handleChange} />
+                    {requerimiento.tieneTrabajadoraExtra.value === 1 &&
+                        <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
+                               name="detalleTrabajadoraExtra"
+                               type="text"
+                               value={requerimiento.detalleTrabajadoraExtra}
+                               placeholder={st1Text[lang].inputLb10}
+                               onChange={ (e) => handleChange(e, 'detalleTrabajadoraExtra', 'text') }
+                        />
+                    }
                 </div>
 
             </section>

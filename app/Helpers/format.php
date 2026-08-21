@@ -80,6 +80,17 @@ function convertToFormatSelectRegistroRequerimiento($id, $type =  null, $paisped
                 'label' => mb_convert_case($data->nombre, MB_CASE_TITLE, "UTF-8"),
                 'value' => $data->id,
             ];
+        }else if ($type == 'boolean'){
+            if ($id == 1){
+                $name  = ($lang == 'es') ? 'SI' : 'YES';
+            }else if ($id == 2){
+                $name  = 'NO';
+            }
+
+            $result = [
+                'label' => mb_convert_case($name, MB_CASE_TITLE, "UTF-8"),
+                'value' => $id,
+            ];
         }else{
 
             $result = [
