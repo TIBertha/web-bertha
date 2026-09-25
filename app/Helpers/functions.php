@@ -62,7 +62,7 @@ function formatIdentificacion($trabajador,$privada = null){
 
         $result =[
             'tipoDocumento'         => $trabajador->tipodocumento,
-            'numeroDocumento'       => $privada ? $trabajador->numero_documento : restringirInformacion($trabajador->numero_documento),
+            'numeroDocumento'       => restringirInformacion($trabajador->numero_documento),
             'fotoDocumentoDelantera'=> $trabajador->nacionalidad_id == 1 ? $muestraDNI1 : $muestraCE1 ,
             'fotoDocumentoPosterior'=> $trabajador->nacionalidad_id == 1 ? $muestraDNI2 : $muestraCE2,
         ];
