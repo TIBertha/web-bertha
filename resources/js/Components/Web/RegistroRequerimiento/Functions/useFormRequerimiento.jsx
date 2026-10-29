@@ -146,6 +146,10 @@ export default function UseFormRequerimiento(initialState= {}) {
         setValue(prev => ({ ...prev, ...normalized }));
     };
 
+    const setFieldsAM = (target) => {
+        setValue({...value, ...target});
+    };
+
 
     const handleDelete = (valor, nombrecampo) => {
 
@@ -234,5 +238,5 @@ export default function UseFormRequerimiento(initialState= {}) {
         });
     };
 
-    return [ value, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios,setFields, reset ];
+    return [ value, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios,setFields, setFieldsAM, reset ];
 }

@@ -3,9 +3,12 @@ import parse from "html-react-parser";
 
 import { IMaskInput } from "react-imask";
 
-import SelectFormExterno from "../../Components/selectFormExterno.jsx";
+import SelectFormExterno from "../../Components/selectFormExterno.jsx"
+import SelectFormExternoArray from "../../Components/selectFormExternoArray.jsx";
 import Tooltips from "../../Components/tooltips.jsx";
 import TagEdades from "../Components/tagEdades.jsx";
+import Swal from "sweetalert2";
+import global from "@/Components/Helpers/constantes.jsx";
 
 const makeNumberOptions = (max) =>
     Array.from({ length: max + 1 }, (_, i) => ({
@@ -39,6 +42,15 @@ const optionsSiNO = [
 const optionsYesNo = [
     { value: 0, label: 'NO' },
     { value: 1, label: 'YES' },
+];
+
+const optionsSexo = [
+    { value: 1, label: 'Varon' },
+    { value: 2, label: 'Mujer' },
+];
+const optionsSex = [
+    { value: 1, label: 'Male' },
+    { value: 2, label: 'Female' },
 ];
 
 const edadNinosES = [
@@ -87,6 +99,51 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
     let inputsueldo = '';
 
+    const addAM = () => {
+        setFields({dato_adulto_mayor: requerimiento.dato_adulto_mayor.concat([{ edad: '', sexo: '', diagnostico: '', caminar: '', panal: '', ayuda:'' }]) });
+    };
+
+    const removeAM = (id) => {
+
+        let icon = '<i class="fas fa-exclamation-circle"></i>';
+
+        Swal.fire({
+            title: icon,
+            text: st1Text[lang].amDelSwal,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: global.PURPLEBERTHA,
+            confirmButtonText: st1Text[lang].opY,
+            cancelButtonText: st1Text[lang].opN,
+        }).then((result) => {
+
+            if (result.value) {
+                setFields({dato_adulto_mayor: requerimiento.dato_adulto_mayor.filter((s, sidx) => id !== sidx) });
+            }
+
+        });
+    };
+
+
+
+    const onChangeAM = (e, nombrecampo, tipocampo, llave) => {
+
+        const data = requerimiento.dato_adulto_mayor.map((contacto, sidx) => {
+
+            if (llave !== sidx) return contacto;
+
+            if(tipocampo === 'event'){
+                console.log(e.value)
+                return { ...contacto, [nombrecampo]: e};
+            }else{
+                return { ...contacto, [e.target.name]: e.target.value.toUpperCase() };
+            }
+
+
+        });
+        setFields({dato_adulto_mayor: data});
+    };
+
     if (requerimiento.sueldo && requerimiento.sueldo < requerimiento.sueldoActividad){
         inputsueldo = 'sueldo-minimo-input';
     }
@@ -98,6 +155,10 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
     const optionsSN = lang === 'en'
         ? optionsYesNo
         : optionsSiNO;
+
+    const optionsSX = lang === 'en'
+        ? optionsSex
+        : optionsSexo;
 
     const st1Text = {
         es: {
@@ -136,10 +197,33 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
             phLabel10: 'Seleccione una opción',
             inputLb10: 'Escribe que hace la otra trabajadora',
 
+            title11: 'Datos del adulto mayor',
+            subTit11: 'Esta información nos ayuda a encontrar una persona con la experiencia adecuada. Si hay algún adulto mayor que requiera atención, agrélo en la parte de abajo.',
+
+            amButAdd1: 'Agregar adulto mayor',
+            amButAdd2: 'Agregar otro adulto mayor',
+            amButDel: 'Eliminar',
+            amDelSwal: '¿Desea borrar este registro?',
+
+            amTi: 'Adulto mayor',
+            amEdad: 'Edad',
+            phAmEdad: 'Ingresar edad',
+            amSexo: 'Sexo',
+            phAmSexo: 'Seleccione genero',
+            amDiag: 'Diagnóstico o condición de salud',
+            phAmDiag: 'Ingresar Diagnóstico o condición de salud',
+            amCam: '¿Puede caminar?',
+            amPan: '¿Usa pañal?',
+            amAy: '¿Requiere ayuda para bañarse?',
+            phG: 'Seleccione una opción',
+
             dav: 'Agrega tu dirección (es completamente confidencial y no la compartimos con nadie)',
             dav1: 'Avenida/calle/jirón/pasaje (o Manzana o Lote) + número (o s/n) + referencia',
             dav2: 'Ejemplo: Av Los Ingenieros 771. Frente a la iglesia de los mormones.',
-            dav3: 'Agrega tu direción'
+            dav3: 'Agrega tu direción',
+
+            opY: 'Si',
+            opN: 'No',
         },
         en: {
             inicio: '1. Hello ' + nombreEmpleador + '! Fill out your request so we can find the ideal worker for your home. It’s just 2 steps:',
@@ -176,10 +260,33 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
             phLabel10: 'Select one option',
             inputLb10: "Describe what the other worker does",
 
+            title11: 'Senior Care Information',
+            subTit11: 'This information helps us find a caregiver with the right experience. If there is a senior who requires care, please add their details below.',
+
+            amButAdd1: 'Add senior adult',
+            amButAdd2: 'Add another senior adult',
+            amButDel: 'Remove',
+            amDelSwal: 'Would you like to delete this record?',
+
+            amTi: 'Senior Adult',
+            amEdad: 'Age',
+            phAmEdad: 'Enter age',
+            amSexo: 'Sex',
+            phAmSexo: 'Select sex',
+            amDiag: 'Health condition or diagnosis',
+            phAmDiag: 'Enter health condition or diagnosis',
+            amCam: 'Can they walk independently?',
+            amPan: 'Do they use diapers?',
+            amAy: 'Do they require assistance with bathing?',
+            phG: 'Select an option',
+
+
             dav: 'Add your address (it is completely confidential and we do not share it with anyone)',
             dav1: 'Avenue/street/alley/passage (or Block or Lot) + number (or n/a) + reference',
             dav2: 'Example: Av Los Ingenieros 771. In front of the Mormon church.',
-            dav3: 'Enter address'
+            dav3: 'Enter address',
+            opY: 'Si',
+            opN: 'No',
         }
     }
 
@@ -289,8 +396,8 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className="col-12">
                     <div className="mt-4 texto-casillas">{st1Text[lang].dav}</div>
-                    <div className={'secRl pb-1'}>{st1Text[lang].dav1}</div>
-                    <div className={'secRl'}>{st1Text[lang].dav2}</div>
+                    <div className={'secRll pb-1'}>{st1Text[lang].dav1}</div>
+                    <div className={'secR'}>{st1Text[lang].dav2}</div>
                     <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
                            name="centro"
                            type="text"
@@ -312,6 +419,100 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                                onChange={ (e) => handleChange(e, 'detalleTrabajadoraExtra', 'text') }
                         />
                     }
+                </div>
+
+
+                <div className={'col-12'}>
+                    <div className={'adultoMayorsec'}>
+                        <div className={'amTitle'}>{st1Text[lang].title11}</div>
+                        <div className={'amSubTit'}>{st1Text[lang].subTit11}</div>
+
+                        {requerimiento.dato_adulto_mayor.map((data, key) => (
+                            <div className={'amDataDiv'}>
+                                <div className={'adTit'}>
+                                    <div className={'row justify-content-between'}>
+                                        <div className={'col text-start'}>
+                                            <div className={'tit'}>
+                                                {st1Text[lang].amTi + ' ' + (key +1)}
+                                            </div>
+                                        </div>
+                                        <div className={'col text-end'}>
+                                            <a className={'delBut text-pink'} onClick={ () => removeAM(key)}>
+                                                <i className="far fa-trash-alt text-pink me-2"></i>
+                                                {st1Text[lang].amButDel}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={'adForm'}>
+                                    <div className={'row mx-2'}>
+
+                                        <div className={'col-4'}>
+                                            <div className={'afTit'}>{st1Text[lang].amEdad}</div>
+                                            <div>
+                                                <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
+                                                       name="edad"
+                                                       type="text"
+                                                       value={data.edad}
+                                                       placeholder={st1Text[lang].phAmEdad}
+                                                       onChange={ (e) => onChangeAM(e, 'edad', 'text', key) }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className={'col-4'}>
+                                            <div className={'afTit'}>{st1Text[lang].amSexo}</div>
+                                            <div>
+                                                <SelectFormExternoArray value={data.sexo} llave={key} placeholder={st1Text[lang].phG} nombrecampo="sexo" tipocampo="event" opciones={optionsSX} handleChange={onChangeAM}/>
+                                            </div>
+                                        </div>
+
+                                        <div className={'col-4'}>
+                                            <div className={'afTit'}>{st1Text[lang].amDiag}</div>
+                                            <div>
+                                                <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
+                                                       name="diagnostico"
+                                                       type="text"
+                                                       value={data.diagnostico}
+                                                       placeholder={st1Text[lang].phAmDiag}
+                                                       onChange={ (e) => onChangeAM(e, 'diagnostico', 'text', key) }
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className={'col-4'}>
+                                            <div className={'afTit'}>{st1Text[lang].amCam}</div>
+                                            <div>
+                                                <SelectFormExternoArray value={data.caminar} llave={key} placeholder={st1Text[lang].phG} nombrecampo="caminar" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM}/>
+                                            </div>
+                                        </div>
+
+                                        <div className={'col-4'}>
+                                            <div className={'afTit'}>{st1Text[lang].amPan}</div>
+                                            <div>
+                                                <SelectFormExternoArray value={data.panal} llave={key} placeholder={st1Text[lang].phG} nombrecampo="panal" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM}/>
+                                            </div>
+                                        </div>
+
+                                        <div className={'col-4'}>
+                                            <div className={'afTit'}>{st1Text[lang].amAy}</div>
+                                            <div>
+                                                <SelectFormExternoArray value={data.ayuda} llave={key} placeholder={st1Text[lang].phG} nombrecampo="ayuda" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM}/>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+                        <div className={'amButtonDiv'}>
+                            <a className={'btn btn-lg bertha-purple-button'} onClick={() => addAM()}><i className="fas fa-plus me-2"></i>{requerimiento.dato_adulto_mayor.length !== 0 ? st1Text[lang].amButAdd2 : st1Text[lang].amButAdd1}</a>
+                        </div>
+                    </div>
                 </div>
 
             </section>

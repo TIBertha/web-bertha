@@ -50,13 +50,76 @@ function formatDataRegistroRequerimiento($data, $placeholder, $sueldoActividad, 
             'fechaEntrevista'         => $data->fecha_entrevista ?: '',
             'horaEntrevista'          => $data->hora_entrevista ? convertToFormatSelectHour($data->hora_entrevista) : null,
             'paispedido_id'           => $data->paispedido_id ?: null,
-            'divisa'                  => $data->paispedido_id == 11 ? 'CLP $ ' : 'PEN S/ '
+            'divisa'                  => $data->paispedido_id == 11 ? 'CLP $ ' : 'PEN S/ ',
+            'dato_adulto_mayor'       =>($data->dato_adulto_mayor AND $data->dato_adulto_mayor != '[]') ? convertFormatSingleDatoAdultoMayor($data->dato_adulto_mayor, $lang) : [],
         ];
 
     }
 
     return $result;
 
+}
+
+function convertFormatSingleDatoAdultoMayor($data, $lang)
+{
+    if (!$data) {
+        return null;
+    }
+
+    $sexoLabels = [
+        1 => $lang === 'es' ? 'Varón' : 'Male',
+        2 => $lang === 'es' ? 'Mujer' : 'Female',
+    ];
+
+    $siNoLabels = [
+        1 => $lang === 'es' ? 'SI' : 'YES',
+        0 => 'NO',
+    ];
+
+    $result = [];
+
+    foreach (json_decode($data, true) ?? [] as $d) {
+
+        if (!array_filter($d)) {
+            continue;
+        }
+
+        $result[] = [
+            'edad' => $d['edad'] ?? '',
+
+            'sexo' => isset($d['sexo'])
+                ? [
+                    'label' => $sexoLabels[$d['sexo']] ?? '',
+                    'value' => $d['sexo']
+                ]
+                : (object)[],
+
+            'diagnostico' => $d['diagnostico'] ?? '',
+
+            'caminar' => isset($d['caminar'])
+                ? [
+                    'label' => $siNoLabels[$d['caminar']] ?? '',
+                    'value' => $d['caminar']
+                ]
+                : (object)[],
+
+            'panal' => isset($d['panal'])
+                ? [
+                    'label' => $siNoLabels[$d['panal']] ?? '',
+                    'value' => $d['panal']
+                ]
+                : (object)[],
+
+            'ayuda' => isset($d['ayuda'])
+                ? [
+                    'label' => $siNoLabels[$d['ayuda']] ?? '',
+                    'value' => $d['ayuda']
+                ]
+                : (object)[],
+        ];
+    }
+
+    return empty($result) ? null : $result;
 }
 
 function resolverActividad($data)

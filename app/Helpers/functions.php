@@ -685,6 +685,36 @@ function saveFormatVerificaciones($data){
     return ( ($result == [] OR $result == '[]' OR $result == '') ? NULL : $result);
 }
 
+function saveFormatDatoAdultoMayor($data){
+
+    $result = null;
+
+    if($data){
+
+        $r = [];
+
+        foreach($data as $key => $value){
+
+            if(array_filter($value)){
+
+                $d = [
+                    "edad" => $value['edad'],
+                    "sexo" => isset($value['sexo']) ? $value['sexo']['value'] : null,
+                    "diagnostico" => $value['diagnostico'],
+                    "caminar" => isset($value['caminar']) ? $value['caminar']['value'] : null,
+                    "panal" => isset($value['panal']) ? $value['panal']['value'] : null,
+                    "ayuda" => isset($value['ayuda']) ? $value['ayuda']['value'] : null,
+                ];
+
+                array_push($r, $d);
+            }
+        }
+
+        $result = json_encode($r);
+    }
+    return ( ($result == [] OR $result == '[]' OR $result == '') ? NULL : $result);
+}
+
 function saveFormatMultiselect($data){
 
     $result = null;

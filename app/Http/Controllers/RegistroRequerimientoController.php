@@ -233,6 +233,7 @@ class RegistroRequerimientoController extends Controller
             'detalle_mascotas'      => $request->input('data.detalleMascotas'),
             'tiene_trabajadora_extra'=> $request->input('data.tieneTrabajadoraExtra'),
             'detalle_trabajadora_extra'=> $request->input('data.detalleTrabajadoraExtra'),
+            'dato_adulto_mayor'     => $request->input('data.dato_adulto_mayor'),
 
             'hora_ingreso'          => $request->input('hi'),
             'hora_salida'           => $request->input('hs'),
@@ -314,7 +315,9 @@ class RegistroRequerimientoController extends Controller
                 'hora_entrevista'         => $data['hora_entrevista'] ? Carbon::parse($data['hora_entrevista']) : null,
                 'trabajadores_id'         => saveTrabajadoresCartSeleccion(),
                 'fecha_inicio_labores'    => $data['fechaInicioLabores'] ? Carbon::parse($data['fechaInicioLabores']) : null,
+                'dato_adulto_mayor'       => saveFormatDatoAdultoMayor($data['dato_adulto_mayor']),
             ];
+
 
             if ($data['id']) {
                 $req = Requerimiento::find($data['id']);

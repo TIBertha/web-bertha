@@ -312,7 +312,7 @@ export default function StepFour({trabajador, show, stepCurrent, setFields, acti
 
                                             <div className="col-12 col-lg-2 d-flex align-items-center justify-content-center">
 
-                                                {show ? '' : <span className="remove-contactos mt-4 mb-4" onClick={ () => borrar(key) }>Borrar</span> }
+                                                {show ? '' : <span className="remove-contactos mt-4 mb-4" onClick={ () => borrar(key)}>Borrar</span> }
 
                                             </div>
 

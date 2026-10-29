@@ -87,6 +87,7 @@ export default function RegistroRequerimiento({url, token, lang = 'es'}) {
         setSueldoActividad: 0,
         tipoBeneficio_id:'',
         fechaInicioLabores: '',
+        dato_adulto_mayor: [],
     };
 
     const initialStep = {first: 1, last: 2, current: 1};
@@ -95,7 +96,7 @@ export default function RegistroRequerimiento({url, token, lang = 'es'}) {
     const [msjExito, setMsjExito] = useState(false);
     const [step, setStep] = useState(initialStep);
     const [percentageProgressBar, setPercentageProgressBar] = useState(0);
-    const [requerimiento, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios, setFields] = UseFormRequerimiento(initialStateRequerimiento);
+    const [requerimiento, handleChange, handleDelete, handleAddition, handleDrag, handleChangeHorarios, setFields, setFieldsAM] = UseFormRequerimiento(initialStateRequerimiento);
     const [edades, setEdades] = useState([]);
     const [actividades, setActividades] = useState([]);
     const [modalidades, setModalidades] = useState([]);
@@ -114,7 +115,9 @@ export default function RegistroRequerimiento({url, token, lang = 'es'}) {
     const [frecuencias, setFrecuencias] = useState([]);
     const [horasLabor, setHorasLabor] = useState([]);
     const [tiposBeneficios, setTiposBeneficios] = useState([]);
-    const [tiposBeneficiosSM, setTiposBeneficiosSM] = useState([]);
+    const [tiposBeneficiosSM, setTiposBeneficiosSM] = useState([])
+
+    const onChangeSetFieldsAM = (data) => setFieldsAM(data);
 
     const [isLoadingData, setIsLoadingData] = useState(true);
 
@@ -269,6 +272,7 @@ export default function RegistroRequerimiento({url, token, lang = 'es'}) {
                                     handleDelete={onDelete}
                                     handleAddition={onAdittion}
                                     handleDrag={onDrag}
+                                    setFields={onChangeSetFieldsAM}
 
                                     lang={lang}
                                 />

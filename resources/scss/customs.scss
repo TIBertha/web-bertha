@@ -633,4 +633,54 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
     }
 }
 
+.adultoMayorsec{
+
+    border: solid 1px $purple_bertha;
+    border-radius: 0.625rem;
+    margin-top: 1.5rem;
+    padding: 1rem;
+
+    .amTitle{
+        color: $purple_bertha;
+        font-size: 1.25rem;
+    }
+
+    .amSubTit{
+        color: $gray_bertha2;
+        font-size: 1.1rem;
+    }
+
+    .amButtonDiv{
+        margin-top: 1rem;
+    }
+
+    .amDataDiv{
+        .adTit{
+            background-color: $light_purple_bertha;
+            padding: .5rem 1rem;
+            margin: .5rem;
+            border-radius: 0.625rem;
+            font-size: 1.25rem;
+
+            .tit{
+                color: $purple_bertha;
+                font-weight: bold;
+            }
+            .delBut{
+                color: $pink_bertha;
+                text-decoration: none !important;
+                cursor: pointer;
+            }
+        }
+
+        .adForm{
+            .afTit{
+                padding: 0rem .5rem;
+                font-size: 1.1rem;
+                color: black;
+            }
+        }
+    }
+}
+
 
