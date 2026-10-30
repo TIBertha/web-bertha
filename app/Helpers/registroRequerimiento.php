@@ -60,7 +60,7 @@ function formatDataRegistroRequerimiento($data, $placeholder, $sueldoActividad, 
 
 }
 
-function convertFormatSingleDatoAdultoMayor($data, $lang)
+function convertFormatSingleDatoAdultoMayor($data, $lang = 'es')
 {
     if (!$data) {
         return null;

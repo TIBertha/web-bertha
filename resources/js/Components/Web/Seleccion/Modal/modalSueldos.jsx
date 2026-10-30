@@ -24,53 +24,53 @@ export default function ModalSueldos({country, lang = 'es' }) {
     // Listas multilanguage
     let arrayTCPe = [
         {
-            es: "Cama adentro sale sábados 1pm, retorna lunes 7am",
-            en: "Live-in domestic worker: leaves Saturdays 1pm, returns Monday 7am",
+            es: "Cama adentro sale sábados 12pm, retorna lunes 7am",
+            en: "Live-in domestic worker: leaves Saturdays 12pm, returns Monday 7am",
             cost: "1750",
         },
         {
-            es: "Cama adentro sale viernes 7pm, retorna domingo 7pm",
-            en: "Live-in domestic worker: leaves Friday 7pm, returns Sunday 7pm",
+            es: "Cama adentro sale viernes 6pm, retorna domingo 9pm",
+            en: "Live-in domestic worker: leaves Friday 6pm, returns Sunday 9pm",
             cost: "1750",
         },
         {
-            es: "Cama adentro sale viernes 7pm, retorna lunes 7am",
-            en: "Live-in domestic worker: leaves Friday 7pm, returns Monday 7am",
+            es: "Cama adentro sale viernes 6pm, retorna lunes 7am",
+            en: "Live-in domestic worker: leaves Friday 6pm, returns Monday 7am",
             cost: "1700",
         },
         {
-            es: "Cama afuera de lunes a viernes de 8am a 7pm + sábados 8am a 1pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–7pm + Sat 8am–1pm",
+            es: "Cama afuera de lunes a viernes de 8am a 6:30pm + sábados 8am a 1pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–6:30pm + Sat 8am–1pm",
             cost: "1700"
         },
         {
-            es: "Cama afuera de lunes a viernes de 8am a 7pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–7pm",
+            es: "Cama afuera de lunes a viernes de 8am a 6:30pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–6:30pm",
             cost: "1600"
         },
         {
-            es: "Cama afuera de lunes a viernes de 8am a 6pm + sábados 8am a 1pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–6pm + Sat 8am–1pm",
+            es: "Cama afuera de lunes a viernes de 8am a 5:30pm + sábados 8am a 1pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–5:30pm + Sat 8am–1pm",
             cost: "1550",
         },
         {
-            es: "Cama afuera de lunes a viernes de 8am a 5pm + sábados 8am a 1pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–5pm + Sat 8am–1pm",
+            es: "Cama afuera de lunes a viernes de 8am a 4:30pm + sábados 8am a 1pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–4:30pm + Sat 8am–1pm",
             cost: "1450",
         },
         {
-            es: "Cama afuera de lunes a viernes de 8am a 6pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–6pm",
+            es: "Cama afuera de lunes a viernes de 8am a 5:30pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–5:30pm",
             cost: "1450"
         },
         {
-            es: "Cama afuera de lunes a viernes 8am a 3:30pm + sábados 8am a 1pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–3:30pm + Sat 8am–1pm",
+            es: "Cama afuera de lunes a viernes 8am a 3pm + sábados 8am a 1pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–3pm + Sat 8am–1pm",
             cost: "1400",
         },
         {
-            es: "Cama afuera de lunes a viernes 8am a 5pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–5pm",
+            es: "Cama afuera de lunes a viernes 8am a 4:30pm",
+            en: "Live-out domestic worker: Mon–Fri 8am–4:30pm",
             cost: "1400",
         },
     ];
@@ -109,7 +109,7 @@ export default function ModalSueldos({country, lang = 'es' }) {
             }
         },
         {
-            es: "4 veces: (Entre lunes y viernes) 8am a 5pm",
+            es: "4 veces: (Entre lunes y viernes) 8am a 4:30pm",
             en: "4 days a week: Mon–Fri 8am–5pm",
             cost: {
                 es: "80 por día o 1280 mensual",
@@ -117,15 +117,15 @@ export default function ModalSueldos({country, lang = 'es' }) {
             }
         },
         {
-            es: "3 veces: (lunes-miércoles-viernes o martes-jueves-sábado) 8am a 5pm",
-            en: "3 days a week: M-W-F or T-Th-Sat 8am–5pm",
+            es: "3 veces: (lu-mi-vi) 8am a 4:30pm",
+            en: "3 days a week: M-W-F 8am–4:30pm",
             cost: {
                 es: "80 por día o 960 mensual",
                 en: "80 per day or 960 monthly",
             }
         },
         {
-            es: "2 veces: (martes-jueves) 8am a 5pm",
+            es: "2 veces: (ma-ju) 8am a 4:30pm",
             en: "2 days a week: Tue–Thu 8am–5pm",
             cost: {
                 es: "80 por día o 640 mensual",
@@ -133,7 +133,7 @@ export default function ModalSueldos({country, lang = 'es' }) {
             }
         },
         {
-            es: "1 vez: (martes o jueves) 8am a 5pm",
+            es: "1 vez: (ma o ju) 8am a 4:30pm",
             en: "1 day a week: Tue or Thu 8am–5pm",
             cost: {
                 es: "80 por día o 320 mensual",
