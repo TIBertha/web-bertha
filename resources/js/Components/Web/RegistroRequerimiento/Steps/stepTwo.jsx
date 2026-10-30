@@ -55,7 +55,7 @@ export default function StepTwo({requerimiento, handleChange, semiModalidades, m
                                                 </div>
                                                 <div className={'col-3'}>
                                                     <div className={'hm_price text-end'}>
-                                                        {(h.semimodalidad_id === 5 ? 'S/ 80 por día' : '') + 'S/ ' + h.sueldo + (h.semimodalidad_id === 5 ? ' al mes' : '')}
+                                                        {(h.semimodalidad_id === 5 ? 'S/ 80 por día o ' : '') + 'S/ ' + h.sueldo + (h.semimodalidad_id === 5 ? ' al mes' : '')}
                                                     </div>
                                                 </div>
                                             </div>
