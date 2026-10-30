@@ -396,8 +396,8 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className="col-12">
                     <div className="mt-4 texto-casillas">{st1Text[lang].dav}</div>
-                    <div className={'secRll pb-1'}>{st1Text[lang].dav1}</div>
-                    <div className={'secR'}>{st1Text[lang].dav2}</div>
+                    <div className={'pt-1 texto-casillas'}>{st1Text[lang].dav1}</div>
+                    <div className={'pt-1 texto-casillas'}>{st1Text[lang].dav2}</div>
                     <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
                            name="centro"
                            type="text"

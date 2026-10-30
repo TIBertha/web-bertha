@@ -77,32 +77,32 @@ export default function ModalSueldos({country, lang = 'es' }) {
 
     let arrayMTPe = [
         {
-            es: "Cama afuera lunes a sábado de 8am a 1pm",
-            en: "Live-out domestic worker: Mon–Sat 8am–1pm",
+            es: "Cama afuera lunes a sábado de 8 a 1",
+            en: "Live-out domestic worker: Mon–Sat 8–1",
             cost: {
                 es: "1350",
                 en: "1350",
             }
         },
         {
-            es: "Cama afuera de lunes a viernes 8am a 3pm o 9am a 4pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–3pm or 9am–4pm",
+            es: "Cama afuera de lunes a viernes 8 a 3 o 9 a 4",
+            en: "Live-out domestic worker: Mon–Fri 8–3 or 9–4",
             cost: {
                 es: "1350",
                 en: "1350",
             }
         },
         {
-            es: "Cama afuera de lunes a viernes 8am a 2pm o 12am a 6pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–2pm or 12pm–6pm",
+            es: "Cama afuera de lunes a viernes 8 a 2 o 12 a 6",
+            en: "Live-out domestic worker: Mon–Fri 8–2 or 12–6",
             cost: {
                 es: "1250",
                 en: "1250",
             }
         },
         {
-            es: "Cama afuera de lunes a viernes 8am a 1pm",
-            en: "Live-out domestic worker: Mon–Fri 8am–1pm",
+            es: "Cama afuera de lunes a viernes 8 a 1",
+            en: "Live-out domestic worker: Mon–Fri 8–1",
             cost: {
                 es: "1150",
                 en: "1150",

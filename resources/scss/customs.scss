@@ -642,7 +642,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
 
     .amTitle{
         color: $purple_bertha;
-        font-size: 1.25rem;
+        font-size: 1.1rem;
     }
 
     .amSubTit{
@@ -652,6 +652,10 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
 
     .amButtonDiv{
         margin-top: 1rem;
+
+        a{
+            font-size: 1.1rem;
+        }
     }
 
     .amDataDiv{
@@ -660,7 +664,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus{
             padding: .5rem 1rem;
             margin: .5rem;
             border-radius: 0.625rem;
-            font-size: 1.25rem;
+            font-size: 1.1rem;
 
             .tit{
                 color: $purple_bertha;
