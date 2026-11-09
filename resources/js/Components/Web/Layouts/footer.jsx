@@ -8,6 +8,7 @@ import {
 import { getLink } from "../../Functions/Functions.jsx";
 import WhatsAppPlugin from "../Components/Plugins/whatsAppPlugin.jsx";
 import ViewsPlugin from "../Components/Plugins/viewsPlugin.jsx";
+import FPWDModal from "../Components/FPWDModal.jsx";
 
 export default function Footer({ url, country = "pe", lang = 'lang' }) {
 
@@ -197,6 +198,8 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
                             </div>
                         </div>
                     </div>
+
+                    <FPWDModal lang={lang} labelText={text} />
                 </div>
             </section>
 
