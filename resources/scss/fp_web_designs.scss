@@ -70,26 +70,5 @@
             transform: skewX(-20deg);
             pointer-events: none;
         }
-
-        &:hover::before,
-        &:focus-visible::before {
-            animation: fp-shine 1.25s ease-in-out;
-        }
-    }
-
-    @keyframes fp-shine {
-        from {
-            left: -70%;
-        }
-
-        to {
-            left: 140%;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        .fp-link-button::before {
-            display: none;
-        }
     }
 }
