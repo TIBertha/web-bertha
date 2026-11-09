@@ -8,6 +8,7 @@ import {
 import { getLink } from "../../Functions/Functions.jsx";
 import WhatsAppPlugin from "../Components/Plugins/whatsAppPlugin.jsx";
 import ViewsPlugin from "../Components/Plugins/viewsPlugin.jsx";
+import FPWDModal from "../Components/FPWDModal.jsx";
 
 export default function Footer({ url, country = "pe", lang = 'lang' }) {
 
@@ -39,6 +40,19 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
             availableIn: "Bertha available in",
         },
     };
+
+    const frameText = {
+        es: {
+            fpLabel1:'Diseñado con ',
+            fpLabel2:' por ',
+        },
+        en: {
+            fpLabel1:'This website was made with ',
+            fpLabel2:' by ',
+        },
+    };
+
+    const text = frameText[lang] ?? frameText.en;
 
     const links = [
         "/",
@@ -164,7 +178,7 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
             {/* FOOTER BOTTOM */}
             <section className="footer-mid-border text-muted">
                 <div className="px-3 px-md-5 mx-auto text-start pt-4 pb-5">
-                    <div className="row justify-content-center mx-0 px-0">
+                    <div className="row justify-content-center mx-0 px-0 pb-3">
                         <div className="col-12 col-lg-8 px-0">
                             <div className="row justify-content-center justify-content-md-between mx-0 px-0">
 
@@ -184,6 +198,8 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
                             </div>
                         </div>
                     </div>
+
+                    <FPWDModal lang={lang} labelText={text}/>
                 </div>
             </section>
 
