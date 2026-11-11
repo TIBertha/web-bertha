@@ -199,7 +199,9 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
                         </div>
                     </div>
 
-                    <FPWDModal lang={lang} labelText={text} />
+                    {/*
+                        <FPWDModal lang={lang} labelText={text} />
+                    */}
                 </div>
             </section>
 
