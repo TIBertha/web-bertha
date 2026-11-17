@@ -52,14 +52,20 @@ export default function Index({url, num, country, lang}){
                 </div>
             </section>
 
-            <section >
-                <div className="coustom-wave inverted border-0"></div>
-                <div className="alterative-bg-gray border-0">
-                    <SliderPrensa url={url} lang={lang}/>
-                </div>
-            </section>
+            {country === 'pe' && (
+                <section >
+                    <div className="coustom-wave inverted border-0"></div>
+                    <div className="alterative-bg-gray border-0">
+                        <SliderPrensa url={url} lang={lang}/>
+                    </div>
+                </section>
+            )}
 
-            <section className={'alterative-bg-gray'}>
+            {country !== 'pe' && (
+                <div className="coustom-wave inverted border-0"></div>
+            )}
+
+            <section className={'alterative-bg-gray' + (country !== 'pe' ? ' pt-5' : '') }>
                 <div className="row text-center mx-0">
                     <div className="col-12 px-3 px-lg-0 padding-girls">
                         <img src={imgChicasBarra} className="img-chicas-pedido-tc" alt="Bertha"/>

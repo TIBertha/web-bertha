@@ -142,9 +142,129 @@ export default function ModalSueldos({country, lang = 'es' }) {
         },
     ];
 
+    let arrayTCMx = [
+        {
+            es: "De planta sale sábados 12 pm, retorna lunes 7 am",
+            en: "Live-in domestic worker: leaves Saturday at noon, returns Monday at 7am",
+            cost: "13,000",
+        },
+        {
+            es: "De planta sale viernes 6 pm, retorna domingo 9 pm",
+            en: "Live-in domestic worker: leaves Friday at 6pm, returns Sunday at 9pm",
+            cost: "13,000",
+        },
+        {
+            es: "De planta sale viernes 6 pm, retorna lunes 7 am",
+            en: "Live-in domestic worker: leaves Friday at 6pm, returns Monday at 7am",
+            cost: "12,500",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 6:30 + sábados 8 a 1",
+            en: "Live-out domestic worker: Mon–Fri 8am–6:30pm + Sat 8am–1pm",
+            cost: "12,500",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 6:30",
+            en: "Live-out domestic worker: Mon–Fri 8am–6:30pm",
+            cost: "11,500",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 5:30 + sábados 8 a 1",
+            en: "Live-out domestic worker: Mon–Fri 8am–5:30pm + Sat 8am–1pm",
+            cost: "11,000",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 4:30 + sábados 8 a 1",
+            en: "Live-out domestic worker: Mon–Fri 8am–4:30pm + Sat 8am–1pm",
+            cost: "10,500",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 5:30",
+            en: "Live-out domestic worker: Mon–Fri 8am–5:30pm",
+            cost: "10,000",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 3 + sábados 8 a 1",
+            en: "Live-out domestic worker: Mon–Fri 8am–3pm + Sat 8am–1pm",
+            cost: "9,500",
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 4:30",
+            en: "Live-out domestic worker: Mon–Fri 8am–4:30pm",
+            cost: "9,500",
+        },
+    ];
+
+    let arrayMTMx = [
+        {
+            es: "Entrada por salida lunes a sábado 8 a 1",
+            en: "Live-out domestic worker: Mon–Sat 8am–1pm",
+            cost: {
+                es: "8,500",
+                en: "8,500",
+            },
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 2:30 o 9 a 3:30",
+            en: "Live-out domestic worker: Mon–Fri 8am–2:30pm or 9am–3:30pm",
+            cost: {
+                es: "8,500",
+                en: "8,500",
+            },
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 2 o 12 a 6",
+            en: "Live-out domestic worker: Mon–Fri 8am–2pm or noon–6pm",
+            cost: {
+                es: "7,500",
+                en: "7,500",
+            },
+        },
+        {
+            es: "Entrada por salida lunes a viernes 8 a 1",
+            en: "Live-out domestic worker: Mon–Fri 8am–1pm",
+            cost: {
+                es: "6,500",
+                en: "6,500",
+            },
+        },
+        {
+            es: "Por días 4 veces: (entre lunes y viernes) 8 a 4:30",
+            en: "4 days a week: selected days Mon–Fri, 8am–4:30pm",
+            cost: {
+                es: "500 por día o 8,000 mensual",
+                en: "500 per day or 8,000 per month",
+            },
+        },
+        {
+            es: "Por días 3 veces: (lunes-miércoles-viernes) 8 a 4:30",
+            en: "3 days a week: Mon, Wed and Fri, 8am–4:30pm",
+            cost: {
+                es: "500 por día o 6,000 mensual",
+                en: "500 per day or 6,000 per month",
+            },
+        },
+        {
+            es: "Por días 2 veces: (martes-jueves) 8 a 4:30",
+            en: "2 days a week: Tue and Thu, 8am–4:30pm",
+            cost: {
+                es: "500 por día o 4,000 mensual",
+                en: "500 per day or 4,000 per month",
+            },
+        },
+        {
+            es: "Por días 1 vez: (martes o jueves) 8 a 4:30",
+            en: "1 day a week: Tue or Thu, 8am–4:30pm",
+            cost: {
+                es: "500 por día o 2,000 mensual",
+                en: "500 per day or 2,000 per month",
+            },
+        },
+    ];
+
     let sueldoLista = {
-        lista1: arrayTCPe,
-        lista2: arrayMTPe,
+        lista1: country === 'mx' ? arrayTCMx : arrayTCPe,
+        lista2: country === 'mx' ? arrayMTMx : arrayMTPe,
     };
 
     return (

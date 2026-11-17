@@ -17,16 +17,25 @@ use Illuminate\Support\Str;
 
 class SeleccionController extends Controller
 {
-    public function index()
+    /*public function index()
     {
         // Detectar idioma por sesión o default
         $lang = session('lang', 'es');
         $country = session('country', 'pe');
 
         return redirect("/{$lang}-{$country}/seleccionar");
+    }*/
+
+    public function index(){
+        return redirect()->route('pedidos-country', [
+            'country' => session(
+                'country',
+                config('regions.default_country')
+            ),
+        ]);
     }
 
-    public function viewCountry($lang, $country)
+    /*public function viewCountry($lang, $country)
     {
         // Guardar idioma y país en sesión
         session()->put('lang', $lang);
@@ -36,6 +45,30 @@ class SeleccionController extends Controller
         countViewWeb("/{$lang}-{$country}/seleccionar");
 
         return $this->viewIndex($lang, $country);
+    }*/
+
+    public function viewCountry(Request $request, $country){
+        $lang = $request->session()->get(
+            'lang',
+            config('regions.default_language')
+        );
+
+        countViewWeb('/' . $country . '/seleccionar');
+
+        return $this->viewIndex($lang, $country);
+    }
+
+    public function legacySeleccion(Request $request, $lang, $country)
+    {
+        $destination = route('pedidos-country', [
+            'country' => $country,
+        ]);
+
+        if ($request->getQueryString()) {
+            $destination .= '?' . $request->getQueryString();
+        }
+
+        return redirect($destination, 301);
     }
 
     public function viewIndex($lang, $country)
@@ -277,7 +310,12 @@ class SeleccionController extends Controller
             $filtros = session('filtros-seleccion');
             $usuarioID = session('usuarioID');
 
-            $sc = Pais::where('country_code', strtoupper($request->input('country')))->first();
+            $sc = Pais::where(
+                'country_code',
+                strtoupper(session('country', config('regions.default_country')))
+            )->firstOrFail();
+
+            //$sc = Pais::where('country_code', strtoupper($request->input('country')))->first();
 
             $empleador_id = getEmpleadorID($usuarioID);
 

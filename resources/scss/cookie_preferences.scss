@@ -1,0 +1,107 @@
+.cookie-preferences {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+
+    padding: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+
+    color: #ffffff;
+    background: rgba(35, 28, 44, 0.94);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+
+    max-height: 70dvh;
+    overflow-y: auto;
+
+    .cookie-preferences-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 0.35rem !important;
+    }
+
+    .cookie-preferences-container {
+        width: 100%;
+        max-width: 1650px;
+        margin-inline: auto;
+    }
+
+    .cookie-preferences-description {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        color: #eeeeee;
+    }
+
+    .form-label {
+        font-size: 0.75rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .form-select {
+        min-height: 38px;
+        border: 0;
+        cursor: pointer;
+
+        &:focus {
+            box-shadow: 0 0 0 3px rgba($pink_bertha, 0.45);
+        }
+    }
+
+    .cookie-preferences-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .cookie-preferences-accept,
+    .cookie-preferences-decline {
+        padding: 0.6rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.8rem;
+        font-weight: 700;
+
+        &:focus-visible {
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
+    }
+
+    .cookie-preferences-accept {
+        background: #ffffff;
+        color: $purple_bertha;
+
+        &:hover {
+            background: #eeeeee;
+            color: $purple_bertha;
+        }
+    }
+
+    .cookie-preferences-decline {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.65);
+        color: #ffffff;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+    }
+
+    .cookie-preferences-error {
+        color: #ffd1df;
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 767.98px) {
+        .cookie-preferences-actions {
+            justify-content: stretch;
+
+            button {
+                flex: 1 1 100%;
+            }
+        }
+    }
+}

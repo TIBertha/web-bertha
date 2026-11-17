@@ -21,7 +21,7 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
             terms: "Términos y condiciones",
             privacy: "Política de privacidad",
             claims: "Libro de reclamaciones",
-            contact: "Contáctanos",
+            contact: "ContáctanIos",
             schedule1: "De lunes a viernes de 8 a 6",
             schedule2: "Sábados hasta la 1",
             availableIn: "Bertha disponible en",
@@ -71,9 +71,18 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
     const [redesSociales, setRedesSociales] = useState(null);
 
     const list1 = [
-        { url: url + '/' + lang + "-pe/condiciones", title: footerText[lang].terms },
-        { url: url + '/' + lang + "-pe/privacidad", title: footerText[lang].privacy },
-        { url: url+ '/' + lang + "-pe/reclamos", title: footerText[lang].claims },
+        {
+            url: `${url}/${country}/condiciones`,
+            title: footerText[lang].terms,
+        },
+        {
+            url: `${url}/${country}/privacidad`,
+            title: footerText[lang].privacy,
+        },
+        {
+            url: `${url}/${country}/reclamos`,
+            title: footerText[lang].claims,
+        },
     ];
 
     useEffect(() => {
@@ -81,6 +90,27 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
             setRedesSociales(r.redessociales);
         });
     }, []);
+
+    const socialMedia = [
+        {
+            name: 'Facebook',
+            key: 'facebook',
+            icon: 'fa-brands fa-facebook-f',
+            link: 'https://www.facebook.com/share/19tGZBC27B/?mibextid=wwXIfr',
+        },
+        {
+            name: 'TikTok',
+            key: 'tiktok',
+            icon: 'fa-brands fa-tiktok',
+            link: 'https://www.instagram.com/_holabertha?dlrf=NHAyb3J2YWp6bWY3',
+        },
+        {
+            name: 'Instagram',
+            key: 'instagram',
+            icon: 'fa-brands fa-instagram',
+            link: 'https://www.tiktok.com/@holabertha.com?_r=1&_t=ZS-9BMXmcA7iDK',
+        },
+    ];
 
     return (
         <>
@@ -155,7 +185,7 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
                                                     href={"https://api.whatsapp.com/send?phone=" + countryData.whatsAppLink}
                                                     target="_blank"
                                                 >
-                                                    <i className="fab fa-whatsapp text-pink"></i>{" "}
+                                                    <i className="fab fa-whatsapp fa-fw text-pink"></i>{" "}
                                                     {countryData.whatsApp}
                                                 </a>
                                             </li>
@@ -165,6 +195,20 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
                                             {footerText[lang].schedule1}
                                             <br />
                                             {footerText[lang].schedule2}
+                                        </div>
+
+                                        <div className={'pt-3 redes-sociales'}>
+                                            {socialMedia.map(network => (
+                                                <a
+                                                    key={network.key}
+                                                    href={network.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    aria-label={network.name}
+                                                >
+                                                    <i className={network.icon} aria-hidden="true"></i>
+                                                </a>
+                                            ))}
                                         </div>
                                     </div>
 
@@ -184,7 +228,7 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
 
                                 <div className="px-0 col-12 col-md-auto link-direccion-emp">
                                     <p className="mb-0 footer-title-text text-center text-md-start">
-                                        {footerText[lang].availableIn} <b>Perú</b>
+                                        {footerText[lang].availableIn} <b>{countryData.nombre}</b>
                                     </p>
                                 </div>
 

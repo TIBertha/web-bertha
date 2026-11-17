@@ -13,7 +13,7 @@ export default function SeleccionConfirmar({url, country, lang = 'es'}) {
     //const [country, setCountry] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-    let urlSeleccion = url + '/' +  lang + '-' + country + '/seleccionar';
+    const urlSeleccion = `${url}/${country}/seleccionar`;
 
     const deleteCart = () => {
         ajaxDeleteCartSeleccion().then(result => {

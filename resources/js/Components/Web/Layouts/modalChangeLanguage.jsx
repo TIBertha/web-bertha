@@ -1,16 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalBody, ModalTitle, ModalHeader } from "react-bootstrap";
-import {mobileDesktop, ajaxCountLangModalView} from "../../Functions/General.jsx";
+import {mobileDesktop, ajaxCountLangModalView, ajaxChangeLanguage, getCountryData} from "../../Functions/General.jsx";
 import mapaPeru from "../../../../../public/img/mapa-peru.png";
+import mapaMexico from "../../../../../public/img/mapa-mexico.png";
+import { showAlert } from "../../Helpers/alerts.jsx";
 
-export default function ModalChangeLanguage({url, path, countryTooltip, lang}){
+const countryMaps = {
+    pe: {
+        src: mapaPeru,
+        alt: {
+            es: 'Mapa de Perú',
+            en: 'Map of Peru',
+        },
+    },
+    mx: {
+        src: mapaMexico,
+        alt: {
+            es: 'Mapa de México',
+            en: 'Map of Mexico',
+        },
+    },
+};
+
+export default function ModalChangeLanguage({url, path, countryTooltip, lang, country = 'pe',}){
     const [show, setShow] = useState(false);
     const display = mobileDesktop();
+    const [savingLanguage, setSavingLanguage] = useState(false);
+    let countryData = getCountryData(country);
+    const countryMap = countryMaps[country];
 
     const chngLangText = {
         es: {
             title: 'Bertha también atiende a familias extranjeras, turistas, ejecutivos y/o diplomáticos que necesitan apoyo en',
-            location: 'Lima, Perú.',
             sub1: 'Más de ',
             ye: '50 años',
             sub2: ' conectando hogares en Perú.',
@@ -21,7 +42,6 @@ export default function ModalChangeLanguage({url, path, countryTooltip, lang}){
         },
         en: {
             title: 'Bertha also assists foreign families, tourists, executives and diplomats who need support in',
-            location: 'Lima, Peru.',
             sub1: 'More than ',
             ye: '50 years',
             sub2: ' connecting households in Peru.',
@@ -64,26 +84,32 @@ export default function ModalChangeLanguage({url, path, countryTooltip, lang}){
         );
     }
 
-    function switchLang(langSelected) {
+    async function switchLang(langSelected) {
+        if (savingLanguage || langSelected === lang) return;
 
-        // Detectar si el path contiene idioma
-        const hasLangSegment = path.includes('es-pe') || path.includes('en-pe');
+        setSavingLanguage(true);
 
-        if (hasLangSegment) {
-            // Caso 1: ruta con idioma
-            const currentLangSegment = path.includes('es-pe') ? 'es-pe' : 'en-pe';
-            const newLangSegment = langSelected + '-pe';
-            const newPath = path.replace(currentLangSegment, newLangSegment);
+        try {
+            const result = await ajaxChangeLanguage(langSelected);
 
-            window.location.href = '/' + newPath;
-            return;
+            if (result.code !== 200) {
+                throw new Error('Language could not be saved');
+            }
+
+            window.location.reload();
+        } catch {
+            setSavingLanguage(false);
+
+            showAlert(
+                'error',
+                lang === 'en'
+                    ? 'We could not change your language. Please try again.'
+                    : 'No pudimos cambiar el idioma. Intenta de nuevo.'
+            );
         }
-
-        // Caso 2: ruta SIN idioma → cambiar idioma en Laravel
-        window.location.href = `/change-lang/${langSelected}`;
     }
 
-    const flag = (lang === 'es' ? 'pe' : 'us');
+    const flag = lang === 'es' ? country : 'us';
 
     return (
         <>
@@ -116,10 +142,15 @@ export default function ModalChangeLanguage({url, path, countryTooltip, lang}){
                 <ModalBody className="py-20 text-center selectLangModal">
 
                     <div className={'peruMap'}>
-                        <img src={mapaPeru} />
+                        {countryMap && (
+                            <img
+                                src={countryMap.src}
+                                alt={countryMap.alt[lang] ?? countryMap.alt.es}
+                            />
+                        )}
                     </div>
 
-                    <p className={'title pt-4'}>{chngLangText[lang].title} <span className={'text-pink'}>{chngLangText[lang].location}</span></p>
+                    <p className={'title pt-4'}>{chngLangText[lang].title} <span className={'text-pink'}>{countryData.location[lang]}</span></p>
 
                     <div className={'container'}>
                         <hr/>
@@ -131,7 +162,7 @@ export default function ModalChangeLanguage({url, path, countryTooltip, lang}){
 
                                 <LangOption
                                     code="es"
-                                    flag="pe"
+                                    flag={country}
                                     title={chngLangText[lang].esOpt}
                                     subtitle={chngLangText[lang].eo1}
                                 />

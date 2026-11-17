@@ -357,49 +357,73 @@ function showTiposModalidadesID($ca, $cf, $pd){
     return $mod;
 }
 
-function showTiposModalidadesFichaModal($ca, $cf, $ph, $paisPostulando = 54){
-
+function showTiposModalidadesFichaModal(
+    $ca,
+    $cf,
+    $ph,
+    $paisPostulando = 54
+) {
     $lang = session('lang', 'es');
 
-    $mod_es = [
-        1 => 'CAMA ADENTRO',
-        2 => 'CAMA AFUERA',
-        3 => 'POR DIAS',
+    $modalidades = [
+        'es' => [
+            54 => [
+                1 => 'Cama Adentro',
+                2 => 'Cama Afuera',
+                3 => 'Por Días',
+            ],
+            49 => [
+                1 => 'De Planta',
+                2 => 'Entrada por Salida',
+                3 => 'Por Días',
+            ],
+        ],
+        'en' => [
+            54 => [
+                1 => 'Live-in',
+                2 => 'Live-out',
+                3 => 'Scheduled days only',
+            ],
+            49 => [
+                1 => 'Live-in',
+                2 => 'Live-out',
+                3 => 'Scheduled days only',
+            ],
+        ],
     ];
 
-    $mod_en = [
-        1 => 'LIVE-IN',
-        2 => 'LIVE-OUT',
-        3 => 'SCHEDULED DAYS ONLY',
-    ];
+    $lang = isset($modalidades[$lang]) ? $lang : 'es';
 
-    $mod = [
-        $ca ? ($lang === 'es' ? $mod_es[1] : $mod_en[1]) : '',
-        $cf ? ($lang === 'es' ? $mod_es[2] : $mod_en[2]) : '',
-        $ph ? ($lang === 'es' ? $mod_es[3] : $mod_en[3]) : '',
-    ];
+    $nombres = $modalidades[$lang][$paisPostulando]
+        ?? $modalidades[$lang][54];
 
-    $filterMod = array_filter($mod);
+    $seleccionadas = [];
 
-    if($filterMod){
+    if ($ca) {
+        $seleccionadas[] = $nombres[1];
+    }
 
-        if(count($filterMod) > 1){
+    if ($cf) {
+        $seleccionadas[] = $nombres[2];
+    }
 
-            $lastValue = array_pop($filterMod);
-            $resultado = formatTextFirstCharacterToUpper(implode(', ', $filterMod));
-            $resultado .= ' y '.formatTextFirstCharacterToUpper($lastValue);
+    if ($ph) {
+        $seleccionadas[] = $nombres[3];
+    }
 
-        }else{
-
-            $resultado = formatTextFirstCharacterToUpper(implode('', $filterMod));
-        }
-
-        return $resultado;
-
-    }else{
+    if (!$seleccionadas) {
         return '';
     }
 
+    $ultima = array_pop($seleccionadas);
+
+    if (!$seleccionadas) {
+        return $ultima;
+    }
+
+    $conector = $lang === 'en' ? ' and ' : ' y ';
+
+    return implode(', ', $seleccionadas) . $conector . $ultima;
 }
 
 function calcularTiempoServicioEn($inicio, $fin){

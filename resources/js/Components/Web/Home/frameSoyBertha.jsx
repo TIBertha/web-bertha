@@ -32,7 +32,7 @@ export default function FrameSoyBertha({url, country, lang = 'es'}) {
                                 {sectionText[lang].Content}
                             </div>
                             <div className='py-5'>
-                                <a className='btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow mt-0' href={url + '/' + lang + '-' + country + '/seleccionar'}>{sectionText[lang].Button}</a>
+                                <a className='btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow mt-0' href={`${url}/${country}/seleccionar`}>{sectionText[lang].Button}</a>
                             </div>
                         </div>
                     </div>

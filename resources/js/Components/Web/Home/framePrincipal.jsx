@@ -8,11 +8,11 @@ export default function FramePrincipal({ url, country, lang = 'es'}) {
 
     const frameTitle = {
         es: {
-            main: "Consigue a trabajadoras del hogar cama adentro, cama afuera y por días en Perú.",
+            main: "Consigue a trabajadoras del hogar cama adentro, cama afuera y por días en " + countryData.nombre + ".",
             second: "Selecciona a trabajadoras del hogar sin antecedentes y con experiencia.",
         },
         en: {
-            main: "Hire live-in, live-out, and scheduled days only domestic workers in Peru.",
+            main: "Hire live-in, live-out, and scheduled days only domestic workers in " + countryData.nombre + ".",
             second: "Select domestic workers with experience and no criminal record.",
         },
     };
@@ -41,7 +41,7 @@ export default function FramePrincipal({ url, country, lang = 'es'}) {
                     :
                     'bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow'
                 }
-                href={url + '/' + lang + '-' + country + "/seleccionar"}
+                href={`${url}/${country}/seleccionar`}
             >
                 <b>{display === 'desktop' ? buttonText[lang].desktop : buttonText[lang].mobile}</b>
             </a>

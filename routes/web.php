@@ -17,12 +17,34 @@ use App\Http\Controllers\MisContratosController;
 Route::post('/ajax-upload-file', [MasterController::class, 'ajaxUploadFile']);
 Route::post('/ajax-lang-modal-view', [MasterController::class, 'ajaxLangModalView']);
 
+// Cambiar el idioma de la sesión.
+Route::post(
+    '/ajax-change-language',
+    [MasterController::class, 'ajaxChangeLanguage']
+)->name('language.change');
 
 //ruta de Inicio
+/*
 Route::get('/', [WebController::class, 'index'])->name('inicio');
 Route::get('/{lang}-pe', [WebController::class, 'viewPeru'])
     ->where('lang', 'es|en')
     ->name('inicio-pe');
+*/
+
+// Inicio: redirige al país de la sesión.
+Route::get('/', [WebController::class, 'index'])
+    ->name('inicio');
+
+// Inicio por país.
+Route::get('/{country}', [WebController::class, 'viewCountry'])
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->name('inicio-country');
+
+// Compatibilidad con las direcciones anteriores de Perú.
+Route::get('/{lang}-pe', [WebController::class, 'legacyPeru'])
+    ->whereIn('lang', array_keys(config('regions.languages')))
+    ->name('inicio-pe');
+
 Route::post('/ajax-disable-modal-seleccion', [WebController::class, 'ajaxDisableModal']);
 Route::post('/ajax-verify-disable-modal-seleccion', [WebController::class, 'ajaxVerifyDisableModal']);
 Route::post('/ajax-get-data-prensa', [WebController::class, 'ajaxGetDataPrensa']);
@@ -34,32 +56,59 @@ Route::post('/ajax-get-views', [WebController::class, 'ajaxGetViews']);
 Route::post('/ajax-get-redes-sociales', [WebController::class, 'ajaxGetRedesSociales']);
 
 //ruta de condiciones
+/*
 Route::get('/condiciones', [WebController::class, 'condicionesRedirect']);
 Route::get('/{lang}-pe/condiciones', [WebController::class, 'viewCondiciones'])
     ->where('lang', 'es|en')
     ->name('condiciones');
+*/
+Route::get('/condiciones', [WebController::class, 'condicionesRedirect']);
+Route::get('/{country}/condiciones', [WebController::class, 'viewCondiciones'])
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->name('condiciones');
+
 
 //ruta de privacidad
+/*
 Route::get('/privacidad', [WebController::class, 'privacidadRedirect']);
 Route::get('/{lang}-pe/privacidad', [WebController::class, 'viewPrivacidad'])
     ->where('lang', 'es|en')
     ->name('privacidad');
+*/
+Route::get('/privacidad', [WebController::class, 'privacidadRedirect']);
+Route::get('/{country}/privacidad', [WebController::class, 'viewPrivacidad'])
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->name('privacidad');
 
 //ruta post reclamos
+/*
 Route::get('/{lang}-pe/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])
     ->where('lang', 'es|en')
     ->name('libro-reclamaciones');
 Route::get('/reclamos', [ReclamoController::class, 'reclamosRedirect']);
+*/
+Route::get('/reclamos', [ReclamoController::class, 'reclamosRedirect']);
+
+Route::get('/{country}/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->name('libro-reclamaciones');
+
 
 //Route::get('/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])->name('libro-reclamaciones');
 
 Route::post('/ajax-reclamos-new', [ReclamoController::class, 'ajaxNew']);
 Route::post('/ajax-get-data-reclamos', [ReclamoController::class, 'ajaxGetData']);
-
 //rutas comerciales
 Route::get('/cuenta-bancaria', [WebController::class, 'cuentaBancariaView'])->name('cuenta-bancaria');
 
+// Compatibilidad con enlaces anteriores.
+Route::get('/{lang}-{country}/{page}', [WebController::class, 'legacyPage'])
+    ->whereIn('lang', array_keys(config('regions.languages')))
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->where('page', 'condiciones|privacidad|reclamos');
+
 //ruta de seleccionar
+/*
 Route::get('/{lang}-{country}/seleccionar', [SeleccionController::class, 'viewCountry'])
     ->where([
         'lang' => 'es|en',
@@ -67,6 +116,22 @@ Route::get('/{lang}-{country}/seleccionar', [SeleccionController::class, 'viewCo
     ])
     ->name('pedidos-country');
 Route::get('/seleccionar', [SeleccionController::class, 'index'])->name('pedidos');
+*/
+
+// Selección por país.
+Route::get('/{country}/seleccionar', [SeleccionController::class, 'viewCountry'])
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->name('pedidos-country');
+
+// Selección sin país: utilizar la sesión.
+Route::get('/seleccionar', [SeleccionController::class, 'index'])
+    ->name('pedidos');
+
+// Compatibilidad con los enlaces anteriores.
+Route::get('/{lang}-{country}/seleccionar', [SeleccionController::class, 'legacySeleccion'])
+    ->whereIn('lang', array_keys(config('regions.languages')))
+    ->whereIn('country', array_keys(config('regions.countries')))
+    ->name('pedidos-legacy');
 
 Route::post('/ajax-procesar-seleccion', [SeleccionController::class, 'ajaxProcesarSeleccion']);
 Route::post('/ajax-save-cart-seleccion', [SeleccionController::class, 'ajaxSaveCartSeleccion']);

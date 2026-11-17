@@ -146,7 +146,7 @@ export default function FrameTuTrabajadoraDelHogar({url, country, lang = 'es'}) 
                 </div>
 
                 <div className="col-12 pt-md-3 pb-md-4 text-center">
-                    <a className="bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow" href={url + '/' + lang + '-' + country + '/seleccionar'}>{tuTrabajadoraText[lang].button}</a>
+                    <a className="bertha-purplepink-button font-weight-bold btn btn-lg mt-3 btn-size no-box-shadow" href={`${url}/${country}/seleccionar`}>{tuTrabajadoraText[lang].button}</a>
                 </div>
 
             </div>

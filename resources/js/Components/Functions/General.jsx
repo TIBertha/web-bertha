@@ -87,6 +87,7 @@ export function getCountryData(country) {
         cf: '',
         whatsApp: '',
         whatsAppLink: '',
+        location: '',
     };
 
     if (country == 'pe'){
@@ -97,6 +98,10 @@ export function getCountryData(country) {
         result.cf = 'Cama Afuera';
         result.whatsApp = '+51 999 256 807';
         result.whatsAppLink = '51999256807';
+        result.location = {
+            es: 'Lima, Perú.',
+            en: 'Lima, Peru.',
+        };
     }else if (country == 'cl'){
         result.nombre = 'Chile';
         result.divisa = 'CLP $';
@@ -105,6 +110,10 @@ export function getCountryData(country) {
         result.cf = 'Puerta Afuera';
         result.whatsApp = '+51 999 256 807';
         result.whatsAppLink = '51999256807';
+        result.location = {
+            es: 'Santiago, Chile.',
+            en: 'Santiago, Chile.',
+        };
     }else if (country == 'mx'){
         result.nombre = 'México';
         result.divisa = 'MXN $';
@@ -113,7 +122,17 @@ export function getCountryData(country) {
         result.cf = 'Entrada por Salida';
         result.whatsApp = '+52 55 2091 2182';
         result.whatsAppLink = '525520912182';
+        result.location = {
+            es: 'D.F., México.',
+            en: 'Mexico City, Mexico.',
+        };
     }
 
     return result;
+}
+
+export function ajaxChangeLanguage(lang) {
+    return axios.post('/ajax-change-language', {
+        lang,
+    }).then(res => res.data);
 }

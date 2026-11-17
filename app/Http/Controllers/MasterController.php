@@ -50,4 +50,23 @@ class MasterController extends Controller
         }
 
     }
+
+    public function ajaxChangeLanguage(Request $request)
+    {
+        $data = $request->validate([
+            'lang' => [
+                'required',
+                'in:' . implode(',', array_keys(config('regions.languages'))),
+            ],
+        ]);
+
+        $request->session()->put('lang', $data['lang']);
+
+        app()->setLocale($data['lang']);
+
+        return response()->json([
+            'code' => 200,
+            'lang' => $data['lang'],
+        ]);
+    }
 }

@@ -13,7 +13,7 @@ use DB;
 class ReclamoController extends Controller
 {
 
-    public function reclamosRedirect()
+    /*public function reclamosRedirect()
     {
         // 1. Si ya hay lang en sesión → usarlo
         $lang = session('lang');
@@ -27,9 +27,9 @@ class ReclamoController extends Controller
 
         // 3. Redirigir a la ruta multilanguage correcta
         return redirect("/{$lang}-pe/reclamos");
-    }
+    }/*
 
-    public function viewLibroReclamaciones($lang)
+    /*public function viewLibroReclamaciones($lang)
     {
         $country = 'pe';
         $lang = $request->lang ?? session('lang', 'es');
@@ -40,6 +40,24 @@ class ReclamoController extends Controller
         return view('Web.libro-reclamaciones', [
             'country' => $country,
             'lang' => $lang,
+        ]);
+    }*/
+
+    public function reclamosRedirect()
+    {
+        return redirect()->route('libro-reclamaciones', [
+            'country' => session('country', config('regions.default_country')),
+        ]);
+    }
+
+    public function viewLibroReclamaciones(Request $request, $country)
+    {
+        return view('Web.libro-reclamaciones', [
+            'country' => $country,
+            'lang' => $request->session()->get(
+                'lang',
+                config('regions.default_language')
+            ),
         ]);
     }
 

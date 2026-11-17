@@ -72,12 +72,22 @@ function getQuerySeleccionTrabajadores($filtros = null, $isMobile = null){
     $actividades = null;
     $modalidades = null;
 
-    $country = Pais::where('country_code', strtoupper(session()->get('country')))->first();
+    $countryCode = session(
+        'country',
+        config('regions.default_country')
+    );
+
+    $country = Pais::where(
+        'country_code',
+        strtoupper($countryCode)
+    )->first();
+
+    abort_if(!$country, 404, 'País no disponible.');
 
     $query = TrabajadorView::where('estadoid', 1)
         ->where('actividad_id', 'not like', '%[11]%')
         ->where('postulando_pais_id', $country->id)
-        ->where('actualizado', '>=', \Carbon\Carbon::now()->subDays(30) )
+        ->where('actualizado', '>=', \Carbon\Carbon::now()->subDays(30))
         ->orderBy('actualizado', 'desc');
 
     if($filtros){

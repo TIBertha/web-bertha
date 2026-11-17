@@ -16,12 +16,13 @@ import "bootstrap";
 import HeaderJSX from "./Components/Web/Layouts/header.jsx";
 const headerJSX = document.getElementById("header");
 if (headerJSX) {
-    const { url, path, lang} = headerJSX.dataset;
+    const { url, path, lang, country } = headerJSX.dataset;
     ReactDOM.createRoot(headerJSX).render(
         <HeaderJSX
             url={url}
             path={path}
             lang={lang}
+            country={country}
         />,
     );
 }
@@ -31,11 +32,12 @@ if (headerJSX) {
 import FooterJSX from "./Components/Web/Layouts/footer.jsx";
 const footerJSX = document.getElementById("footer");
 if (footerJSX) {
-    const { url, lang } = footerJSX.dataset;
+    const { url, lang, country } = footerJSX.dataset;
     ReactDOM.createRoot(footerJSX).render(
         <FooterJSX
             url={url}
             lang={lang}
+            country={country}
         />,
     );
 }
@@ -59,11 +61,12 @@ if (indexJSX) {
 import ContactLabelJSX from "./Components/Web/Layouts/contactLabel.jsx";
 const contactLabelJSX = document.getElementById("contact-label");
 if (contactLabelJSX) {
-    const { url, path, lang} = contactLabelJSX.dataset;
+    const { url, path, country, lang} = contactLabelJSX.dataset;
     ReactDOM.createRoot(contactLabelJSX).render(
         <ContactLabelJSX
             url={url}
             path={path}
+            country={country}
             lang={lang}
         />,
     );
@@ -205,6 +208,21 @@ if (verAntecedenteJSX) {
     ReactDOM.createRoot(verAntecedenteJSX).render(
         <VerAntecedenteJSX
             pdflink={pdflink}
+        />,
+    );
+}
+
+/*---seleccionPais.jsx---*/
+import SeleccionPaisJSX from "./Components/Web/SeleccionPais/seleccionPais.jsx";
+const seleccionPaisJSX = document.getElementById("seleccionar-pais");
+if (seleccionPaisJSX) {
+    const { url, lang, countries } = seleccionPaisJSX.dataset;
+
+    ReactDOM.createRoot(seleccionPaisJSX).render(
+        <SeleccionPaisJSX
+            url={url}
+            lang={lang}
+            countries={JSON.parse(countries || "{}")}
         />,
     );
 }

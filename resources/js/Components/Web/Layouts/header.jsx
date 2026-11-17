@@ -1,9 +1,9 @@
 import React from "react";
 import imgLogo from "../../../../../public/img/logo.png";
-import { mobileDesktop } from "../../Functions/General.jsx";
+import {getCountryData, mobileDesktop} from "../../Functions/General.jsx";
 import ModalChangeLanguage from "./modalChangeLanguage.jsx";
 
-export default function Header({ url, path, lang = 'es' }) {
+export default function Header({ url, path, country = 'pe', lang = 'es' }) {
 
     const display = mobileDesktop();
 
@@ -29,28 +29,28 @@ export default function Header({ url, path, lang = 'es' }) {
     const menuList = [
         {
             label: headerText[lang].home,
-            href: `/${lang}-pe`,
-            includedPath: `${lang}-pe`,
+            href: `/${country}`,
+            includedPath: country,
             drowpdown: false,
             sublist: [],
             showMobile:
                 display === "desktop"
                     ? true
-                    : path === `${lang}-pe/seleccionar`,
+                    : path === `${country}/seleccionar`,
             show: true,
             icon: null,
             aClass: "",
         },
         {
             label: headerText[lang].select,
-            href: `/${lang}-pe/seleccionar`,
-            includedPath: `${lang}-pe/seleccionar`,
+            href: `/${country}/seleccionar`,
+            includedPath: `${country}/seleccionar`,
             drowpdown: false,
             sublist: [],
             showMobile:
                 display === "desktop"
                     ? true
-                    : path === `${lang}-pe`,
+                    : path === country,
             show: true,
             icon: null,
             aClass: "",
@@ -62,6 +62,8 @@ export default function Header({ url, path, lang = 'es' }) {
         label: "nav-label",
     };
 
+    let countryData = getCountryData(country);
+
     return (
         <header>
             <nav className="navbar-bertha">
@@ -69,7 +71,7 @@ export default function Header({ url, path, lang = 'es' }) {
 
                     {/* LOGO */}
                     <div className="col-auto p-0">
-                        <a href={`/${lang}-pe`}>
+                        <a href={`/${country}`}>
                             {logoTag}
                         </a>
                     </div>
@@ -100,7 +102,7 @@ export default function Header({ url, path, lang = 'es' }) {
                             {/* SOPORTE */}
                             <li>
                                 <a
-                                    href="https://api.whatsapp.com/send?phone=51999256807"
+                                    href={'https://api.whatsapp.com/send?phone=' + countryData.whatsAppLink}
                                     target="_blank"
                                     className={
                                         verticalNavbar.button +
@@ -125,6 +127,7 @@ export default function Header({ url, path, lang = 'es' }) {
                             path={path}
                             lang={lang}
                             countryTooltip={headerText[lang].countryTooltip}
+                            country={country}
                         />
                     </div>
 

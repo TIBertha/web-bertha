@@ -124,7 +124,7 @@ export default function FramePostulantesEnVivo({url, country, lang = 'es'}) {
 
                         <div className={'col-12 centerSlider'}>
                             <div className='py-2'>
-                                <a className='btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow mt-0 btn-full-width' href={url + '/' + lang + '-' + country + '/seleccionar'}>{postulantesText[lang].more}</a>
+                                <a className='btn-size btn btn-lg bertha-pink-button font-weight-bold no-box-shadow mt-0 btn-full-width' href={`${url}/${country}/seleccionar`}>{postulantesText[lang].more}</a>
                             </div>
                         </div>
                     </div>

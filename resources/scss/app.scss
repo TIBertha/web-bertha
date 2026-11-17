@@ -15,6 +15,8 @@
 @import "fp_web_designs.scss";
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Google+Sans:300,400,500,600|Material+Icons|Google+Sans+Display:400,500');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css");
+@import "cookie_preferences.scss";
+@import "seleccion_pais.scss";
 
 @font-face {
     font-family: 'Jasmina';
@@ -46,4 +48,8 @@ p{
 
 .react-datepicker-wrapper {
     display: grid !important;
+}
+
+.no-border-radius{
+    border-radius: 0 !important;
 }

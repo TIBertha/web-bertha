@@ -125,6 +125,9 @@ class RegistroRequerimientoController extends Controller
         }else if ($paispedido == 11){
             $actividades = Actividad::WhereIn('id',[1,3,6,10])->borrado(false)->ordenar()->get();
             $tb = [5,6];
+        }else if ($paispedido == 49){
+            $actividades = Actividad::WhereIn('id',[1,3,6,10])->borrado(false)->ordenar()->get();
+            $tb = [7,8,9,4];
         }
 
         if ($inputActividad AND $inputModalidad){
@@ -197,105 +200,144 @@ class RegistroRequerimientoController extends Controller
 
     public function ajaxSaveRegistroRequerimiento(Request $request)
     {
-        // PASO 1 — Encapsular todo en un solo arreglo limpio
         $data = [
-            'id'                    => $request->input('data.id'),
-            'modalidadhorario_id'   => $request->input('data.modalidadhorario_id'),
-            'input_domicilio'       => $request->input('data.input_domicilio'),
-            'tipoBeneficio_id'      => $request->input('data.tipoBeneficio_id'),
-            'fechaInicioLabores'    => $request->input('data.fechaInicioLabores'),
-            'nombres'               => $request->input('data.nombres'),
-            'apellidos'             => $request->input('data.apellidos'),
-            'numeroCelular'         => $request->input('data.numeroCelular'),
-            'actividad_id'          => $request->input('data.actividad_id'),
-            'modalidad_id'          => $request->input('data.modalidad_id'),
-            'rangominimo'           => $request->input('data.rangominimo'),
-            'rangomaximo'           => $request->input('data.rangomaximo'),
-            'ubicacion_id'          => $request->input('data.ubicacion_id'),
-            'sueldo'                => $request->input('data.sueldo'),
-            'tipoVivienda_id'       => $request->input('data.tipoVivienda_id'),
-            'numeroPisos'           => $request->input('data.numeroPisos'),
-            'numeroBebes'           => $request->input('data.numeroBebes'),
-            'edadBebes'             => $request->input('data.edadBebes'),
-            'numeroNinos'           => $request->input('data.numeroNinos'),
-            'edadNinos'             => $request->input('data.edadNinos'),
-            'numeroAdultos'         => $request->input('data.numeroAdultos'),
-            'edadAdultos'           => $request->input('data.edadAdultos'),
-            'numeroMascotas'        => $request->input('data.numeroMascotas'),
-            'diaIngreso'            => $request->input('data.diaIngreso'),
-            'diaSalida'             => $request->input('data.diaSalida'),
-            'diaDescanso'           => $request->input('data.diaDescanso'),
-            'diaDescansoCamaDentro' => $request->input('data.diaDescansoCamaDentro'),
-            'frecuencia'            => $request->input('data.frecuencia'),
-            'diasFrecuencia'        => $request->input('data.diasFrecuencia'),
-            'fechaEntrevista'       => $request->input('data.fechaEntrevista'),
-            'tipoDescanso_id'       => $request->input('data.tipoDescanso_id'),
-            'detalle_mascotas'      => $request->input('data.detalleMascotas'),
-            'tiene_trabajadora_extra'=> $request->input('data.tieneTrabajadoraExtra'),
+            'id'                       => $request->input('data.id'),
+            'modalidadhorario_id'       => $request->input('data.modalidadhorario_id'),
+            'input_domicilio'           => $request->input('data.input_domicilio'),
+            'tipoBeneficio_id'          => $request->input('data.tipoBeneficio_id'),
+            'fechaInicioLabores'        => $request->input('data.fechaInicioLabores'),
+            'nombres'                  => $request->input('data.nombres'),
+            'apellidos'                => $request->input('data.apellidos'),
+            'numeroCelular'            => $request->input('data.numeroCelular'),
+            'actividad_id'             => $request->input('data.actividad_id'),
+            'modalidad_id'             => $request->input('data.modalidad_id'),
+            'rangominimo'              => $request->input('data.rangominimo'),
+            'rangomaximo'              => $request->input('data.rangomaximo'),
+            'ubicacion_id'             => $request->input('data.ubicacion_id'),
+            'sueldo'                   => $request->input('data.sueldo'),
+            'tipoVivienda_id'          => $request->input('data.tipoVivienda_id'),
+            'numeroPisos'              => $request->input('data.numeroPisos'),
+            'numeroBebes'              => $request->input('data.numeroBebes'),
+            'edadBebes'                => $request->input('data.edadBebes'),
+            'numeroNinos'              => $request->input('data.numeroNinos'),
+            'edadNinos'                => $request->input('data.edadNinos'),
+            'numeroAdultos'            => $request->input('data.numeroAdultos'),
+            'edadAdultos'              => $request->input('data.edadAdultos'),
+            'numeroMascotas'           => $request->input('data.numeroMascotas'),
+            'diaIngreso'               => $request->input('data.diaIngreso'),
+            'diaSalida'                => $request->input('data.diaSalida'),
+            'diaDescanso'              => $request->input('data.diaDescanso'),
+            'diaDescansoCamaDentro'     => $request->input('data.diaDescansoCamaDentro'),
+            'frecuencia'               => $request->input('data.frecuencia'),
+            'diasFrecuencia'           => $request->input('data.diasFrecuencia'),
+            'fechaEntrevista'          => $request->input('data.fechaEntrevista'),
+            'tipoDescanso_id'          => $request->input('data.tipoDescanso_id'),
+            'detalle_mascotas'         => $request->input('data.detalleMascotas'),
+            'tiene_trabajadora_extra'  => $request->input('data.tieneTrabajadoraExtra'),
             'detalle_trabajadora_extra'=> $request->input('data.detalleTrabajadoraExtra'),
-            'dato_adulto_mayor'     => $request->input('data.dato_adulto_mayor'),
+            'dato_adulto_mayor'        => $request->input('data.dato_adulto_mayor'),
 
-            'hora_ingreso'          => $request->input('hi'),
-            'hora_salida'           => $request->input('hs'),
-            'hora_entrevista'       => $request->input('he'),
+            'hora_ingreso'             => $request->input('hi'),
+            'hora_salida'              => $request->input('hs'),
+            'hora_entrevista'          => $request->input('he'),
 
-            'token'                 => $request->input('token'),
+            'token'                    => $request->input('token'),
         ];
 
         DB::beginTransaction();
 
         try {
+            // 1. Obtener el requerimiento una sola vez y resolver su país.
+            $req = $data['id']
+                ? Requerimiento::findOrFail($data['id'])
+                : null;
 
-            // -----------------------------------------
-            // 1. Obtener o crear empleador según token
-            // -----------------------------------------
-            if ($data['token']) {
-
-                $reqLink = RequerimientoLink::where('token', $data['token'])->first();
-                $idToken = $reqLink ? RequerimientoLink::find($reqLink->id) : null;
-                $empID = $reqLink?->empleador_id;
-
+            if ($req) {
+                $paisPedidoId = (int) $req->paispedido_id;
             } else {
+                $country = \App\Models\Pais::where(
+                    'country_code',
+                    strtoupper(session('country', 'pe'))
+                )->firstOrFail();
 
+                $paisPedidoId = (int) $country->id;
+            }
+
+            // 2. Obtener o crear empleador según token.
+            $idToken = null;
+
+            if ($data['token']) {
+                $idToken = RequerimientoLink::where(
+                    'token',
+                    $data['token']
+                )->firstOrFail();
+
+                $empID = $idToken->empleador_id;
+            } else {
                 $usuario = Usuario::create([
                     'nombres'           => formatText($data['nombres']),
                     'apellidos'         => formatText($data['apellidos']),
                     'telefono'          => formatText($data['numeroCelular']),
                     'telefono_whatsapp' => formatText($data['numeroCelular']),
-                    'cuenta'            => 'BERTHA'
+                    'cuenta'            => 'BERTHA',
                 ]);
 
                 $empleador = Empleador::create([
-                    'usuario_id'            => $usuario->id,
-                    'estatusempleador_id'   => 1
+                    'usuario_id'          => $usuario->id,
+                    'estatusempleador_id' => 1,
                 ]);
 
                 $empID = $empleador->id;
             }
 
-            // -----------------------------------------
-            // 2. Ubicación
-            // -----------------------------------------
+            // 3. Ubicación.
             $distrito = $provincia = $departamento = null;
 
-            if ($data['ubicacion_id'] && $data['ubicacion_id']['value']) {
-                $ubicacion = Distrito::find($data['ubicacion_id']['value']);
-                $distrito = $ubicacion?->id;
-                $provincia = $ubicacion?->provincia_id;
-                $departamento = $ubicacion?->departamento_id;
+            if (!empty($data['ubicacion_id']['value'])) {
+                $ubicacion = Distrito::findOrFail(
+                    $data['ubicacion_id']['value']
+                );
+
+                $distrito = $ubicacion->id;
+                $provincia = $ubicacion->provincia_id;
+                $departamento = $ubicacion->departamento_id;
             }
 
-            // -----------------------------------------
-            // 3. Rango de edad
-            // -----------------------------------------
+            // 4. Rango de edad.
             $rangoEdad = ($data['rangominimo'] && $data['rangomaximo'])
                 ? saveRangoBusqueda($data['rangominimo'], $data['rangomaximo'])
                 : null;
 
-            // -----------------------------------------
-            // 4. Crear o actualizar requerimiento
-            // -----------------------------------------
+            // 5. Consultar el horario y calcular los sueldos por país.
+            $detallesSueldo = [];
+
+            if ($data['modalidadhorario_id']) {
+                $modalidadhorario = ModalidadesHorarios::findOrFail(
+                    $data['modalidadhorario_id']
+                );
+
+                $esPorDias = (int) $modalidadhorario->semimodalidad_id === 5;
+
+                if ($paisPedidoId === 54) {
+                    $detallesSueldo = [
+                        'sueldo'          => $modalidadhorario->sueldo,
+                        'sueldo_por_dias' => $esPorDias ? 80 : null,
+                    ];
+                } elseif ($paisPedidoId === 49) {
+                    $detallesSueldo = [
+                        'sueldo'          => $modalidadhorario->sueldo_mx,
+                        'sueldo_por_dias' => $esPorDias ? 500 : null,
+                    ];
+                } else {
+                    throw new \RuntimeException(
+                        'No hay tarifas configuradas para el país seleccionado.'
+                    );
+                }
+            }
+
+            // 6. Crear o actualizar el requerimiento.
             $detallesReq = [
+                'paispedido_id'           => $paisPedidoId,
                 'usuariointerno_id'       => 7,
                 'tipocontrato_id'         => 1,
                 'empleador_id'            => $empID,
@@ -307,67 +349,69 @@ class RegistroRequerimientoController extends Controller
                 'input_domicilio'         => $data['input_domicilio'],
                 'detalle_mascotas'        => $data['detalle_mascotas'],
                 'tiene_trabajadora_extra' => $data['tiene_trabajadora_extra']['value'] ?? null,
-                'detalle_trabajadora_extra'=> $data['detalle_trabajadora_extra'],
+                'detalle_trabajadora_extra' => $data['detalle_trabajadora_extra'],
                 'distrito_id'             => $distrito,
                 'provincia_id'            => $provincia,
                 'departamento_id'         => $departamento,
-                'fecha_entrevista'        => $data['fechaEntrevista'] ? Carbon::parse($data['fechaEntrevista']) : null,
-                'hora_entrevista'         => $data['hora_entrevista'] ? Carbon::parse($data['hora_entrevista']) : null,
+                'fecha_entrevista'        => $data['fechaEntrevista']
+                    ? Carbon::parse($data['fechaEntrevista'])
+                    : null,
+                'hora_entrevista'         => $data['hora_entrevista']
+                    ? Carbon::parse($data['hora_entrevista'])
+                    : null,
                 'trabajadores_id'         => saveTrabajadoresCartSeleccion(),
-                'fecha_inicio_labores'    => $data['fechaInicioLabores'] ? Carbon::parse($data['fechaInicioLabores']) : null,
-                'dato_adulto_mayor'       => saveFormatDatoAdultoMayor($data['dato_adulto_mayor']),
+                'fecha_inicio_labores'    => $data['fechaInicioLabores']
+                    ? Carbon::parse($data['fechaInicioLabores'])
+                    : null,
+                'dato_adulto_mayor'       => saveFormatDatoAdultoMayor(
+                    $data['dato_adulto_mayor']
+                ),
             ];
 
-
-            if ($data['id']) {
-                $req = Requerimiento::find($data['id']);
+            if ($req) {
                 $req->update($detallesReq);
             } else {
                 $req = Requerimiento::create($detallesReq);
             }
 
-            // -----------------------------------------
-            // 5. Actividad (match limpio)
-            // -----------------------------------------
-            $detallesReqAct = resolverActividad($data);
+            // 7. Resolver actividad.
+            $req->update(resolverActividad($data));
 
-            $req->update($detallesReqAct);
-
-            // -----------------------------------------
-            // 6. Modalidad (match limpio)
-            // -----------------------------------------
+            // 8. Resolver modalidad y aplicar al final las tarifas del horario.
             $detallesReqMod = resolverModalidad($data);
 
-            $req->update($detallesReqMod);
+            $req->update(array_merge($detallesReqMod, $detallesSueldo));
 
-            // -----------------------------------------
-            // 7. Actualizar token si es nuevo requerimiento
-            // -----------------------------------------
-            if (!$data['id'] && isset($idToken)) {
+            // 9. Actualizar el enlace si es un nuevo requerimiento.
+            if (!$data['id'] && $idToken) {
                 $idToken->update([
                     'requerimiento_id'    => $req->id,
                     'fecha_requerimiento' => Carbon::now(),
-                    'borrado'             => 1
+                    'borrado'             => 1,
                 ]);
             }
 
-            deleteCartSeleccion();
-
             DB::commit();
+
+            deleteCartSeleccion();
 
             return response()->json([
                 'code' => 200,
-                'msj'  => 'Listo, ya está generado tu requerimiento. En breve, nos comunicaremos contigo.'
+                'msj'  => 'Listo, ya está generado tu requerimiento. En breve, nos comunicaremos contigo.',
             ]);
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
+            if (DB::transactionLevel() > 0) {
+                DB::rollBack();
+            }
 
-            DB::rollback();
+            report($e);
 
-            return response()->json(['code' => 500, 'msj' => 'Ocurrio un problema al crear postulante. Consulte al administrador' ]);
-
+            return response()->json([
+                'code' => 500,
+                'msj'  => 'Ocurrió un problema al guardar el requerimiento. Consulte al administrador.',
+            ]);
         }
-
     }
 
     public function ajaxSendMailReq(Request $request){

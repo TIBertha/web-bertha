@@ -2008,6 +2008,41 @@ $grayTitleGoogle: #3c4043;
     border-top: 2px solid #0000001a;
 }
 
+.redes-sociales {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        font-size: 1.5rem;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &, &:hover {
+            color: $pink_bertha;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $pink_hover_bertha;
+            outline-offset: 5px;
+            border-radius: 3px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        justify-content: flex-start;
+    }
+}
+
+#p3 .redes-sociales a[aria-label="Facebook"] i {
+    transform: translateX(-0.25em);
+}
+
 .privacidad .legal {
 
     color: $grayTitleGoogle;

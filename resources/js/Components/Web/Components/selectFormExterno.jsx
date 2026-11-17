@@ -10,7 +10,13 @@ const MenuComponent = props => (
 );
 
 const ControlComponent = props => (
-    <components.Control {...props} className="select-form-req req-form-select is-arrow no-box-shadow boton-height-50" />
+    <components.Control
+        {...props}
+        className={[
+            'select-form-req req-form-select is-arrow no-box-shadow boton-height-50',
+            props.selectProps.additionalClass,
+        ].filter(Boolean).join(' ')}
+    />
 );
 
 const InputComponent = props => (
@@ -72,12 +78,14 @@ export default function SelectFormExterno({
   nombrecampo = '',
   llave = '',
   tipocampo = '',
+  additionalClass = null,
   handleChange,
   requerimiento
 }) {
 
     return (
         <Select
+            additionalClass={additionalClass}
             value={value}
             isMulti={isMulti}
             isDisabled={isDisabled}

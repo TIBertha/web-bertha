@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
-    public function index(Request $request)
+    /*public function index(Request $request)
     {
         // Detectar idioma del navegador (primeros 2 caracteres)
         $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
@@ -27,12 +27,62 @@ class WebController extends Controller
         $lang = ($browserLang === 'es') ? 'es' : 'en';
 
         return redirect("/{$lang}-pe");
+    }*/
+
+    public function index(Request $request)
+    {
+        $country = $request->session()->get('country');
+
+        $hasSelectedCountry =
+            $request->session()->get('country_selected', false)
+            && array_key_exists(
+                $country ?? '',
+                config('regions.countries')
+            );
+
+        if ($hasSelectedCountry) {
+            return redirect()->route('inicio-country', [
+                'country' => $country,
+            ]);
+        }
+
+        return view('Web.seleccionar-pais', [
+            'lang' => $request->session()->get(
+                'lang',
+                config('regions.default_language')
+            ),
+        ]);
     }
 
-    public function viewPeru($lang)
+    /*public function viewPeru($lang)
     {
         countViewWeb("/{$lang}-pe");
         return $this->viewIndex('pe', $lang);
+    }*/
+
+    public function viewCountry(Request $request, $country)
+    {
+        $lang = $request->session()->get(
+            'lang',
+            config('regions.default_language')
+        );
+
+        countViewWeb('/' . $country);
+
+        return $this->viewIndex($country, $lang);
+    }
+
+    public function legacyPeru(Request $request, $lang)
+    {
+        $destination = route('inicio-country', [
+            'country' => 'pe',
+        ]);
+
+        if ($request->getQueryString()) {
+            $destination .= '?' . $request->getQueryString();
+        }
+
+        return redirect($destination, 301);
     }
 
     public function cleanPass(){
@@ -97,7 +147,7 @@ class WebController extends Controller
         ]);
     }
 
-    public function condicionesRedirect(Request $request)
+    /*public function condicionesRedirect(Request $request)
     {
         // Detectar idioma del navegador
         $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
@@ -107,9 +157,15 @@ class WebController extends Controller
         $lang = ($browserLang === 'es') ? 'es' : 'en';
 
         return redirect("/{$lang}-pe/condiciones");
+    }*/
+
+    public function condicionesRedirect(){
+        return redirect()->route('condiciones', [
+            'country' => session('country', config('regions.default_country')),
+        ]);
     }
 
-    public function viewCondiciones(Request $request)
+    /*public function viewCondiciones(Request $request)
     {
         $country = 'pe';
         $lang = $request->lang ?? session('lang', 'es');
@@ -123,9 +179,20 @@ class WebController extends Controller
             'country' => $country,
             'lang' => $lang,
         ]);
+    }*/
+
+    public function viewCondiciones(Request $request, $country)
+    {
+        return view('Web.condiciones', [
+            'country' => $country,
+            'lang' => $request->session()->get(
+                'lang',
+                config('regions.default_language')
+            ),
+        ]);
     }
 
-    public function privacidadRedirect()
+    /*public function privacidadRedirect()
     {
         // 1. Si ya hay lang en sesión → usarlo
         $lang = session('lang');
@@ -139,9 +206,16 @@ class WebController extends Controller
 
         // 3. Redirigir a la ruta multilanguage correcta
         return redirect("/{$lang}-pe/privacidad");
+    }*/
+
+    public function privacidadRedirect()
+    {
+        return redirect()->route('privacidad', [
+            'country' => session('country', config('regions.default_country')),
+        ]);
     }
 
-    public function viewPrivacidad(Request $request)
+    /*public function viewPrivacidad(Request $request)
     {
         $country = 'pe';
         $lang = $request->lang ?? session('lang', 'es');
@@ -153,6 +227,36 @@ class WebController extends Controller
             'country' => $country,
             'lang' => $lang,
         ]);
+    }*/
+
+    public function viewPrivacidad(Request $request, $country)
+    {
+        return view('Web.privacidad', [
+            'country' => $country,
+            'lang' => $request->session()->get(
+                'lang',
+                config('regions.default_language')
+            ),
+        ]);
+    }
+
+    public function legacyPage(Request $request, $lang, $country, $page)
+    {
+        $routes = [
+            'condiciones' => 'condiciones',
+            'privacidad' => 'privacidad',
+            'reclamos' => 'libro-reclamaciones',
+        ];
+
+        $destination = route($routes[$page], [
+            'country' => $country,
+        ]);
+
+        if ($request->getQueryString()) {
+            $destination .= '?' . $request->getQueryString();
+        }
+
+        return redirect($destination, 301);
     }
 
     public function ajaxGetRedesSociales(){

@@ -15,7 +15,7 @@ export default function FrameComoFunciona({ url, showButton, country = "pe", lan
 
     function redirectSeleccion(e) {
         disableSeleccionModal().then((r) => {
-            window.location.href = url + '/' + lang + '-' + country + "/seleccionar";
+            window.location.href = `${url}/${country}/seleccionar`;
         });
     }
 

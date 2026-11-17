@@ -300,18 +300,18 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label1}</div>
-                    <SelectFormExterno value={requerimiento.tipoVivienda_id} placeholder={st1Text[lang].phLabel1} nombrecampo="tipoVivienda_id" tipocampo="evento" opciones={tiposViviendas} handleChange={handleChange} />
+                    <SelectFormExterno value={requerimiento.tipoVivienda_id} placeholder={st1Text[lang].phLabel1} nombrecampo="tipoVivienda_id" tipocampo="evento" opciones={tiposViviendas} handleChange={handleChange} additionalClass={'no-border-radius'} />
                 </div>
 
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label2}</div>
-                    <SelectFormExterno value={requerimiento.numeroPisos} placeholder={st1Text[lang].phLabel2} nombrecampo="numeroPisos" tipocampo="evento" opciones={requerimiento.tipoVivienda_id.value === 2 ? optionsPisosDepa : optionsPisos} handleChange={handleChange} />
+                    <SelectFormExterno value={requerimiento.numeroPisos} placeholder={st1Text[lang].phLabel2} nombrecampo="numeroPisos" tipocampo="evento" opciones={requerimiento.tipoVivienda_id.value === 2 ? optionsPisosDepa : optionsPisos} handleChange={handleChange} additionalClass={'no-border-radius'} />
                 </div>
 
                 {[8].includes(requerimiento.actividad_id.value) &&
                     <div className={'col-12'}>
                         <div className="mt-4 texto-casillas">{st1Text[lang].label3}</div>
-                        <SelectFormExterno value={requerimiento.numeroNinos} placeholder={st1Text[lang].phLabel3} nombrecampo="numeroNinos" tipocampo="evento" opciones={requerimiento.actividad_id.value === 7 ? options3 : options6} handleChange={handleChange} />
+                        <SelectFormExterno value={requerimiento.numeroNinos} placeholder={st1Text[lang].phLabel3} nombrecampo="numeroNinos" tipocampo="evento" opciones={requerimiento.actividad_id.value === 7 ? options3 : options6} handleChange={handleChange} additionalClass={'no-border-radius'} />
                     </div>
                 }
 
@@ -363,7 +363,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label6}</div>
-                    <SelectFormExterno value={requerimiento.numeroAdultos} placeholder={st1Text[lang].phLabel6} nombrecampo="numeroAdultos" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} />
+                    <SelectFormExterno value={requerimiento.numeroAdultos} placeholder={st1Text[lang].phLabel6} nombrecampo="numeroAdultos" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} additionalClass={'no-border-radius'} />
                 </div>
 
                 {[3,10].includes(requerimiento.actividad_id.value) &&
@@ -375,7 +375,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label8}<Tooltips text={parse(st1Text[lang].ttLabel8)} estilo={"tooltip-formulario ms-2"} placement={'bottom'}/></div>
 
-                    <SelectFormExterno value={requerimiento.numeroMascotas} placeholder={st1Text[lang].phLabel8} nombrecampo="numeroMascotas" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} />
+                    <SelectFormExterno value={requerimiento.numeroMascotas} placeholder={st1Text[lang].phLabel8} nombrecampo="numeroMascotas" tipocampo="evento" opciones={([3,10].includes(requerimiento.actividad_id.value)) ? options3 : options} handleChange={handleChange} additionalClass={'no-border-radius'} />
 
                     {requerimiento.numeroMascotas.value > 0 &&
                         <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
@@ -391,7 +391,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className="col-12">
                     <div className="mt-4 texto-casillas">{st1Text[lang].label9}<Tooltips text={parse(st1Text[lang].ttLabel9)} estilo={"tooltip-formulario ms-2"} placement={'bottom'}/></div>
-                    <SelectFormExterno value={requerimiento.ubicacion_id} isSearchable={true} placeholder={st1Text[lang].phLabel9} nombrecampo="ubicacion_id" tipocampo="evento" opciones={ubicaciones} handleChange={handleChange} />
+                    <SelectFormExterno value={requerimiento.ubicacion_id} isSearchable={true} placeholder={st1Text[lang].phLabel9} nombrecampo="ubicacion_id" tipocampo="evento" opciones={ubicaciones} handleChange={handleChange} additionalClass={'no-border-radius'} />
                 </div>
 
                 <div className="col-12">
@@ -409,7 +409,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
 
                 <div className={'col-12'}>
                     <div className="mt-4 texto-casillas">{st1Text[lang].label10}</div>
-                    <SelectFormExterno value={requerimiento.tieneTrabajadoraExtra} placeholder={st1Text[lang].phLabel10} nombrecampo="tieneTrabajadoraExtra" tipocampo="evento" opciones={optionsSN} handleChange={handleChange} />
+                    <SelectFormExterno value={requerimiento.tieneTrabajadoraExtra} placeholder={st1Text[lang].phLabel10} nombrecampo="tieneTrabajadoraExtra" tipocampo="evento" opciones={optionsSN} handleChange={handleChange} additionalClass={'no-border-radius'} />
                     {requerimiento.tieneTrabajadoraExtra.value === 1 &&
                         <input className="opacity-inputs form-control input-formulario mt-0 mb-3 texto-input"
                                name="detalleTrabajadoraExtra"
@@ -464,7 +464,7 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                                         <div className={'col-4'}>
                                             <div className={'afTit'}>{st1Text[lang].amSexo}</div>
                                             <div>
-                                                <SelectFormExternoArray value={data.sexo} llave={key} placeholder={st1Text[lang].phG} nombrecampo="sexo" tipocampo="event" opciones={optionsSX} handleChange={onChangeAM}/>
+                                                <SelectFormExternoArray value={data.sexo} llave={key} placeholder={st1Text[lang].phG} nombrecampo="sexo" tipocampo="event" opciones={optionsSX} handleChange={onChangeAM} additionalClass={'no-border-radius'} />
                                             </div>
                                         </div>
 
@@ -484,21 +484,21 @@ export default function StepOne({handleChange, setFields, requerimiento , activi
                                         <div className={'col-4'}>
                                             <div className={'afTit'}>{st1Text[lang].amCam}</div>
                                             <div>
-                                                <SelectFormExternoArray value={data.caminar} llave={key} placeholder={st1Text[lang].phG} nombrecampo="caminar" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM}/>
+                                                <SelectFormExternoArray value={data.caminar} llave={key} placeholder={st1Text[lang].phG} nombrecampo="caminar" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM} additionalClass={'no-border-radius'} />
                                             </div>
                                         </div>
 
                                         <div className={'col-4'}>
                                             <div className={'afTit'}>{st1Text[lang].amPan}</div>
                                             <div>
-                                                <SelectFormExternoArray value={data.panal} llave={key} placeholder={st1Text[lang].phG} nombrecampo="panal" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM}/>
+                                                <SelectFormExternoArray value={data.panal} llave={key} placeholder={st1Text[lang].phG} nombrecampo="panal" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM} additionalClass={'no-border-radius'} />
                                             </div>
                                         </div>
 
                                         <div className={'col-4'}>
                                             <div className={'afTit'}>{st1Text[lang].amAy}</div>
                                             <div>
-                                                <SelectFormExternoArray value={data.ayuda} llave={key} placeholder={st1Text[lang].phG} nombrecampo="ayuda" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM}/>
+                                                <SelectFormExternoArray value={data.ayuda} llave={key} placeholder={st1Text[lang].phG} nombrecampo="ayuda" tipocampo="event" opciones={optionsSN} handleChange={onChangeAM} additionalClass={'no-border-radius'} />
                                             </div>
                                         </div>
 

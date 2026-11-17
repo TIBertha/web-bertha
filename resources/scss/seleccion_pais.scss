@@ -1,0 +1,269 @@
+.seleccion-pais {
+    background: #ffffff;
+    color: $purple_bertha;
+
+    .seleccion-pais-row {
+        min-height: 100dvh;
+    }
+
+    .seleccion-pais-content {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem 3rem;
+    }
+
+    .seleccion-pais-logo {
+        width: 180px;
+        max-width: 100%;
+        height: auto;
+        align-self: flex-start;
+    }
+
+    .seleccion-pais-card-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .seleccion-pais-body {
+        width: 100%;
+        max-width: 720px;
+        margin-block: auto;
+        padding-block: 3rem;
+    }
+
+    h1 {
+        font-size: clamp(1.8rem, 2.5vw, 2.75rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+
+    .seleccion-pais-description {
+        max-width: 550px;
+        color: $grey_bertha;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .seleccion-pais-options {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .seleccion-pais-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        padding: 2rem 1.25rem 1.5rem;
+        border: 1px solid #eddcf3;
+        border-radius: 1rem;
+        background: #fcf6fd;
+        text-align: center;
+
+        h2 {
+            margin-block: 1.5rem;
+            font-size: clamp(1rem, 1.5vw, 1.35rem);
+            font-weight: 700;
+        }
+    }
+
+    .seleccion-pais-flag {
+        display: block;
+        flex-shrink: 0;
+        width: 140px;
+        max-width: 100%;
+        height: 105px;
+        border-radius: 7px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .seleccion-pais-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+
+        width: 100%;
+        margin-top: auto;
+        padding: 0.9rem 1.25rem;
+        font-weight: 700;
+
+        &:focus-visible {
+            outline: 3px solid $purple_bertha;
+            outline-offset: 4px;
+        }
+    }
+
+    .seleccion-pais-footer {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        margin-top: 2rem;
+        color: $grey_bertha;
+        font-size: 1.1rem;
+
+        i {
+            color: $pink_bertha;
+        }
+    }
+
+    .seleccion-pais-image {
+        min-height: 100dvh;
+
+        // Imagen lateral: public/img/seleccion-pais.png
+        background-image: url("../../public/img/seleccion-pais.png");
+        background-size: auto 100%;
+        background-position: right center;
+        background-repeat: no-repeat;
+    }
+
+    @media (max-width: 1199.98px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100dvh;
+
+        .seleccion-pais-row {
+            position: relative;
+            width: 100%;
+            min-height: 0;
+        }
+
+        .seleccion-pais-content {
+            position: relative;
+            z-index: 1;
+
+            padding: 1.5rem;
+        }
+
+        .seleccion-pais-logo {
+            width: clamp(140px, 23vw, 200px);
+            margin-bottom: 2rem;
+        }
+
+        .seleccion-pais-body {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0;
+            margin-block: 0;
+        }
+
+        .seleccion-pais-intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            width: 63%;
+            min-height: clamp(260px, 42vw, 410px);
+            padding-bottom: 1.5rem;
+
+            h1 {
+                font-size: clamp(1.65rem, 4.2vw, 2.6rem);
+                line-height: 1.15;
+                margin-bottom: 1.25rem;
+            }
+        }
+
+        .seleccion-pais-description {
+            font-size: clamp(0.95rem, 2.3vw, 1.25rem);
+            line-height: 1.5;
+            margin-bottom: 0 !important;
+        }
+
+        .seleccion-pais-image {
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            right: 0;
+
+            width: 50%;
+            max-width: 500px;
+            height: clamp(360px, 57vw, 540px);
+            min-height: 0;
+
+            background-size: auto 100%;
+            background-position: right top;
+
+            pointer-events: none;
+
+            // Suavizar la unión con el texto y las tarjetas.
+            &::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+
+                background:
+                    linear-gradient(
+                        to right,
+                        #ffffff 0%,
+                        rgba(255, 255, 255, 0) 30%
+                    ),
+                    linear-gradient(
+                        to top,
+                        #ffffff 0%,
+                        rgba(255, 255, 255, 0) 20%
+                    );
+            }
+        }
+
+        .seleccion-pais-options {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .seleccion-pais-card {
+            flex-direction: row;
+            gap: 1.25rem;
+
+            padding: 1.25rem;
+            text-align: left;
+        }
+
+        .seleccion-pais-flag {
+            width: clamp(90px, 25vw, 160px);
+            height: auto;
+            aspect-ratio: 4 / 3;
+        }
+
+        .seleccion-pais-card h2 {
+            margin: 0 0 0.85rem;
+            font-size: clamp(1rem, 2.8vw, 1.5rem);
+            line-height: 1.25;
+        }
+
+        .seleccion-pais-button {
+            justify-content: center;
+            padding: 0.8rem;
+            font-size: 1rem;
+
+            i {
+                display: none;
+            }
+        }
+
+        .seleccion-pais-footer {
+            justify-content: center;
+            flex-wrap: nowrap;
+
+            margin-top: 1.75rem;
+            margin-bottom: 1rem !important;
+
+            font-size: clamp(0.85rem, 2.2vw, 1.1rem);
+            text-align: center;
+
+            i {
+                flex-shrink: 0;
+                font-size: 1.4rem;
+            }
+        }
+    }
+}
