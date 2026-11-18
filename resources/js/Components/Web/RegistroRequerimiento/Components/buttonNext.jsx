@@ -172,10 +172,17 @@ export default function ButtonNext({ step, next, requerimiento, lang = 'es' }) {
                         : 'Información incompleta',
 
                     html: `
-                    <div style="text-align:left">
-                        ${faltantes.map(x => `• ${x}`).join('<br>')}
-                    </div>
-                `,
+                        <div style="text-align:left">
+                            <p class="pb-2">
+                                ${lang === 'en'
+                                            ? 'Please <strong>complete</strong> the following fields:'
+                                            : 'Por favor, <strong>complete</strong> los siguientes campos:'
+                                        }
+                            </p>
+
+                            ${faltantes.map(x => `• ${x}`).join('<br>')}
+                        </div>
+                    `,
 
                     confirmButtonText: lang === 'en'
                         ? 'Continue'

@@ -307,45 +307,70 @@ class WebController extends Controller
 
     }
 
-    public function ajaxGetTestimonialesEmpleador(){
+    public function ajaxGetTestimonialesEmpleador()
+    {
         $this->cleanPass();
 
-        $testimoniales = TestimonialEmpleador::whereNotNull('imagen_testimonial')->orderBy('fecha','desc')->get();
+        $columnasPorPais = [
+            'pe' => 'disp_pe',
+            'mx' => 'disp_mx',
+        ];
+
+        $country = strtolower(session('country', 'pe'));
+        $columna = $columnasPorPais[$country] ?? null;
 
         $data = [];
 
-        foreach ($testimoniales as $t){
-            $data[] = [
-                'imagen'                             => $t->imagen_testimonial,
-            ];
+        if ($columna) {
+            $testimoniales = TestimonialEmpleador::whereNotNull('imagen_testimonial')
+                ->where($columna, true)
+                ->orderBy('fecha', 'desc')
+                ->get();
+
+            foreach ($testimoniales as $t) {
+                $data[] = [
+                    'imagen' => $t->imagen_testimonial,
+                ];
+            }
         }
 
         return response()->json([
             'code' => 200,
-            'testimoniales' => $data
+            'testimoniales' => $data,
         ]);
-
     }
 
-    public function ajaxGetTestimonialesTrabajador(){
-
+    public function ajaxGetTestimonialesTrabajador()
+    {
         $this->cleanPass();
 
-        $testimoniales = TestimonialTrabajador::whereNotNull('imagen')->orderBy('id', 'desc')->get();
+        $columnasPorPais = [
+            'pe' => 'disp_pe',
+            'mx' => 'disp_mx',
+        ];
+
+        $country = strtolower(session('country', 'pe'));
+        $columna = $columnasPorPais[$country] ?? null;
 
         $data = [];
 
-        foreach ($testimoniales as $t){
-            $data[] = [
-                'imagen'                             => $t->imagen,
-            ];
+        if ($columna) {
+            $testimoniales = TestimonialTrabajador::whereNotNull('imagen')
+                ->where($columna, true)
+                ->orderBy('id', 'desc')
+                ->get();
+
+            foreach ($testimoniales as $t) {
+                $data[] = [
+                    'imagen' => $t->imagen,
+                ];
+            }
         }
 
         return response()->json([
             'code' => 200,
-            'testimoniales' => $data
+            'testimoniales' => $data,
         ]);
-
     }
 
     public function ajaxGetPostulantesSlider(){

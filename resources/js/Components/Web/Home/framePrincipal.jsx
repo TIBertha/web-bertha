@@ -8,7 +8,7 @@ export default function FramePrincipal({ url, country, lang = 'es'}) {
 
     const frameTitle = {
         es: {
-            main: "Consigue a trabajadoras del hogar cama adentro, cama afuera y por días en " + countryData.nombre + ".",
+            main: "Consigue a trabajadoras del hogar " + (countryData.code === 54 ? "cama adentro, cama afuera" : "de planta, entrada por salida") + " y por días en " + countryData.nombre + ".",
             second: "Selecciona a trabajadoras del hogar sin antecedentes y con experiencia.",
         },
         en: {

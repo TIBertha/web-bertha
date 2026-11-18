@@ -65,32 +65,24 @@ export default function SeleccionPais({
                                     ?? item.name;
 
                                 return (
-                                    <div
+                                    <a
                                         key={code}
+                                        href={`${url}/${code}`}
                                         className="seleccion-pais-card"
+                                        aria-label={`${text.button}: ${name}`}
                                     >
-                                    <span
-                                        className={`flag-icon flag-icon-${code} seleccion-pais-flag`}
-                                        aria-hidden="true"
-                                    ></span>
+                                        <span className={`flag-icon flag-icon-${code} seleccion-pais-flag`} aria-hidden="true" ></span>
 
                                         <div className="seleccion-pais-card-content">
                                             <h2>{name}</h2>
 
-                                            <a
-                                                href={`${url}/${code}`}
-                                                className="btn bertha-pink-button seleccion-pais-button"
-                                                aria-label={`${text.button}: ${name}`}
-                                            >
-                                                <span>{text.button}</span>
+                                            <span className="btn bertha-pink-button seleccion-pais-button">
+                                            <span>{text.button}</span>
 
-                                                <i
-                                                    className="fa-solid fa-arrow-right"
-                                                    aria-hidden="true"
-                                                ></i>
-                                            </a>
+                                            <i className="fa-solid fa-arrow-right" aria-hidden="true" ></i>
+                                            </span>
                                         </div>
-                                    </div>
+                                    </a>
                                 );
                             })}
                         </div>
