@@ -226,9 +226,11 @@ class FichaTrabajadorController extends Controller
             'actividad_id' => $tra->actividad_id ? json_decode($tra->actividad_id, true) : [],
             'edad' => $tra->edad,
             'nacionalidad_id' => $tra->nacionalidad_id,
+            'pais_postulando' => $tra->postulando_pais_id,
         ];
 
         $disponibilidad = getDisponibilidadTrabajador($tra->actualizado);
+
 
         return response()->json([
             'code'                  => 200,

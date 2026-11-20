@@ -193,13 +193,13 @@ export default function ColumnaDomicilioLegalSalud({
 
             <hr />
 
-            <div className="py-3">
-                <p className="titulo-seccions m-0">{colText[lang].antTitle}</p>
-                <div className="row mx-0 justify-content-end detalles mt-2">
-                    <div className="col-12 col-xl-10 px-0">
-                        <div className="row mx-0">
-                            {Number(country) === 54 && (
-                                <>
+            {Number(country) === 54 && (
+                <>
+                    <div className="py-3">
+                        <p className="titulo-seccions m-0">{colText[lang].antTitle}</p>
+                        <div className="row mx-0 justify-content-end detalles mt-2">
+                            <div className="col-12 col-xl-10 px-0">
+                                <div className="row mx-0">
                                     <div className="col-10 my-auto">
                                         <p>
                                             {colText[lang].polTitle}
@@ -233,8 +233,8 @@ export default function ColumnaDomicilioLegalSalud({
                                                 <Tooltips
                                                     text={parse(
                                                         '<img class="icon-documento-identidad" src="' +
-                                                            Antecedentes +
-                                                            '"/>',
+                                                        Antecedentes +
+                                                        '"/>',
                                                     )}
                                                     iconclass={iconFile}
                                                     estilo={"tooltip-perfil"}
@@ -246,15 +246,15 @@ export default function ColumnaDomicilioLegalSalud({
                                                 />
                                             )}
                                     </div>
-                                </>
-                            )}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <hr />
-
+                    <hr />
+                </>
+            )}
+            
             {/*
             <div className="py-3">
                 <p className="titulo-seccions m-0">Vacuna COVID</p>
