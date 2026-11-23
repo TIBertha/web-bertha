@@ -31,26 +31,33 @@ class RegistroRequerimientoController extends Controller
             return redirect('/');
         }
 
-        $r = RequerimientoLink::borrado(false)->where('token', $token)->first();
+        $r = RequerimientoLink::borrado(false)
+            ->where('token', $token)
+            ->first();
 
         if (!$r) {
             return redirect('/');
         }
 
-        // Detectar idioma: sesión → navegador → default 'es'
+        if ($r->requerimiento_id !== null) {
+            $requerimiento = Requerimiento::find($r->requerimiento_id);
+
+            if (!$requerimiento || (int) $requerimiento->estatusrequerimiento_id !== 4) {
+                return redirect('/');
+            }
+        }
+
         $lang = session('lang');
 
         if (!$lang) {
-            $browserLang = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
-            $lang = ($browserLang === 'en') ? 'en' : 'es';
+            $browserLang = substr($request->header('Accept-Language', ''), 0, 2);
+            $lang = $browserLang === 'en' ? 'en' : 'es';
         }
 
-        $lang = $lang ?? 'es';
-
-        $data['token'] = $token;
-        $data['lang']  = $lang;
-
-        return view('Web.formulario-requerimiento', $data);
+        return view('Web.formulario-requerimiento', [
+            'token' => $token,
+            'lang'  => $lang,
+        ]);
     }
 
     public function ajaxLoadDataRegistroRequerimiento(Request $request){
