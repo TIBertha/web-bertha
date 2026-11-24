@@ -56,12 +56,6 @@ Route::post('/ajax-get-views', [WebController::class, 'ajaxGetViews']);
 Route::post('/ajax-get-redes-sociales', [WebController::class, 'ajaxGetRedesSociales']);
 
 //ruta de condiciones
-/*
-Route::get('/condiciones', [WebController::class, 'condicionesRedirect']);
-Route::get('/{lang}-pe/condiciones', [WebController::class, 'viewCondiciones'])
-    ->where('lang', 'es|en')
-    ->name('condiciones');
-*/
 Route::get('/condiciones', [WebController::class, 'condicionesRedirect']);
 Route::get('/{country}/condiciones', [WebController::class, 'viewCondiciones'])
     ->whereIn('country', array_keys(config('regions.countries')))
@@ -69,24 +63,12 @@ Route::get('/{country}/condiciones', [WebController::class, 'viewCondiciones'])
 
 
 //ruta de privacidad
-/*
-Route::get('/privacidad', [WebController::class, 'privacidadRedirect']);
-Route::get('/{lang}-pe/privacidad', [WebController::class, 'viewPrivacidad'])
-    ->where('lang', 'es|en')
-    ->name('privacidad');
-*/
 Route::get('/privacidad', [WebController::class, 'privacidadRedirect']);
 Route::get('/{country}/privacidad', [WebController::class, 'viewPrivacidad'])
     ->whereIn('country', array_keys(config('regions.countries')))
     ->name('privacidad');
 
 //ruta post reclamos
-/*
-Route::get('/{lang}-pe/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])
-    ->where('lang', 'es|en')
-    ->name('libro-reclamaciones');
-Route::get('/reclamos', [ReclamoController::class, 'reclamosRedirect']);
-*/
 Route::get('/reclamos', [ReclamoController::class, 'reclamosRedirect']);
 
 Route::get('/{country}/reclamos', [ReclamoController::class, 'viewLibroReclamaciones'])
@@ -108,15 +90,6 @@ Route::get('/{lang}-{country}/{page}', [WebController::class, 'legacyPage'])
     ->where('page', 'condiciones|privacidad|reclamos');
 
 //ruta de seleccionar
-/*
-Route::get('/{lang}-{country}/seleccionar', [SeleccionController::class, 'viewCountry'])
-    ->where([
-        'lang' => 'es|en',
-        'country' => 'pe'
-    ])
-    ->name('pedidos-country');
-Route::get('/seleccionar', [SeleccionController::class, 'index'])->name('pedidos');
-*/
 
 // Selección por país.
 Route::get('/{country}/seleccionar', [SeleccionController::class, 'viewCountry'])

@@ -90,11 +90,12 @@ if (terminosCondicionesJSX) {
 import PrivacidadJSX from "./Components/Web/Privacidad/privacidad.jsx";
 const privacidadJSX = document.getElementById("privacidad");
 if (privacidadJSX) {
-    const { url, lang} = privacidadJSX.dataset;
+    const { url, lang, country} = privacidadJSX.dataset;
     ReactDOM.createRoot(privacidadJSX).render(
         <PrivacidadJSX
             url={url}
             lang={lang}
+            country={country}
         />,
     );
 }

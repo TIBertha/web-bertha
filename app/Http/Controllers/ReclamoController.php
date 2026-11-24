@@ -107,16 +107,44 @@ class ReclamoController extends Controller
 
     }
 
-    public function ajaxGetData(){
+    public function ajaxGetData()
+    {
+        $country = session('country', 'pe');
 
-        $bienes = TipoBien::borrado(false)->orderBy('nombre', 'asc')->get();
-        $tiposreclamos = TipoReclamo::borrado(false)->orderBy('nombre', 'asc')->get();
+        $bienes = TipoBien::borrado(false)
+            ->orderBy('nombre', 'asc')
+            ->get();
+
+        $tiposreclamos = TipoReclamo::borrado(false)
+            ->orderBy('nombre', 'asc')
+            ->get();
+
+        if ($country === 'mx') {
+
+            $orden = [
+                2 => 1, // RECLAMACIÓN
+                1 => 2, // QUEJA
+                3 => 3, // DEVOLUCIÓN
+            ];
+
+            $tiposreclamos = $tiposreclamos
+                ->map(function ($tipo) {
+
+                    if ((int) $tipo->id === 2) {
+                        $tipo->nombre = 'RECLAMACIÓN';
+                        $tipo->pronombre = 'DE LA';
+                    }
+
+                    return $tipo;
+                })
+                ->sortBy(fn ($tipo) => $orden[$tipo->id] ?? 99)
+                ->values();
+        }
 
         return response()->json([
             'code' => 200,
             'bienes' => $bienes,
-            'tiposreclamos' => $tiposreclamos
+            'tiposreclamos' => $tiposreclamos,
         ]);
-
     }
 }

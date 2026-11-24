@@ -1,0 +1,125 @@
+.privacidad .legal {
+
+    color: $grayTitleGoogle;
+
+    margin: auto;
+    padding: 4.5rem 0;
+
+    @include media-breakpoint-down(md) { /*--Less than 768px---*/
+        padding: 2rem 1rem;
+    }
+
+    .legal-title{
+        font-size: 1.8rem;
+        text-align: center;
+        line-height: 1.5em;
+        margin: 0 0 2rem;
+        font-weight: 500;
+        color: $grayTitleGoogle;
+
+        @include media-breakpoint-down(md) { /*--Less than 768px---*/
+            font-size: 1.5em;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .title-termino{
+        color: $grayTitleGoogle;
+        font-size: 1.3rem;
+        text-decoration: underline;
+
+    }
+
+    .legal-content{
+
+        .legal-clauses {
+            > li {
+                &::marker {
+                    font-weight: 700;
+                }
+
+                .subtitle {
+                    font-weight: 700;
+                }
+
+                .description {
+                    strong {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+
+
+        .list-ol-mod {
+            padding-left: 1.5rem !important;
+        }
+
+        .resume {
+            letter-spacing: .2px;
+            line-height: 24px;
+            padding-top: 20px;
+            margin: 10px 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        ol{
+
+            padding-left: 1rem;
+            .details{
+
+                a{
+                    text-decoration: none;
+                    color: $purple_bertha;
+                    font-weight: bold;
+                }
+
+                .subtitle{
+                    color: $grayTitleGoogle;
+                    font-size: 1.1rem;
+                    line-height: 1.2em;
+                    font-weight: 600;
+                    margin: 2rem 0 0.5rem;
+
+                    @include media-breakpoint-down(md) { /*--Less than 768px---*/
+                        margin: 1.5rem 0 0.5rem;
+                    }
+                }
+
+                .description{
+                    letter-spacing: .2px;
+                    line-height: 24px;
+                    padding-top: 20px;
+                    margin: 10px 0 0.5rem 0;
+                    font-size: 1rem;
+                }
+
+                .description-mod{
+                    margin-left: -1.5rem !important;
+                }
+
+                ul{
+                    list-style-type: disc;
+                    letter-spacing: .2px;
+                    line-height: 24px;
+                    padding-top: 20px;
+                    margin: 1rem 0 1.2rem;
+                    font-size: 1rem;
+
+                    @include media-breakpoint-down(md){ /*--Less than 768px---*/
+                        margin: 0 10px 1rem 10px;
+                    }
+
+                    span{
+                        font-weight: bold;
+                        color: $grayTitleGoogle;
+                    }
+
+                    li{
+                        margin-bottom: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}

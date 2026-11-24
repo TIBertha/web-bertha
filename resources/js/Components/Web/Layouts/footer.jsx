@@ -20,7 +20,7 @@ export default function Footer({ url, country = "pe", lang = 'lang' }) {
             about: "Sobre Bertha",
             terms: "Términos y condiciones",
             privacy: "Política de privacidad",
-            claims: "Libro de reclamaciones",
+            claims: country === "mx" ? "Quejas y reclamaciones" : "Libro de reclamaciones",
             contact: "ContáctanIos",
             schedule1: "De lunes a viernes de 8 a 6",
             schedule2: "Sábados hasta la 1",
