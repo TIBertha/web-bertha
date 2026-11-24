@@ -85,8 +85,8 @@ export default function ModalSueldos({country, lang = 'es' }) {
             }
         },
         {
-            es: "Cama afuera lunes a viernes 8 a 3 o 9 a 4",
-            en: "Live-out domestic worker: Mon–Fri 8–3 or 9–4",
+            es: "Cama afuera lunes a viernes 8 a 2:30 o 9 a 3:30",
+            en: "Live-out domestic worker: Mon–Fri 8–2:30 or 9–3:30",
             cost: {
                 es: "1350",
                 en: "1350",
